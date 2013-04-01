@@ -1,0 +1,9 @@
+env
+media
+*.pyc
+*.db
+*.*~
+hashers.py
+.afignore
+
+

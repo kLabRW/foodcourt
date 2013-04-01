@@ -1,0 +1,30 @@
+{% extends "public_base.html" %}
+{% block title%} Have it easy..{% endblock%}
+{% block content %}
+
+<div id="ordering-content-wrapper">
+ <div id="resto-search" class="frontbox searchbox">
+  <h2 class="headin"> Start Order Here</h2>
+  <div>
+  <form style="position: absolute;" method="get" action="{% url search %}">
+  <div class="radio-button">
+  <ul>
+   <li id="DeliveryOption" style="float: left; color: #163F5E;">
+    <input id="DelivrySelectionOption" type="radio" checked="checked" value="D" name="deliveryType" /> Delivery
+   </li>
+   <li id="PickupOption" style="color: #163F5E; margin-left: 300px;">
+    <input id="PickupOptionSelection" class="" type="radio" value="P" name="deliveryType" /> Pickup
+   </li>
+  </ul>
+  </div>
+  <br>
+   <input type="text" name="q" onfocus="if (this.value==this.defaultValue) this.value='';" value="search by location e.g,Kacyiru" />
+   <br>
+   <button class="btn btn-info" type="submit">
+   <div class="text status">Search</div>
+   </button>
+  </form>
+ </div>
+</div>
+
+{% endblock %}

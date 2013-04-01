@@ -1,0 +1,8 @@
+{% load menu_tags %}
+{% with order_item_count as order_count %}
+<!-- <a href="{% url order_index %}"> -->
+  Items in your order
+  <br />
+  {{ order_count }} Item{{ order_count|pluralize }}
+ </a>
+{% endwith %}

@@ -1,0 +1,40 @@
+F4L is an online Food ordering app that is still under development and will be operating in kigali,Rwanda.
+This app is being developed by Mark Musasizi, a django, python beginner programmer. Any collaboration on this is higly appreciated.
+
+Before embarking on major changes please file a new Issue with your planned enhancement so we can discuss whether it is appropriate.
+
+Getting Started.
+These instructions are for Unix/OS X, you will have to modify these a bit to get going on Windows. Consult your favorite Windows Python guru for details.
+
+1. Check out the repository:
+
+  `% git clone git://github.com/nyaruka/F4L.git`
+  % cd f4l
+
+2. Create a virtual environment and active it:
+
+  % virtualenv env
+  % source env/bin/activate
+
+3. Initialize it with all the required libraries:
+
+  % pip install -r requirements.txt
+
+4. Initialize our database:
+
+  % python manage.py syncdb
+
+5.  Start the server:
+
+  % python manage.py runserver
+
+You should now be able to load and interact with the F4L website at: http://localhost:8000/
+
+Don't mind the design so far.its very basic..
+
+
+
+
+
+ 
+  

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% load checkout_tags %}
+
+{% block content %}
+<h1>Checkout</h1>{% if error_message %}
+ <ul class="errorlist">
+  <li>{{ error_message }}</li>
+ </ul>
+{% endif %}
+<div>
+ <legend>Making Payments to F4L</legend>
+ <p>F4L accepts payments through MTN mobile money and Tigo cash Services.</p>
+ <p>We assume that you already registered and are using these services.</p>
+ <p>To pay with MTN mobile money, send sum equivalent to your <input type=button value="Order Total" onclick="javascript:history.go(-1);"> on previous page, to 078###### </p>
+ <p>To pay with Tigo cash, send to 072######</p>
+ <p>You and F4L(us) will receive an SMS notification of the transaction details.</p>
+ <p>Complete form below, its the last one, we promise..</p>
+</div>
+<form action="" method = "post">
+ <fieldset class="checkout">
+  <legend>Contact Info</legend>
+  <table>
+  {{ form.errors }}
+  {{ form.non_field_errors }}
+  {% form_table_row form.email %}
+  {% form_table_row form.mobile %}
+  </table>
+ </fieldset>
+ <fieldset class="checkout">
+  <legend>Billing Info</legend>
+  <table>
+  {% form_table_row form.billing_name%}
+  {% form_table_row form.billing_address %}
+  {% form_table_row form.billing_city %}
+  </table>
+ </fieldset>
+ <table>
+ <tr>
+ <form method="post" action="">
+  {% csrf_token %}
+  <th colspan="2">  
+   <input name="submit" type="submit" value="place order" class="submit" />
+  </th>
+ </form> 
+ </tr>
+ </table>
+</form>    
+ 
+{% endblock %}

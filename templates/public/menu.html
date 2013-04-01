@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+{% for menu in menus %}
+ <h5> {{ menu.title }} </h5>
+  {% for item in category.item.all %}
+  <li>{{item.name}}<span>{{item.price}}frw</span></li>
+  {% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load checkout_tags %}
+
+{% block content %}
+<h1>Checkout</h1>{% if error_message %}
+ <ul class="errorlist">
+  <li>{{ error_message }}</li>
+ </ul>
+{% endif %}
+<form action="." method = "post">
+ <fieldset class="checkout">
+  <legend>Contact Info</legend>
+  <table>
+  {{ form.errors }}
+  {{ form.non_field_errors }}
+  {% form_table_row form.email %}
+  {% form_table_row form.phone %}
+  </table>
+ </fieldset>
+ <fieldset class="checkout">
+  <legend>Delivery Info</legend>
+  <table>
+  {% form_table_row form.delivery_name%}
+  {% form_table_row form.delivery_address %}
+  {% form_table_row form.delivery_city %}
+  </table>
+ </fieldset>
+ <fieldset class="checkout">
+  <legend>Billing Info</legend>
+  <table>
+  {% form_table_row form.billing_name %}
+  {% form_table_row form.billing_address %}
+  {% form_table_row form.billing_city %}
+  </table>
+ </fieldset>
+ <fieldset class="checkout">
+  <legend>Credit Card Info</legend>
+  <table>
+  {% form_table_row form.credit_card_number %}
+  {% form_table_row form.credit_card_type %}
+  {% form_table_row form.credit_card_expire_month %}
+  {% form_table_row form.credit_card_expire_year %}
+  {% form_table_row form.credit_card_cvv %}
+  </table>
+ </fieldset>
+ <table>
+ <tr>
+ <form method="post" action=".">
+  {% csrf_token %}
+  <th colspan="2">  
+   <input name="submit" type="submit" value="place order" class="submit" />
+  </th>
+ </form> 
+ </tr>
+ </table>
+</form>    
+ 
+{% endblock %}

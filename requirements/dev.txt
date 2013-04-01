@@ -1,0 +1,3 @@
+-r common.txt
+yolk==0.4.3
+django-debug-toolbar==0.9.4

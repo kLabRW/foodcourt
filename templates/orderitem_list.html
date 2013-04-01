@@ -1,0 +1,10 @@
+{% extends "smartmin/list.html" %}
+{% block content %}
+<div class="row">
+ <div class="span6">
+ {% for order in orderitem_list %}
+ {{ order.item.name }},{{ order.item.price }},{{ order.quantity }}  {{ order.order.customer }},{{ order.order.restaurant.services }}
+ {% endfor %}
+ </div>
+</div> 
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "frame.html" %}
+
+{% block extra-style %}
+
+{% endblock %}
+
+{% block brand %}
+<a class="brand" href="/">F4L</a>
+{% endblock %}
+
+{% block navigation %}          
+<div class="nav-collapse">
+            
+  <ul class="nav">
+  
+  {% if perms.restaurant_detail.restaurant_detail_list %}
+  <li><a href="{% url restaurant_detail.restaurant_detail_list %}">Restaurant Details</a></li>
+  {% endif %}
+  
+  {% if perms.restaurant_detail.item_list %}
+  <li><a href="{% url restaurant_detail.item_list %}">Menu Items</a></li>
+  {% endif %}
+  {% if perms.restaurant_detail.category_list %}
+  <li><a href="{% url restaurant_detail.category_list %}">Menu Category</a></li>
+  {% endif %}
+  {% if perms.orders.recieved_order_list %}
+  <li><a href="{% url orders.recieved_order_list %}">Recieved Orders</a></li>
+  {% endif %}
+  {% if perms.orders.order_list%}
+  <li><a href="{% url orders.order_list %}">Orders</a></li>
+  {% endif %}
+
+  
+    
+  {% if perms.auth.user_list %}
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuration<b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        {% if perms.auth.user_list %}
+        <li><a href="/users/user/">Users</a></li>
+        {% endif %}
+      </ul>
+    </li>
+    {% endif %}
+  </ul>
+            
+  <ul class="nav pull-right">
+    {% block login %}
+    {% if request.user and request.user.is_authenticated %}
+    <li class="pull-right">
+      <a href="{% url users.user_profile request.user.id %}" style="float: left;">{{ request.user.username }}</a>
+      <a href="{% url users.user_logout %}?go=/" style="float: right;">logout</a>
+    </li>
+    {% else %}
+    <li class="pull-right"><a href="{% url users.user_login %}">Login</a></li>
+    {% endif %}
+    {% endblock %}
+  </ul>
+  
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<div style="height:30px">
+ Order more food <input type=button value="Here" onClick="javascript:history.go(-2);">
+</div>
+
+<table summary="Your menu order" id="menu_order">
+   <caption>Your F4L Order</caption>
+   <thead>
+    <tr>
+     <th scope="col">Item</th>
+     <th scope="col">Price</th>
+     <th scope="col" class="right">Total</th>
+    </tr>
+   </thead>
+   <tfoot>
+   <tr>
+    <th class="right" colspan="2">
+     Order Subtotal:
+    </th>
+    <th class="right">
+    {{order_subtotal}}<span> frw</span>
+    </th>
+   </tr>
+   <tr>
+     <th class="right" colspan="2">
+      Order Total:
+     </th>
+     <th class="right" colspan="2">
+       {{total}}<span> frw, inclusive of the service fee {{item.owner.service_fee}} that is {{ item.owner.service_type }}.</span>
+     </th>
+   </tr>
+   {% if order_items %}
+   <tr>
+    <th class="right" colspan="2">
+     <form method="post" action=".">
+      {% csrf_token %}
+      <input type="submit" name="submit" value="checkout" alt="checkout" />
+     </form> 
+    </th>
+   </tr>
+   {% endif %}
+   </tfoot>
+   <tbody>
+    {% if order_items %}
+     {% for item in order_items %}
+    <tr>
+     <td>
+ 
+       {{ item.item.name }}
+    
+     </td>
+     <td>{{ item.item.price }}<span> frw</span></td>
+     <td class="right">
+      <form method="post" action="." class="order">
+       {% csrf_token %}
+       <label for="quantity">Quantity:</label>
+       <input type="text" name="quantity" value="{{ item.quantity }}" id="quantity" size="2" class="quantity" max_length="5" />
+       <input type="hidden" name="item_id" value="{{ item.id }}" />
+     </td>
+     <td>
+      <input type="submit" name="submit" value="Update" />
+      </form>
+     </td>
+     <td>
+     <form method="post" action="." class="order">
+      {% csrf_token %}
+     <input type="hidden" name="item_id" value="{{ item.id }}" />
+     </form>
+     </td>
+     <td>
+     <form method="post" action="." class="order">
+      {% csrf_token %}
+     <input type="hidden" name="item_id" value="{{ item.id }}" />
+     <input type="submit" name="submit" value="Remove" />
+     </form>
+     </td>
+    </tr>
+     {% endfor %}
+     {% else %}
+    <tr>
+    <td colspan="2" style="height:30px;">
+     Your F4L order is empty.
+    </td>
+    </tr>
+    {% endif %}
+   </tbody>
+</table>
+{% endblock %}

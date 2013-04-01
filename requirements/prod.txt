@@ -1,0 +1,3 @@
+-r common.txt
+agon-ratings==0.2
+django-ratings==0.3.7

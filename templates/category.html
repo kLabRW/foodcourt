@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+{% for category in categories %}
+ {% for item in category.item.all %}
+  {{ item.owner}}
+  <h6>Service time:- {{ item.owner.service_hour_start }} to     {{ item.owner.service_hour_end }}</h6>
+  {% endfor %}
+{% endfor %}
+</div>
+<p>click an item to order</p>
+
+<div id="left_grid"></div>
+{% for category in categories %}
+ <h5 class="heading"> {{ category.title }} </h5>
+  {% for item in category.item.all %}
+  <ul>
+   <li style="display: block;"><a href="{% url item_order item.id %}">{{item.name}}<span> {{item.price}}frw</span></li><a/>
+  </ul>
+  {% endfor %}
+{% endfor %}
+{% endblock %}
+

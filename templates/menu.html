@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h4>Defining the f4l menu page layout</h4>
+
+<p>Name of restaurant</p>
+<p>address/official phone number</p>
+
+<p>click an item to order</p>
+<h6>
+delivery time: -
+pickup time:-
+ </h6>
+{% for category in categories %}
+ <h5> {{ category.title }} </h5>
+  {% for item in category.item.all %}
+
+  <a href="#myModal" role="button" class="btn" data-toggle="modal"> <li>{{item.name}}<span> {{item.price}}frw</span></li><a/>
+  <!--Modal-->
+  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+   </div>
+   <div class="modal-body">
+    <form method="post" action=".">
+    {% csrf_token %}
+     {{ form.as_p }}
+     <br />
+     <input type="submit" value="Add To Order" name="submit">
+    </form>
+    <p>one fine body</p>
+   </div>
+   <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">close</button>
+    <button class="btn btn-primary">save changes</button>
+   </div>
+  </div>
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}
+

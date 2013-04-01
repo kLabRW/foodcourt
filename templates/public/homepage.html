@@ -1,0 +1,76 @@
+{% extends "public_base.html" %}
+{% block title %}F4L,Don't you jus love easy food.{% endblock %}
+{% block content %}
+<div id="f4lheader">
+ <div class="bizborder">
+  <div class="f4lcentered">
+   <a href="/">
+    <div class="sliced_f4l"></div>
+    <div class="f4llogo"></div>
+   </a>
+   <ul>
+    <li id="accountholder" style="float: right; margin-left: 20px; margin-top: 20px;">
+    <div class="signed-out">
+     {% if request.user.is_authenticated %}
+      <li><a href="{% url users.user_logout %}"> logout</a></li>
+     {% else %}
+     <li><a href="{% url users.user_login %}">login</a></li>
+     {% endif %}
+    </div>
+    </li>
+    <ul>
+    <li id="accountholder" style="float: right; margin-left: 20px; margin-top: 20px;">
+     <li><a href="{% url restaurant_detail.restaurant_detail_create%}">Join F4L</a></li>
+    </li>
+   </ul> 
+  </div>
+ </div>
+</div>
+<div class="clear"></div>
+<div class="results-area" style="position: static;">
+ <div id="white-sep" class="white-sep" style="dipslay: none;"></div>
+ <div id="background" style="height: 415px;">
+  <div class="centered">
+   <div id="front-spacer"></div>
+   <div id="resto-search" class="frontbox searchbox">
+    <div class="">
+     <div class=""></div>
+    </div>
+    <div class=""></div>
+    <h2 class="headin">Start Order Here</h2>
+    <div>
+    <form style="position: absolute;" method="get" action="/search_results/">
+    <div class="radio-button">
+     <ul>
+      <li id="DeliveryOption" style="float: left; color: #163F5E;">
+       <input id="DelivrySelectionOption" type="radio" checked="checked" value="D" name="deliveryType" /> Delivery
+      </li>
+      <li id="PickupOption" style="color: #163F5E; margin-left: 300px;">
+       <input id="PickupOptionSelection" class="" type="radio" value="P" name="deliveryType" /> Pickup
+      </li>
+     </ul>
+    </div>
+    <br>
+     <input type="text" name="q" onfocus="if (this.value==this.defaultValue) this.value='';" value="search by location e.g,Kacyiru" />
+     <br>
+     <button class="btn btn-info" type="submit">
+     <div class="text status">Search</div>
+     </button>  
+    </form> 
+   </div>
+  </div>
+   
+ </div>
+ <div style="bottom: 0; left:0; position: absolute; right: 0; top: 100% top: 469px; background-color: white;">
+  <div id="copyright">
+  F4L, Food 4 Less Copyright. All rights reserved.
+  <span>
+   {% if perms.orders.recieved_order_list%}
+    <li><a href="{% url orders.recieved_order_list %}">Admin</a></li>
+   {% endif%}
+  </span>
+  </div>
+ </div>
+ 
+</div>
+{% endblock %}
