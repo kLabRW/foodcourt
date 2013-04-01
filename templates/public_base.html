@@ -5,7 +5,7 @@
   {% block styles %}
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/main.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/bootstrap.css">
-  <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/styles.css">
+  <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impress.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impression.css">
   
@@ -18,26 +18,30 @@
  <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
  <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
 {% endblock %}
+
  
- <div id="header">
-   <div id="top-nav" class="center-wrapper">
-    <a class="title" href="#"><img src="img/title.png" alt="Title"></a><!--end.title-->
-    <ul class="nav">
+ <div class="navbar navbar-inverse">
+   <div class="navbar-inner">
+    <ul class="nav nav-pills">
+    <li><a class="brand" href="#">F4L</a></li>
     {% if perms.users.user.is_authenticated %}
-     <li><a href="{% url users.user_logout %}">Logout</a></li>
+     <li class=""><a href="{% url users.user_logout %}">Logout</a></li>
     {% else%}
-     <li><a href="{% url users.user_login %}">Login</a></li>
+     <li class=""><a href="{% url users.user_login %}">Login</a></li>
     {% endif%}
-     <li><a href="">Contact Us</a></li>
-     <li><a><!--include Aboutus--></a></li>
-     <li><a><!--include FAQ--></a></li>
+    <li class="divider-vertical"></li>
+     <li class=""><a href="#">Contact Us</a></li>
+     <li class="divider-vertical"></li>
+     <li><a href="#">FAQ</a></li>
+     <li class="divider-vertical"></li>
+     <li><a href="#">Company</a></li>
     </ul>
    </div><!--end .nav-->
  </div><!--end #header-->
  
- <div id="main">
+ <div class="container">
   {% block order-content %}
-  
+   <p style="color: black;">nejrngljkrnglkj</p>
   {% endblock %}
  </div><!--end #-->
  
@@ -48,8 +52,8 @@
   </div>
  </div><!--end-->
  
- <div id = "footer">
- </div><!--end#footer-->
+<div id = "">
+</div><!--end#footer-->
  
  
 
