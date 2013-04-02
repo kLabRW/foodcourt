@@ -5,7 +5,7 @@
   {% block styles %}
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/main.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/bootstrap.css">
-  <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}css/styles.css">
+  <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/style.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impress.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impression.css">
   
@@ -22,7 +22,7 @@
  
  <div class="navbar navbar-inverse">
    <div class="navbar-inner">
-    <ul class="nav nav-pills">
+    <ul class="nav pull-right">
     <li><a class="brand" href="#">F4L</a></li>
     {% if perms.users.user.is_authenticated %}
      <li class=""><a href="{% url users.user_logout %}">Logout</a></li>
@@ -38,22 +38,28 @@
     </ul>
    </div><!--end .nav-->
  </div><!--end #header-->
+ <div style="clear: both;"></div>
  
  <div class="container">
   {% block order-content %}
-   <p style="color: black;">nejrngljkrnglkj</p>
   {% endblock %}
  </div><!--end #-->
  
- <div id="content-wrapper">
  
-  <div id="side-bar">
-   sidebar content
+ <div style="clear: both;"></div>
+ 
+<div id="footer">
+ <div id="footer-contents">
+  <div id="copyright">
+    F4L	© 2012	Copyright. All rights reserved.
+    <span class="login">
+     {% if perms.restaurant_detail.item_list %}
+     <a href="{% url restaurant_detail.item_list %}">Admin</a>
+     {%endif%}
+    </span>
   </div>
- </div><!--end-->
- 
-<div id = "">
-</div><!--end#footer-->
+ </div>
+</div>
  
  
 

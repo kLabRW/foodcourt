@@ -62,7 +62,7 @@
 #resto-search{
 	-moz-user-select: none;
 	height: 300px;
-	float: 0;
+	float: none;
 	margin: 0;
 	position: absolute;
 	top: 120px;
@@ -75,10 +75,10 @@
 }
 .frontbox,.searchbox{
 	-moz-box-sizing: border-box;
-	background-color: #FFFFFF;
+	background-color: #e3e4e4;
 	border:1px solid #94C1FF;
 	border-radius: 12px 12px 12px 12px;
-	box-shadow: 0 0 5px #94C1FF;
+/*	box-shadow: 0 0 5px #94C1FF;*/
 }
 .searchbox .icon-holder{
 	-moz-user-select: none;
