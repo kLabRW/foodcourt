@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "public_base.html" %}
+{% block order-content %}
 
 <div>
 {% for category in categories %}
@@ -11,7 +11,7 @@
 </div>
 <p>click an item to order</p>
 
-<div id="left_grid"></div>
+<div id="background"></div>
 {% for category in categories %}
  <h5 class="heading"> {{ category.title }} </h5>
   {% for item in category.item.all %}

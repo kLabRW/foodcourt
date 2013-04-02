@@ -1,8 +1,8 @@
-{% extends "base.html" %}
+{% extends "public_base.html" %}
 {% load thumbnail %}
 {% load url from future %}
 {% block title %}Don't you jus love easy food{% endblock %}
-{% block content %}
+{% block order-content %}
 <div class="clear"></div>
 <div class="results-area" style="position: static;">
  <div id="white-sep" class="white-sep" style="dipslay: none;"></div>
@@ -35,11 +35,7 @@
       </table>
      </div>
     </div>
-   </div>
-  <div style="clear: both;"></div> 
- </div>
- <div style="bottom: 0; left:0; position: absolute; right: 0; top: 100% top: 469px; background-color: white;">
-  <p style="color: black;">© 2013 F4L, Inc. Food 4 Less is a trademark of Food 4 Less, Inc</p>
+   </div> 
  </div>
 </div>
 {% endfor %}
