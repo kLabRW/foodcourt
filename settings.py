@@ -69,12 +69,12 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+#MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+#MEDIA_URL = ''
 DATE_FORMAT = "d-m-Y"
 DATETIME_FORMAT = "d-m-Y H:i"
 SITE_NAME = 'Food for less'
@@ -87,19 +87,23 @@ RATINGS_VOTES_PER_IP = 3 #to limit the number of unique IPs per object/rating-fi
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 ROOT_PATH = os.path.dirname(__file__)
+#STATICFILES_DIRS =
 STATIC_ROOT = os.path.join(ROOT_PATH, 'static')
+MEDIA_ROOT = os.path.join(ROOT_PATH, 'media')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 # Additional locations of static files
-STATICFILES_DIRS = (
+
+#STATICFILES_DIRS = (
 #	"/home/matsinvasion/food4less/static/css"
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-)
+#)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -195,7 +199,7 @@ EMAIL_HOST_PASSWORD = 'timewilltell81'
 EMAIL_USE_TLS = True
 
 #LOGIN DETAILS
-LOGIN_URL = "/users/login"
+LOGIN_URL = "/users/login/"
 LOGOUT_URL = "/users/logout/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"

@@ -12,7 +12,9 @@
    <div class="full_events">
     <div class=" event_main">
      <div class=" event_image">
-      <img src="{{ STATIC_URL }}{{ restaurant.logo }}" />
+      {% thumbnail restaurant.logo "100x110" crop="center" as im%}
+      <img src="{{im.url}}" /> 
+      {% endthumbnail%}
      </div>
      <div class="event_details">
       <table width="100%" cellspacing="" cellpadding="" border="0">
@@ -20,16 +22,16 @@
         <td colspan="2" class="heading"><a href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name}}</a></td> 
        </tr>
        <tr>
-        <td class="" style="color: #163F5E">Location</td>
-        <td class="left" style="color: #163F5E;">{{restaurant.address}}</td>
+        <td class="" style="color: white;">Location</td>
+        <td class="left" style="color: white;">{{restaurant.address}}</td>
        </tr>
        <tr>
-        <td class="" style="color: #163F5E">Service Time:</td>
-        <td class="left" style="color: #163F5E">{{ restaurant.service_hours_start}} to {{ restaurant.service_hours_end }}</td>
+        <td class="" style="color: white;">Service Time:</td>
+        <td class="left" style="color: white;">{{ restaurant.service_hours_start}} to {{ restaurant.service_hours_end }}</td>
        </tr>
        <tr>
-        <td class="" style="color: #163F5E">Services offered in: </td>
-        <td class="left" style="color: #163F5E">{{restaurant.delivery_territory}}</td>
+        <td class="" style="color: white">Services offered in: </td>
+        <td class="left" style="color: white">{{restaurant.delivery_territory}}</td>
        </tr>
       </table>
      </div>
