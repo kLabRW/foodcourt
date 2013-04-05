@@ -1,12 +1,10 @@
 {% extends "public_base.html" %}
-{% block title%} Have it easy..{% endblock%}
 
 {% block order-content %}
 <div id="ordering-content-wrapper">
  <div id="resto-search" class="frontbox searchbox">
   <h2 class="headin"> START YOUR ORDER</h2>
-  <div>
-  <form class="search_form" style="position: absolute;" method="get" action="{% url search %}">
+  <form style="position: absolute;" method="get" action="{% url search %}">
  <div class="radio-button">
   <ul>
    <li id="DeliveryOption" style="float: left; color: #163F5E;">
@@ -17,15 +15,18 @@
    </li>
   </ul>
   <br>
-   <input type="text" name="q" onfocus="if (this.value==this.defaultValue) this.value='';" value="search by location e.g,Kacyiru" />
+  <div style="padding-left: 60px;">
+   <input class="input-xxlarge" type="text" name="q" placeholder="search by location e.g,Kacyiru" />
    <br>
    <button class="btn btn-large btn-primary" type="submit">
     <div class="text status">Search</div>
    </button>
+  </div>
  </div> 
   </form>
  </div>
 </div>
-<!--<p> join in</p>-->
+
+<p> join in</p>
 
 {% endblock %}

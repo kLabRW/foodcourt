@@ -61,12 +61,12 @@
 }
 #resto-search{
 	-moz-user-select: none;
-	height: 300px;
+	height: 250px;
 	float: none;
 	margin: 0;
 	position: absolute;
 	top: 120px;
-	width:468px;
+	width:450px;
 	z-index: 2;
 }
 .searchbox{
