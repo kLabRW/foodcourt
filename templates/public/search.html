@@ -5,13 +5,14 @@
 <div class="clear"></div>
 <div class="results-area" style="position: static;">
  <div id="white-sep" class="white-sep" style="dipslay: none;"></div>
- <div id="background" style="height: 415px;">
+ <div id="" style="height: 415px;margin-top:30px;">
   {% if found_entries %}
    <p> You searched for restaurants in {{ query_string }}.</p>
+   <br />
    {% for restaurant in found_entries %}
    <div class="full_events">
-    <div class=" event_main">
-     <div class=" event_image">
+    <div class="event_main">
+     <div class="event_image">
       {% thumbnail restaurant.logo "100x110" crop="center" as im%}
       <img src="{{im.url}}" /> 
       {% endthumbnail%}
