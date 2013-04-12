@@ -1,7 +1,7 @@
 <!doctype html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}F4L Don't you jus love good Food{% endblock %}</title>
+  <title>{% block title %}F4L | Have it easy {% endblock %}</title>
   <meta name="description" content="">
   <meta name="author" content="">
   
@@ -68,8 +68,8 @@
               {% block login %}
               {% if request.user and request.user.is_authenticated %}
               <li class="pull-right">
-                <a href="{% url users.user_profile request.user.id %}" style="float: left;">{{ request.user.username }}</a>
-                <a href="{% url users.user_logout %}?go=/" style="float: right;">logout</a>
+               <a href="{% url users.user_profile request.user.id%}" style="float: left;"> {{ request.user.username }}</a>
+               <a href="{% url users.user_logout %}?go=/" style="float:right;">logout</a>
               </li>
               {% else %}
               <li class="pull-right"><a href="{% url users.user_login %}">Login</a></li>

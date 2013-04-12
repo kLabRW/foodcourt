@@ -1,43 +1,41 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "public_base.html" %}
+{% block order-content %}
 
-
-<div style="height:30px">
- Order more food <input type=button value="Here" onClick="javascript:history.go(-2);">
+<div>
+ <p style="color: #888888;">Order more food <input type="submit" class="btn" value="Here" onClick="javascript:history.go(-3);"></p>
 </div>
 
-<table summary="Your menu order" id="menu_order">
-   <caption>Your F4L Order</caption>
+<table class="table table-hover" summary="Your menu order">
+   <caption class="category_head">Your F4L Order</caption>
    <thead>
     <tr>
-     <th scope="col">Item</th>
-     <th scope="col">Price</th>
-     <th scope="col" class="right">Total</th>
+     <th style="color: #40637f;"scope="col">Item</th>
+     <th style="color: #40637f;"scope="col">Price</th>
     </tr>
    </thead>
    <tfoot>
    <tr>
-    <th class="right" colspan="2">
+    <th style="color: #40637f;" colspan="2">
      Order Subtotal:
     </th>
-    <th class="right">
-    {{order_subtotal}}<span> frw</span>
+    <th style="color: #40637f;">
+    {{order_subtotal}}<span style="color: #888888;"> frw</span>
     </th>
    </tr>
    <tr>
-     <th class="right" colspan="2">
+     <th style="color: #40637f;"colspan="2">
       Order Total:
      </th>
-     <th class="right" colspan="2">
-       {{total}}<span> frw, inclusive of the service fee {{item.owner.service_fee}} that is {{ item.owner.service_type }}.</span>
+     <th style="color: #40637f;" colspan="2">
+      {{total}}<span style="color: #888888;"> frw, inclusive of the service fee {{item.owner.service_fee}} that is {{ item.owner.service_type }}.</span>
      </th>
    </tr>
    {% if order_items %}
    <tr>
-    <th class="right" colspan="2">
+    <th class="" colspan="2">
      <form method="post" action=".">
       {% csrf_token %}
-      <input type="submit" name="submit" value="checkout" alt="checkout" />
+      <input type="submit" class="btn" name="submit" value="checkout" alt="checkout" />
      </form> 
     </th>
    </tr>
@@ -46,35 +44,28 @@
    <tbody>
     {% if order_items %}
      {% for item in order_items %}
-    <tr>
-     <td>
+    <tr style="margin: 0px;">
+     <td style="color: #888888;">
  
        {{ item.item.name }}
     
      </td>
-     <td>{{ item.item.price }}<span> frw</span></td>
-     <td class="right">
-      <form method="post" action="." class="order">
+     <td style="color: #888888;">{{ item.item.price }}<span style="color: #888888;"> frw</span></td>
+     <td>
+      <form class="" method="post" action=".">
        {% csrf_token %}
-       <label for="quantity">Quantity:</label>
-       <input type="text" name="quantity" value="{{ item.quantity }}" id="quantity" size="2" class="quantity" max_length="5" />
+       <input type="text" name="quantity" value="{{ item.quantity }}" id="quantity" size="" class="input-small" max_length="" />
        <input type="hidden" name="item_id" value="{{ item.id }}" />
      </td>
      <td>
-      <input type="submit" name="submit" value="Update" />
+      <input type="submit" class="btn" name="submit" value="Update" />
       </form>
      </td>
      <td>
-     <form method="post" action="." class="order">
+     <form method="post" action="." class="">
       {% csrf_token %}
      <input type="hidden" name="item_id" value="{{ item.id }}" />
-     </form>
-     </td>
-     <td>
-     <form method="post" action="." class="order">
-      {% csrf_token %}
-     <input type="hidden" name="item_id" value="{{ item.id }}" />
-     <input type="submit" name="submit" value="Remove" />
+     <input type="submit" class="btn" name="submit" value="Remove" />
      </form>
      </td>
     </tr>

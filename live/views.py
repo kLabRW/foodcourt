@@ -67,7 +67,7 @@ def show_checkout(request,id):
 			order_number = order_created.id
 			if order_number:
 				request.session['order_number'] = order_number
-			if postdata['submit'] == 'place order':
+			if postdata['submit'] == 'complete order':
 				reciept_url = urlresolvers.reverse('checkout_reciept')
 				return HttpResponseRedirect(reciept_url)
 	else:

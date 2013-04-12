@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "public_base.html" %}
+{% block order-content %}
 <div style="height:30px">
  <h1>{{item.name}}</h1>
 </div>
@@ -8,7 +8,7 @@
       {% csrf_token %}
        {{ form.as_p }}
       <br />
-      <input type="submit" id="submit_order" value="Add To Order" name="submit">
+      <input class="btn btn-large btn-primary" type="submit" id="submit_order" value="Add To Order" name="submit">
   </form>
 </div>
 {% endblock%}

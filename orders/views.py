@@ -29,16 +29,19 @@ class OrderCRUDL(SmartCRUDL):
 	permissions = True
 	actions = ('list','read','create','delete','update')
 	
+			
+	
 	class List(SmartListView):
-		fields = ('date','status','billing_name','mobile','email','billing_address','billing_city','restaurant','restaurant.service_type')
+		fields = ('date','status','billing_name','mobile','email','billing_address','billing_city','restaurant.restaurant_name','restaurant.service_type')
 		search_fields = ('date',)
+		
 		
 		def get_queryset(self,*args,**kwargs):
 			queryset = super(OrderCRUDL.List,self).get_queryset(*args,**kwargs)
 			#if super-user,show all orders
 			if self.request.user.is_superuser:
 				return queryset
-			return queryset.filter(restaurant=self.request.user)
+			return queryset.filter(restaurant__user=self.request.user)
 			
 
 			 
@@ -97,14 +100,14 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 		
 	
 	class List(SmartListView):
-		fields = ('order_date','order_status','order_email','order_mobile','order_billing_name','order_billing_address','order_billing_city','item.name','item.price','quantity','order_id')
-		search_fields = ('date_added',)
+		fields = ('order_date','order_status','order_email','order_mobile','order_billing_name','order_billing_address','order_billing_city','item.name','item.price','quantity','order_id','order_restaurant','order_service_type')
+		search_fields = ('order_id',)
 		
 		def get_queryset(self,*args,**kwargs):
 			queryset = super(Recieved_OrderCRUDL.List, self).get_queryset(*args,**kwargs)
 			if self.request.user.is_superuser:
 				return queryset
-			return queryset.filter(order=self.request.user)
+			return queryset.filter(order__restaurant__user=self.request.user)
 			
 		
 		def get_order_date(self,obj):
@@ -123,6 +126,10 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 			return obj.order.billing_city
 		def get_order_id(self,obj):
 			return obj.order.id
+		def get_order_restaurant(self,obj):
+			return obj.order.restaurant.restaurant_name
+		def get_order_service_type(self,obj):
+			return obj.order.restaurant.service_type
 		
 	
 	

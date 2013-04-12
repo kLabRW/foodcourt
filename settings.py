@@ -87,6 +87,7 @@ RATINGS_VOTES_PER_IP = 3 #to limit the number of unique IPs per object/rating-fi
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 ROOT_PATH = os.path.dirname(__file__)
+#FIXTURE_DIRS = os.path.join(ROOT_PATH, 'fixtures')
 #STATICFILES_DIRS =
 STATIC_ROOT = os.path.join(ROOT_PATH, 'static')
 MEDIA_ROOT = os.path.join(ROOT_PATH, 'media')
@@ -219,7 +220,7 @@ PERMISSIONS = {
 }
 GROUP_PERMISSIONS = {
     "Administrator": ('auth.user.*','restaurant_detail.restaurant_detail.*','restaurant_detail.restaurant_read','orders.order.*','orders.orderItem.*','orders.orderitem.*','orders.orderitem_list','orders.order.*','orders.recieved_order.*','django_quickblocks.quickblocks.*','django_quickblocks.quickblocktype.*',),
-    "Restaurants": ('restaurant_detail.restaurant_myprofile','restaurant_detail.restaurant_read','restaurant_detail.item.*','restaurant_detail.category.*',),
+    "Restaurants": ('restaurant_detail.restaurant_myprofile','restaurant_detail.restaurant_read','restaurant_detail.item.*','restaurant_detail.category.*','orders.order.*','orders.recieved_order.*',),
 }
 
 

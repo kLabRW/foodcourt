@@ -516,7 +516,7 @@ html {
 body {
     width: 100%;
     color: #3f3e3c;
-    background-color: #267;
+    background-color: #d0dde3;
     font-family: Molengo, sans-serif;
 }
 
@@ -993,6 +993,17 @@ h3 {
     font-size: 30px;
     font-family: Homenaje, sans-serif;
     padding-bottom: 10px;
+}
+.category_head {
+    font-size: 30px;
+    color: #40637F;
+    font-family: "proxima-nova-condensed",Helvetica,serif;
+    padding-bottom: 10px;
+    font-style: normal;
+    font-weight: 800px;
+    letter-spacing: 1px;
+    line-height: 26px;
+    text-transform: uppercase;
 }
 
 .heading a {

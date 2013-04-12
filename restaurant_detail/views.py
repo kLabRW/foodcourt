@@ -259,7 +259,7 @@ class CategoryCRUDL(SmartCRUDL):
 			restaurant = Restaurant.objects.get(user=self.request.user)
 			return Category.objects.filter(owner=restaurant)
 	class Update(SmartUpdateView):
-		fields = ('item','title','description')
+		fields = ('item','title','description','is_active')
 		form_class = CategoryUpdateForm
 		
 		def get_form_kwargs(self):
@@ -305,7 +305,7 @@ class ItemCRUDL(SmartCRUDL):
 			restaurant = Restaurant.objects.get(user=self.request.user)
 			return Item.objects.filter(owner=restaurant)
 	class Update(SmartUpdateView):
-		fields = ('name','description','price')
+		fields = ('name','description','price','is_active')
 
 # 	class Shortlist(SmartListView):			
 #		fields = ('name','description','owner')
