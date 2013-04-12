@@ -76,6 +76,17 @@
 	width:450px;
 	z-index: 2;
 }
+
+#message-box{
+	-moz-user-select: none;
+	height: 250px;
+	float: right;
+	margin: 0;
+	top: 37px;
+	width:450px;
+	z-index: 2;
+}
+
 .searchbox{
 	filter: none;
 	position: relative;
