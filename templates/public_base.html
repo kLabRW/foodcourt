@@ -20,15 +20,13 @@
 {% endblock %}
 
  {% load smartmin %}
- <div class="navbar navbar-inverse">
-   <div class="navbar-inner">
+ <div class="navbar">
+   <div class="">
     <ul class="nav pull-right">
     <li><a class="brand" href="{% url homepage %}">F4L</a></li>
-    <li class="divider-vertical"></li>
+    
      <li class=""><a href="#">Contact Us</a></li>
-     <li class="divider-vertical"></li>
      <li><a href="#">FAQ</a></li>
-     <li class="divider-vertical"></li>
      <li><a href="#">Company</a></li>
      {% if request.user.is_authenticated %}
       <li><a href="{% url users.user_logout %}">logout</a></li>
