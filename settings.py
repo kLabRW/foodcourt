@@ -33,9 +33,9 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "dev.db",
+            "NAME": "dev",
             "USER": "matsinvasion",
-            'PASSWORD': "food",
+            'PASSWORD': "live4ever",
             "HOST": "localhost",
             "PORT": "5432",
             }
@@ -288,6 +288,6 @@ LOGGING = {
  }
 
 import dj_database_url
-DATABASES = {'default':dj_database_url.config(default='postgres://matsinvasion:food@localhost:5432/dev.db')}
+DATABASES = {'default':dj_database_url.config(default='postgres://matsinvasion:live4ever@localhost:5432/dev')}
 # Honor the 'x-Forwaded-Proto' header for request is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
