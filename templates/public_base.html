@@ -23,15 +23,15 @@
  <div class="navbar">
    <div class="">
     <ul class="nav pull-right">
-    <li><a class="brand" href="{% url homepage %}">F4L</a></li>
+    <li><a class="brand" style="color: #40637F;" href="{% url homepage %}">F4L</a></li>
     
-     <li class=""><a href="#">Contact Us</a></li>
-     <li><a href="#">FAQ</a></li>
-     <li><a href="#">Company</a></li>
+     <li><a style="color: #40637F;" href="#">Contact Us</a></li>
+     <li><a style="color: #40637F;" href="#">FAQ</a></li>
+     <li><a style="color: #40637F;" href="#">Company</a></li>
      {% if request.user.is_authenticated %}
-      <li><a href="{% url users.user_logout %}">logout</a></li>
+      <li><a style="color: #40637F;" href="{% url users.user_logout %}">logout</a></li>
      {% else %}
-     <li><a href="{% url users.user_login %}">login</a></li>
+     <li><a style="color: #40637F;" href="{% url users.user_login %}">login</a></li>
      {% endif %}
     </ul>
    </div><!--end .nav-->
