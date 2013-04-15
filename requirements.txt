@@ -1,5 +1,5 @@
-mysql-python
 Django==1.4.3
+MySQL-python==1.2.4
 PIL==1.1.7
 Pillow==1.7.8
 RapidSMS==0.9.6a
@@ -21,9 +21,11 @@ django-reversion==1.7
 django-templatetag-sugar==0.1
 djappsettings==0.1.0
 djtables==0.1.2
+gunicorn==0.17.2
 nose==1.2.1
 -e git+http://github.com/nyaruka/nsms.git@bb92e2712112a38dbf85f1ff95ddef3a20757c33#egg=nsms-dev
 phonenumbers==5.2b1
+psycopg2==2.5
 python-memcached==1.48
 pytz==2012g
 rapidsms-httprouter==2.0.4
@@ -31,4 +33,3 @@ smartmin==1.4.1
 sorl-thumbnail==11.12
 wsgiref==0.1.2
 yolk==0.4.3
-
