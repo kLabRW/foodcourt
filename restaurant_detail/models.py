@@ -79,7 +79,7 @@ class Restaurant(SmartModel):
 	restaurant_name =models.CharField(max_length=100, help_text="Please provide name of your restaurant")
 	logo=models.ImageField(upload_to="restaurant_detail/restaurant/", help_text = "upload your restaurant logo")
 	cusine=models.TextField(help_text="Type(s)/Cusine(s) of Food served")
-	service_type=models.CharField(max_length=3,choices=SERVICES,help_text="Do you Deliver,offer Pickup services or both")
+	service_type=models.CharField(max_length=15,choices=SERVICES,help_text="Do you Deliver,offer Pickup services or both")
 	service_fee=models.IntegerField(max_length=5,help_text="HOw much you charge for delivery or pickup service.")
 	service_days=models.CharField(max_length=5,choices=DAYS,null=True,blank=True,help_text= "Days on which you offer delivery services")
 	service_hours_start=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your services start i.e HH:MM, don't include am or pm.")
