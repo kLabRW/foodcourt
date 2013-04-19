@@ -156,7 +156,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # added packages,
     'guardian',
-    'south',
+    #'south',
     #nyaruka packages,
     'smartmin',
     'django_quickblocks',
