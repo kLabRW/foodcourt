@@ -3,7 +3,7 @@ MySQL-python==1.2.4
 PIL==1.1.7
 Pillow==1.7.8
 RapidSMS==0.9.6a
-South==0.7.5
+South==0.7.6
 agon-ratings==0.2
 argparse==1.2.1
 dj-database-url==0.2.1
