@@ -46,13 +46,16 @@
             
   <ul class="nav pull-right">
     {% block login %}
+    
+    {{request.user}}
+    {{request.user.is_authenticated}}
     {% if request.user and request.user.is_authenticated %}
      <li class="pull-right">
       <a href="{% url users.user_profile request.user.id %}" style="float: left;">{{ request.user.username }}</a>
       <a href="{% url users.user_logout %}?go=/" style="float: right;">logout</a>
      </li>
     {% else %}
-     <li class="pull-right"><a href="{% url users.user_login %}">Login</a></li>
+     <li class="pull-right"><a href="{% url users.user_login %}">Lo</a></li>
     {% endif %}
     {% endblock %}
   </ul>

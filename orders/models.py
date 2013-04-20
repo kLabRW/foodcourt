@@ -27,7 +27,7 @@ options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('augment_quantity','name','pric
 
 class OrderItem(SmartModel):
 	"""model to store information of the item instance in customers online_order"""
-	shopping_id = models.CharField(max_length=50,db_index=True)
+	shopping_id = models.CharField(max_length=255,db_index=True)
 #	date_added = models.DateTimeField(auto_now_add=True)
 	quantity = models.IntegerField(default=0)
 	item = models.ForeignKey(Item)
