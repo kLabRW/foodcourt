@@ -32,7 +32,7 @@ if 'VCAP_SERVICES' in os.environ:
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgres_psy",
+            "ENGINE": "django.db.backends.postgres_psycopg2",
             "NAME": "dev",
             "USER": "matsinvasion",
             'PASSWORD': "live4ever",
