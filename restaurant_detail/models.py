@@ -18,8 +18,8 @@ class Restaurant_detail(SmartModel):
 	#)
 	
 	DAYS=(
-		('AWOSI','All Weekdays, Only Saturdays Inclusive'),
-		('AWSSI','All Weekdays, Saturdays & Sundays'),
+		('SDW','Seven days a week'),
+		('AWUS','All Weekdays,untill Saturday'),
 		('OWD','Only in the weekdays'),
 	)
 	
@@ -27,7 +27,6 @@ class Restaurant_detail(SmartModel):
 	SERVICES=(
 		('DELIVERY', 'Delivery'),
 		('PICKUP', 'PickUp'),
-		('ALL','Both'),
 	)
 	first_name=models.CharField(max_length=64,help_text="Your first name.")
 	last_name=models.CharField(max_length=64,help_text="Your last name")
@@ -40,7 +39,7 @@ class Restaurant_detail(SmartModel):
 	cusine=models.TextField(help_text="Type(s)/Cusine(s) of Food served")
 	service_type=models.CharField(max_length=15,choices=SERVICES,help_text="Do you Deliver,offer Pickup services or both")
 	service_fee=models.IntegerField(max_length=5,help_text="How much you charge for delivery and pickup services")
-	service_days=models.CharField(max_length=5,choices=DAYS, help_text= "Days on which you offer delivery services")
+	service_days=models.CharField(max_length=5,choices=DAYS, help_text= "Days on which you offer delivery/pickup services")
 	service_hours_start=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your delivery services start i.e HH:MM,don't include am or pm.")
 	service_hours_end=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your delivery services end i.e HH:MM, don't include am or pm.")
 	minimum_order_amount =models.IntegerField(max_length=5,help_text="The least amount you accept for online ordering")
@@ -59,17 +58,17 @@ class Restaurant(SmartModel):
 		
 	#)
 	DAYS=(
-		('MON-SAT','All Weekdays, Only Saturdays Inclusive'),
-		('MON-SUN','Seven days a week'),
-		('MON-FRI','Only in the weekdays'),
+		('SDW','Seven days a week.'),
+		('AWUS','All weekdays untill saturday'),
+		('OWD','Only in the weekdays'),
 	)
 	
 	SERVICES=(
 		('DELIVERY', 'Delivery'),
 		('PICKUP', 'PickUp'),
-		('ALL','Both'),
 	)
 	user=models.ForeignKey(User,default=1)
+#	piglet=models.CharField(max_length=5,null=True,blank=True,help_text='oink,oink')
 	first_name=models.CharField(max_length=64,help_text="Your first name.")
 	last_name=models.CharField(max_length=64,help_text="Your last name")
 	address=models.CharField(max_length=100,help_text="e.g Klab Restaurant,6th floor Telecom house,Kacyiru")
@@ -79,9 +78,9 @@ class Restaurant(SmartModel):
 	restaurant_name =models.CharField(max_length=100, help_text="Please provide name of your restaurant")
 	logo=models.ImageField(max_length=500,upload_to="restaurant_detail/restaurant/", help_text = "upload your restaurant logo")
 	cusine=models.TextField(help_text="Type(s)/Cusine(s) of Food served")
-	service_type=models.CharField(max_length=15,choices=SERVICES,help_text="Do you Deliver,offer Pickup services or both")
+	service_type=models.CharField(max_length=15,choices=SERVICES,help_text="Do you Deliver,offer Pickup services.")
 	service_fee=models.IntegerField(max_length=5,help_text="HOw much you charge for delivery or pickup service.")
-	service_days=models.CharField(max_length=5,choices=DAYS,null=True,blank=True,help_text= "Days on which you offer delivery services")
+	service_days=models.CharField(max_length=5,choices=DAYS,null=True,blank=True,help_text= "Days on which you offer delivery/pickup services")
 	service_hours_start=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your services start i.e HH:MM, don't include am or pm.")
 	service_hours_end=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your  services end i.e HH:MM,don't include am or pm.")
 	minimum_order_amount =models.IntegerField(max_length=5,default='1',help_text="The least amount you accept for online ordering")

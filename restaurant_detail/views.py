@@ -79,7 +79,7 @@ class Restaurant_detailCRUDL(SmartCRUDL):
 #		def get_delivery_days(self,obj):
 #			return obj.get_delivery_days_display()
 	class Update(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','is_active')
+		fields=('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','is_active')
 	class Create(SmartCreateView):
 		permission=None
 		submit_button_name="Join the F4L restaurant network"

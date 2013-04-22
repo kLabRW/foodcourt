@@ -33,7 +33,7 @@ else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgres_psycopg2",
-            "NAME": "dev",
+            "NAME": "dev_db",
             "USER": "matsinvasion",
             'PASSWORD': "live4ever",
             "HOST": "localhost",
@@ -48,7 +48,7 @@ else:
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Africa/Kigali'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -289,6 +289,6 @@ LOGGING = {
  }
 
 import dj_database_url
-DATABASES = {'default':dj_database_url.config(default='postgres://matsinvasion:live4ever@localhost:5432/dev')}
+DATABASES = {'default':dj_database_url.config(default='postgres://matsinvasion:live4ever@localhost:5432/dev_db')}
 # Honor the 'x-Forwaded-Proto' header for request is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

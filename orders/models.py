@@ -72,7 +72,7 @@ class Order(SmartModel):
 #	customer = models.ForeignKey(Customer,null=True,blank=True,help_text="The customer who made this order",default=None,)
 	restaurant = models.ForeignKey(Restaurant,null=True,blank=True,default = None,help_text="The restaurant the customer order from")
 	#contact info
-	email = models.EmailField(max_length=50,help_text="Needed as alternative")
+#	email = models.EmailField(max_length=50,help_text="Needed as alternative")
 	mobile = PhoneNumberField(max_length=20,default='+25078######',help_text="Needed to communicate and confirm payment from mobile money")
 	
 	#billing information
@@ -84,7 +84,7 @@ class Order(SmartModel):
 
 		
 	def __unicode__(self):
-		return "%s %s %s %s" % (self.billing_name,self.billing_address,self.billing_city,self.email,)
+		return "%s %s %s" % (self.billing_name,self.billing_address,self.billing_city)
 		
 	@property
 	def total(self): 
