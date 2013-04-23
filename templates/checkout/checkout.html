@@ -11,44 +11,46 @@
 <div>
  <p class="text-center" style="color: #40637f;">Making Payments to F4L</p>
  <br />
- <p style="color: #888888;">F4L accepts payments through MTN mobile money and Tigo cash Services.</p>
+ <p class="wording">F4L accepts payments through MTN mobile money and Tigo cash Services.</p>
  <br />
- <p style="color: #888888;">We assume that you already registered and are using these services.</p>
+ <p class="wording">We assume that you already registered and are using these services.</p>
  <br />
- <p style="color: #888888;">To pay with MTN mobile money, send sum equivalent to your <input type="submit" class="btn" value="Order Total" onclick="javascript:history.go(-1);"> on previous page, to 078###### </p>
+ <p class="wording">To pay with MTN mobile money, send sum equivalent to your <input type="submit" class="btn" value="Order Total" onclick="javascript:history.go(-1);"> on previous page, to 078###### </p>
  <br />
- <p style="color: #888888;">To pay with Tigo cash, send to 072######</p>
+ <p class="wording">To pay with Tigo cash, send to 072######</p>
  <br />
- <p style="color: #888888;">You and F4L(us) will receive an SMS notification of the transaction details.</p>
+ <p class="wording">You and F4L(us) will receive an SMS notification of the transaction details.</p>
  <br />
- <p style="color: #888888;">Please complete form below, the info provided will enable us locate you, and its the last one, we promise..</p>
+ <p class="wording">Please complete form below, the info provided will enable us locate you, and its the last one, we promise..</p>
  <br />
 </div>
 <br />
-<form action="" method = "post">
-  <legend class="category_head">Contact & billing Info</legend>
-  <fieldset>
-  <table class="table">
-  {{ form.errors }}
-  {{ form.non_field_errors }}
-  {% form_table_row form.email %}
-  {% form_table_row form.mobile %}
-  {% form_table_row form.billing_name%}
-  {% form_table_row form.billing_address %}
-  {% form_table_row form.billing_city %}
+<p class="wording lead">Klab Coffee bar is accepting payments by hand..</p>
+<br />
+ <form action="" method = "post">
+   <legend class="category_head">Contact & billing Info</legend>
+   <fieldset>
+   <table class="table">
+   {{ form.errors }}
+   {{ form.non_field_errors }}
+   {% form_table_row form.email %}
+   {% form_table_row form.mobile %}
+   {% form_table_row form.billing_name%}
+   {% form_table_row form.billing_address %}
+   {% form_table_row form.billing_city %}
+   </table>
+   </fieldset>
+  <br />
+  <table>
+  <tr>
+  <form method="post" action="">
+   {% csrf_token %}
+   <th colspan="2">  
+    <input name="submit" type="submit" value="complete order" class="btn" />
+   </th>
+  </form> 
+  </tr>
   </table>
-  </fieldset>
- <br />
- <table>
- <tr>
- <form method="post" action="">
-  {% csrf_token %}
-  <th colspan="2">  
-   <input name="submit" type="submit" value="complete order" class="btn" />
-  </th>
- </form> 
- </tr>
- </table>
-</form>    
+ </form>    
  
 {% endblock %}

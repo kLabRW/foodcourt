@@ -28,6 +28,9 @@
      <li><a style="color: #40637F;" href="#">Contact Us</a></li>
      <li><a style="color: #40637F;" href="#">FAQ</a></li>
      <li><a style="color: #40637F;" href="#">Company</a></li>
+     {% if perms.orders.recieved_order_list %}
+     <li><a href="{% url orders.recieved_order_list %}">Admin</a></li>
+     {%endif%}
      {% if request.user.is_authenticated %}
       <li><a style="color: #40637F;" href="{% url users.user_logout %}">logout</a></li>
      {% else %}
@@ -46,18 +49,7 @@
  
  <div style="clear: both;"></div>
  
-<div style="bottom: 0px;" id="footer">
- <div id="footer-contents">
-  <div id="copyright">
-    F4L	© 2012	Copyright. All rights reserved.
-    <span class="login">
-     {% if perms.orders.recieved_order_list %}
-     <a href="{% url orders.recieved_order_list %}">Admin</a>
-     {%endif%}
-    </span>
-  </div>
- </div>
-</div>
+
  
  
 

@@ -9,6 +9,10 @@
   {% if found_entries %}
    <p style="color: #888888"> You searched for restaurants in {{ query_string }}.</p>
    <br />
+    <div class="alert">
+     <button type="button" class="close" data-dismiss="alert">&times;</button>
+      Please take note of the Service Time,don't assume the services are 24hr..
+    </div>
    {% for restaurant in found_entries %}
    <div class="full_events">
     <div class="event_main">

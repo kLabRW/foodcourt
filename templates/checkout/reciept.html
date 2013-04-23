@@ -1,10 +1,11 @@
 {% extends "public_base.html"%}
 {% block order-content %}
- <caption>Your F4L order has been placed..hooray!!<br /><br />
+ <p style="padding-top: 50px;" class="wording lead">Your F4L order has been placed..hooray!!<br /><br />
   Your Order Number is: {{ order.id }}
- </caption>
- <p>Take note of your order Number, useful in cases of any complaints.</p>
+ </p>
+ <p class="wording">Take note of your order Number, useful in cases of any complaints.</p>
+ <br />
  
- <p class="headin">Thank you, see you soon..</p>
+ <p class=" text-center wording lead">Thank you, see you soon..</p>
 
 {% endblock %}    
