@@ -92,7 +92,7 @@ class OrderItemCRUDL(SmartCRUDL):
 
 class Recieved_OrderCRUDL(SmartCRUDL):
 	model = Recieved_Order
-	actions = ('create','read','update','delete','list')
+	actions = ('create','read','delete','list')
 	permissions = True
 	
 #	class Create(SmartCreateView):
