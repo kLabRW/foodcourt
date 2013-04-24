@@ -33,7 +33,7 @@ class OrderCRUDL(SmartCRUDL):
 	
 	class List(SmartListView):
 		fields = ('date','status','billing_name','mobile','billing_address','billing_city','restaurant.restaurant_name','restaurant.service_type')
-		search_fields = ('date',)
+		search_fields = ('status',)
 		
 		
 		def get_queryset(self,*args,**kwargs):
