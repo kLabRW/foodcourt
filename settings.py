@@ -1,7 +1,7 @@
 # Django settings for a generic project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -237,10 +237,10 @@ SESSION_COOKIE_NAME = 'sessionid'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 #Age of cookie, in seconds(default: 2 weeks).
 SESION_COOKIE_AGE = 60 * 60 *24 * 7 * 2
-#whetehr a user's session expires when they close the web browser is closed
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+#whether a user's session expires when they close the web browser is closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 #whether the session cookie should be secure(https:// only)
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
 
 CACHES = {
 	'default':{
