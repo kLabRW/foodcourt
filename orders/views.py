@@ -59,6 +59,8 @@ class OrderCRUDL(SmartCRUDL):
 #			return queryset
 	class Read(SmartReadView):
 		fields = ('date','status','customer','restaurant')
+	class Update(SmartUpdateView):
+		fields = ('status')
 
 
 #---------------------------------------------------------------------------
