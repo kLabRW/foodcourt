@@ -3,7 +3,7 @@ import os
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-ALLOWED_HOSTS = ['www.heroku.com']
+ALLOWED_HOSTS = ['f4l.herokuapp.com']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
