@@ -41,7 +41,7 @@ class OrderCRUDL(SmartCRUDL):
 			#if super-user,show all orders
 			if self.request.user.is_superuser:
 				return queryset
-			return queryset.filter(restaurant__user=self.request.user)
+			return queryset.filter(restaurant__user=self.request.user).order_by('status')
 			
 
 			 
@@ -107,8 +107,7 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 			queryset = super(Recieved_OrderCRUDL.List, self).get_queryset(*args,**kwargs)
 			if self.request.user.is_superuser:
 				return queryset
-			return queryset.filter(order__restaurant__user=self.request.user)
-			
+			return queryset.filter(order__restaurant__user=self.request.user).order_by('status')			
 		
 		def get_order_date(self,obj):
 			return obj.order.date
