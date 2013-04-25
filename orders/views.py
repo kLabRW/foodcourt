@@ -27,7 +27,7 @@ from restaurant_detail.models import Restaurant
 class OrderCRUDL(SmartCRUDL):
 	model = Order
 	permissions = True
-	actions = ('list','read','create','delete','update')
+	actions = ('list','read','create','delete','update','is_active')
 	
 			
 	
