@@ -29,7 +29,7 @@ class OrderItem(SmartModel):
 	"""model to store information of the item instance in customers online_order"""
 	shopping_id = models.CharField(max_length=255,db_index=True)
 #	date_added = models.DateTimeField(auto_now_add=True)
-	quantity = models.IntegerField(default=0)
+	quantity = models.IntegerField()
 	item = models.ForeignKey(Item)
 #	item_slug = models.CharField(max_length=50)
 

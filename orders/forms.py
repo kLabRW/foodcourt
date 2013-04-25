@@ -15,7 +15,7 @@ class PartialOrderItemForm(ModelForm):
 		model = OrderItem
 		exclude = ('shopping_id','is_active','modified_by','created_by','item','order')
 		widgets = {
-			'quantity': TextInput(attrs={'size':'2','value':'0', 'class':'quantity','maxlength':'5'}),
+			'quantity': TextInput(attrs={'size':'2', 'class':'quantity','maxlength':'5'}),
 #			'item_slug': forms.HiddenInput(),
 		
 #	error_messages={'invalid':'please enter a valid quantity.'},min_value=0),

@@ -46,4 +46,10 @@
 </div>
 {% endfor %}
 {% endif %}
+{% if query_string and not found_entries %}
+ <div class="alert">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+      The restaurant you searched for is either not offering the service you need for or it is not yet part of the F4L restaurant network. Please don't hestate to try out another restaurant.
+ </div> 
+{% endif %}
 {% endblock %}
