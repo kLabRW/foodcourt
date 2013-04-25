@@ -60,7 +60,7 @@ class OrderCRUDL(SmartCRUDL):
 	class Read(SmartReadView):
 		fields = ('date','status','customer','restaurant')
 	class Update(SmartUpdateView):
-		fields = ('status')
+		fields = ('status',)
 
 
 #---------------------------------------------------------------------------
@@ -103,13 +103,13 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 	
 	class List(SmartListView):
 		fields = ('order_date','order_status','order_mobile','order_billing_name','order_billing_address','order_billing_city','item.name','item.price','quantity','order_id','order_restaurant','order_service_type')
-		search_fields = ('order_id',)
+		search_fields = ('order_status',)
 		
 		def get_queryset(self,*args,**kwargs):
 			queryset = super(Recieved_OrderCRUDL.List, self).get_queryset(*args,**kwargs)
 			if self.request.user.is_superuser:
 				return queryset
-			return queryset.filter(order__restaurant__user=self.request.user).order_by('status')			
+			return queryset.filter(order__restaurant__user=self.request.user).order_by('order_status')			
 		
 		def get_order_date(self,obj):
 			return obj.order.date
