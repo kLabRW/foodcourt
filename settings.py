@@ -1,7 +1,7 @@
 # Django settings for a generic project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
