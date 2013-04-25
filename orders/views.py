@@ -27,7 +27,7 @@ from restaurant_detail.models import Restaurant
 class OrderCRUDL(SmartCRUDL):
 	model = Order
 	permissions = True
-	actions = ('list','read','create','delete','update','is_active')
+	actions = ('list','read','create','delete','update',)
 	
 			
 	
@@ -58,9 +58,9 @@ class OrderCRUDL(SmartCRUDL):
 #			queryset=queryset.prefetch_related('orderitems')
 #			return queryset
 	class Read(SmartReadView):
-		fields = ('date','status','customer','restaurant')
+		fields = ('date','status','customer','restaurant','is_active')
 	class Update(SmartUpdateView):
-		fields = ('status',)
+		fields = ('status','is_active')
 
 
 #---------------------------------------------------------------------------
