@@ -158,7 +158,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # added packages,
     'guardian',
-    #'south',
     #nyaruka packages,
     'smartmin',
     'django_quickblocks',
@@ -177,6 +176,7 @@ INSTALLED_APPS = (
     'live',
     'debug_toolbar',
     'orders',
+    'south',
     # marketing
     
     

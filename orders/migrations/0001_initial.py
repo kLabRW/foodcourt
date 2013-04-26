@@ -8,116 +8,64 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Restaurant_detail'
-        db.create_table('restaurant_detail_restaurant_detail', (
+        # Adding model 'OrderItem'
+        db.create_table('order_items', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='restaurant_detail_creations', to=orm['auth.User'])),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='orderitem_creations', to=orm['auth.User'])),
             ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='restaurant_detail_modifications', to=orm['auth.User'])),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='orderitem_modifications', to=orm['auth.User'])),
             ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('address', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('mobile', self.gf('phonenumber_field.modelfields.PhoneNumberField')(max_length=18)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=74)),
-            ('restaurant_name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('logo', self.gf('django.db.models.fields.files.ImageField')(max_length=500)),
-            ('cusine', self.gf('django.db.models.fields.TextField')()),
-            ('service_type', self.gf('django.db.models.fields.CharField')(max_length=15)),
-            ('service_fee', self.gf('django.db.models.fields.IntegerField')(max_length=5)),
-            ('service_days', self.gf('django.db.models.fields.CharField')(max_length=5)),
-            ('service_hours_start', self.gf('django.db.models.fields.TimeField')()),
-            ('service_hours_end', self.gf('django.db.models.fields.TimeField')()),
-            ('minimum_order_amount', self.gf('django.db.models.fields.IntegerField')(max_length=5)),
-            ('delivery_territory', self.gf('django.db.models.fields.TextField')()),
+            ('shopping_id', self.gf('django.db.models.fields.CharField')(max_length=255, db_index=True)),
+            ('quantity', self.gf('django.db.models.fields.IntegerField')()),
+            ('item', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['restaurant_detail.Item'])),
         ))
-        db.send_create_signal('restaurant_detail', ['Restaurant_detail'])
+        db.send_create_signal('orders', ['OrderItem'])
 
-        # Adding model 'Restaurant'
-        db.create_table('restaurant_detail_restaurant', (
+        # Adding model 'Order'
+        db.create_table('orders_order', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='restaurant_creations', to=orm['auth.User'])),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='order_creations', to=orm['auth.User'])),
             ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='restaurant_modifications', to=orm['auth.User'])),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='order_modifications', to=orm['auth.User'])),
             ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['auth.User'])),
-            ('first_name', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('last_name', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('address', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('mobile', self.gf('phonenumber_field.modelfields.PhoneNumberField')(default='+25078######', max_length=18)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=74)),
-            ('restaurant_name', self.gf('django.db.models.fields.CharField')(max_length=100)),
-            ('logo', self.gf('django.db.models.fields.files.ImageField')(max_length=500)),
-            ('cusine', self.gf('django.db.models.fields.TextField')()),
-            ('service_type', self.gf('django.db.models.fields.CharField')(max_length=15)),
-            ('service_fee', self.gf('django.db.models.fields.IntegerField')(max_length=5)),
-            ('service_days', self.gf('django.db.models.fields.CharField')(max_length=5, null=True, blank=True)),
-            ('service_hours_start', self.gf('django.db.models.fields.TimeField')()),
-            ('service_hours_end', self.gf('django.db.models.fields.TimeField')()),
-            ('minimum_order_amount', self.gf('django.db.models.fields.IntegerField')(default='1', max_length=5)),
-            ('delivery_territory', self.gf('django.db.models.fields.TextField')()),
-            ('token', self.gf('django.db.models.fields.CharField')(unique=True, max_length=32)),
-            ('restaurant_detail', self.gf('django.db.models.fields.related.ForeignKey')(default='1', to=orm['restaurant_detail.Restaurant_detail'])),
-            ('rating_votes', self.gf('django.db.models.fields.PositiveIntegerField')(default=0, blank=True)),
-            ('rating_score', self.gf('django.db.models.fields.IntegerField')(default=0, blank=True)),
+            ('date', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('status', self.gf('django.db.models.fields.IntegerField')(default=1)),
+            ('restaurant', self.gf('django.db.models.fields.related.ForeignKey')(default=None, to=orm['restaurant_detail.Restaurant'], null=True, blank=True)),
+            ('mobile', self.gf('phonenumber_field.modelfields.PhoneNumberField')(default='+25078######', max_length=20)),
+            ('billing_name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('billing_address', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('billing_city', self.gf('django.db.models.fields.CharField')(max_length=50)),
         ))
-        db.send_create_signal('restaurant_detail', ['Restaurant'])
+        db.send_create_signal('orders', ['Order'])
 
-        # Adding model 'Item'
-        db.create_table('items', (
+        # Adding model 'Recieved_Order'
+        db.create_table('orders_recieved_order', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='item_creations', to=orm['auth.User'])),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='recieved_order_creations', to=orm['auth.User'])),
             ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='item_modifications', to=orm['auth.User'])),
+            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='recieved_order_modifications', to=orm['auth.User'])),
             ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('item', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['restaurant_detail.Item'])),
+            ('date_added', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, auto_now_add=True, blank=True)),
+            ('quantity', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('price', self.gf('django.db.models.fields.DecimalField')(max_digits=9, decimal_places=2)),
-            ('owner', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['restaurant_detail.Restaurant'])),
+            ('order', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['orders.Order'])),
         ))
-        db.send_create_signal('restaurant_detail', ['Item'])
-
-        # Adding model 'Category'
-        db.create_table('categories', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='category_creations', to=orm['auth.User'])),
-            ('created_on', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='category_modifications', to=orm['auth.User'])),
-            ('modified_on', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('description', self.gf('django.db.models.fields.CharField')(max_length=64)),
-            ('owner', self.gf('django.db.models.fields.related.ForeignKey')(related_name='category', to=orm['restaurant_detail.Restaurant'])),
-        ))
-        db.send_create_signal('restaurant_detail', ['Category'])
-
-        # Adding M2M table for field item on 'Category'
-        db.create_table('categories_item', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('category', models.ForeignKey(orm['restaurant_detail.category'], null=False)),
-            ('item', models.ForeignKey(orm['restaurant_detail.item'], null=False))
-        ))
-        db.create_unique('categories_item', ['category_id', 'item_id'])
+        db.send_create_signal('orders', ['Recieved_Order'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Restaurant_detail'
-        db.delete_table('restaurant_detail_restaurant_detail')
+        # Deleting model 'OrderItem'
+        db.delete_table('order_items')
 
-        # Deleting model 'Restaurant'
-        db.delete_table('restaurant_detail_restaurant')
+        # Deleting model 'Order'
+        db.delete_table('orders_order')
 
-        # Deleting model 'Item'
-        db.delete_table('items')
-
-        # Deleting model 'Category'
-        db.delete_table('categories')
-
-        # Removing M2M table for field item on 'Category'
-        db.delete_table('categories_item')
+        # Deleting model 'Recieved_Order'
+        db.delete_table('orders_recieved_order')
 
 
     models = {
@@ -157,18 +105,47 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'restaurant_detail.category': {
-            'Meta': {'object_name': 'Category', 'db_table': "'categories'"},
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'category_creations'", 'to': "orm['auth.User']"}),
+        'orders.order': {
+            'Meta': {'object_name': 'Order'},
+            'billing_address': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'billing_city': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'billing_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'order_creations'", 'to': "orm['auth.User']"}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'description': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
+            'date': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'item': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['restaurant_detail.Item']", 'symmetrical': 'False'}),
-            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'category_modifications'", 'to': "orm['auth.User']"}),
+            'mobile': ('phonenumber_field.modelfields.PhoneNumberField', [], {'default': "'+25078######'", 'max_length': '20'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'order_modifications'", 'to': "orm['auth.User']"}),
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'owner': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'category'", 'to': "orm['restaurant_detail.Restaurant']"}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '64'})
+            'restaurant': ('django.db.models.fields.related.ForeignKey', [], {'default': 'None', 'to': "orm['restaurant_detail.Restaurant']", 'null': 'True', 'blank': 'True'}),
+            'status': ('django.db.models.fields.IntegerField', [], {'default': '1'})
+        },
+        'orders.orderitem': {
+            'Meta': {'object_name': 'OrderItem', 'db_table': "'order_items'"},
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'orderitem_creations'", 'to': "orm['auth.User']"}),
+            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['restaurant_detail.Item']"}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'orderitem_modifications'", 'to': "orm['auth.User']"}),
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'quantity': ('django.db.models.fields.IntegerField', [], {}),
+            'shopping_id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'})
+        },
+        'orders.recieved_order': {
+            'Meta': {'object_name': 'Recieved_Order'},
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'recieved_order_creations'", 'to': "orm['auth.User']"}),
+            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'date_added': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'auto_now_add': 'True', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'item': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['restaurant_detail.Item']"}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'recieved_order_modifications'", 'to': "orm['auth.User']"}),
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'order': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['orders.Order']"}),
+            'price': ('django.db.models.fields.DecimalField', [], {'max_digits': '9', 'decimal_places': '2'}),
+            'quantity': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         'restaurant_detail.item': {
             'Meta': {'object_name': 'Item', 'db_table': "'items'"},
@@ -238,4 +215,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['restaurant_detail']
+    complete_apps = ['orders']
