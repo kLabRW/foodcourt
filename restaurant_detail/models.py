@@ -138,7 +138,7 @@ class Category(SmartModel):
 	item=models.ManyToManyField(Item)
 	title=models.CharField(max_length=64,help_text="Title of category e.g BreakFast")
 	description=models.CharField(max_length=64,help_text="Describe the category e.g the items included in the category")
-	display_order=models.IntegerField(max_length=3,help_text="in what order should items appear")
+	display_order=models.IntegerField(max_length=3,help_text="in what order should categories appear")
 	owner = models.ForeignKey(Restaurant,related_name='category',help_text="owner of category")
 
 	

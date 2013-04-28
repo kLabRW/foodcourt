@@ -228,7 +228,7 @@ class CategoryCRUDL(SmartCRUDL):
 	fields = ('create','read','update','list','shortlist')
 	
 	class Create(SmartCreateView):
-		fields = ('title','description','item')
+		fields = ('title','description','item','display_order')
 		form_class = CategoryCreateForm
 		
 #		def get_item_name(self,obj):
@@ -247,7 +247,7 @@ class CategoryCRUDL(SmartCRUDL):
 	
 	class Read(SmartReadView):
 		
-		fields=('title','description','item')
+		fields=('title','description','item','display_order')
 		
 		def get_title(self,obj):
 			return str(obj)
@@ -259,7 +259,7 @@ class CategoryCRUDL(SmartCRUDL):
 			restaurant = Restaurant.objects.get(user=self.request.user)
 			return Category.objects.filter(owner=restaurant)
 	class Update(SmartUpdateView):
-		fields = ('item','title','description','is_active')
+		fields = ('item','title','description','is_active','display_order')
 		form_class = CategoryUpdateForm
 		
 		def get_form_kwargs(self):
@@ -282,7 +282,7 @@ class ItemCRUDL(SmartCRUDL):
 
 
 	class Create(SmartCreateView):
-		fields = ('name','description','price')
+		fields = ('name','description','display_order','price')
 		
 		def pre_save(self,obj):
 			obj = super(ItemCRUDL.Create, self).pre_save(obj)
@@ -290,7 +290,7 @@ class ItemCRUDL(SmartCRUDL):
 			obj.owner = restaurant
 			return obj
 	class Read(SmartReadView):
-		fields = ('name','description','price')
+		fields = ('name','description','display_order','price')
 		
 		def get_name(self,obj):
 			return str(obj)
@@ -298,14 +298,14 @@ class ItemCRUDL(SmartCRUDL):
 			return str(obj.owner)
 	
 	class List(SmartListView):
-		fields = ('name','price')
+		fields = ('name','price','display_order')
         # overiding get_queryset from smartminListView. 	
 		def derive_queryset(self):
 #			import pdb;pdb.set_trace()
 			restaurant = Restaurant.objects.get(user=self.request.user)
 			return Item.objects.filter(owner=restaurant)
 	class Update(SmartUpdateView):
-		fields = ('name','description','price','is_active')
+		fields = ('name','description','price','display_order','is_active')
 
 # 	class Shortlist(SmartListView):			
 #		fields = ('name','description','owner')
