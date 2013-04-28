@@ -35,10 +35,10 @@ class Restaurant_detail(SmartModel):
 	mobile= PhoneNumberField(max_length=18,help_text="Highly recommended, should include country code e.g 25078######")
 	email=models.EmailField(max_length=74,help_text="Higly recommended")
 	restaurant_name =models.CharField(max_length=100, help_text="Please provide name of your restaurant")
-	logo=models.ImageField(max_length=500,upload_to="restaurant_detail/restaurant_detail", help_text = "upload your restaurant logo")
+	logo=models.ImageField(max_length=500,null=True,blank=True,upload_to="restaurant_detail/restaurant_detail", help_text = "upload your restaurant logo")
 	cusine=models.TextField(help_text="Type(s)/Cusine(s) of Food served")
 	service_type=models.CharField(max_length=15,choices=SERVICES,help_text="Do you Deliver,offer Pickup services or both")
-	service_fee=models.IntegerField(max_length=5,help_text="How much you charge for delivery and pickup services")
+	service_fee=models.IntegerField(max_length=5,null=True,blank=True,help_text="How much you charge for delivery and pickup services")
 	service_days=models.CharField(max_length=5,choices=DAYS, help_text= "Days on which you offer delivery/pickup services")
 	service_hours_start=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your delivery services start i.e HH:MM,don't include am or pm.")
 	service_hours_end=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your delivery services end i.e HH:MM, don't include am or pm.")
@@ -76,10 +76,10 @@ class Restaurant(SmartModel):
 	mobile= PhoneNumberField(max_length=18,default='+25078######',help_text="Highly recommended, should include country code e.g 25078######")
 	email=models.EmailField(max_length=74,help_text="Higly recommended")
 	restaurant_name =models.CharField(max_length=100, help_text="Please provide name of your restaurant")
-	logo=models.ImageField(max_length=500,upload_to="restaurant_detail/restaurant/", help_text = "upload your restaurant logo")
+	logo=models.ImageField(max_length=500,null=True,blank=True,upload_to="restaurant_detail/restaurant/", help_text = "upload your restaurant logo")
 	cusine=models.TextField(help_text="Type(s)/Cusine(s) of Food served")
 	service_type=models.CharField(max_length=15,choices=SERVICES,help_text="Do you Deliver,offer Pickup services.")
-	service_fee=models.IntegerField(max_length=5,help_text="HOw much you charge for delivery or pickup service.")
+	service_fee=models.IntegerField(max_length=5,null=True,blank=True,help_text="HOw much you charge for delivery or pickup service.")
 	service_days=models.CharField(max_length=5,choices=DAYS,null=True,blank=True,help_text= "Days on which you offer delivery/pickup services")
 	service_hours_start=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your services start i.e HH:MM, don't include am or pm.")
 	service_hours_end=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your  services end i.e HH:MM,don't include am or pm.")
@@ -116,7 +116,7 @@ class Item(SmartModel):
 	#restaurant_name=models.CharField(max_length=100,help_text="please provide name of your restaurant")
 	name= models.CharField(max_length=64,help_text="Name for this item e.g Hamburger")
 	description= models.CharField(max_length=200,help_text="Describe the item in a few words e.g Ham with bread")
-#	display_order=models.IntegerField(default=0)
+	display_order=models.IntegerField(max_length=3,help_text="in what order should items appear")
 	price=models.DecimalField(max_digits=9,decimal_places=2)
 	owner = models.ForeignKey(Restaurant,help_text="Owner of an item")
 #	slug = models.SlugField(max_length=50, unique=True, help_text='Unique value for product page URL, created from name.')
@@ -138,7 +138,7 @@ class Category(SmartModel):
 	item=models.ManyToManyField(Item)
 	title=models.CharField(max_length=64,help_text="Title of category e.g BreakFast")
 	description=models.CharField(max_length=64,help_text="Describe the category e.g the items included in the category")
-#	display_order=models.IntegerField(default=0)
+	display_order=models.IntegerField(max_length=3,help_text="in what order should items appear")
 	owner = models.ForeignKey(Restaurant,related_name='category',help_text="owner of category")
 
 	
@@ -148,7 +148,7 @@ class Category(SmartModel):
 
 
 	def __unicode__(self):
-		return "%s %s %s %s" % (self.item, self.title, self.description, self.owner)
+		return "%s %s %s %s %s" % (self.item, self.title,self.display_order,self.description, self.owner)
 
 
 

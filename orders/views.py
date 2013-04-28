@@ -94,7 +94,7 @@ class OrderItemCRUDL(SmartCRUDL):
 
 class Recieved_OrderCRUDL(SmartCRUDL):
 	model = Recieved_Order
-	actions = ('create','read','delete','list')
+	actions = ('create','read','delete','list','update')
 	permissions = True
 	
 #	class Create(SmartCreateView):
@@ -131,6 +131,9 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 			return obj.order.restaurant.restaurant_name
 		def get_order_service_type(self,obj):
 			return obj.order.restaurant.service_type
+		
+	class Update(SmartUpdateView):
+		fields = ('is_active')
 		
 	
 	
