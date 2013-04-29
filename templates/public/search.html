@@ -17,6 +17,9 @@
    <div class="full_events">
     <div class="event_main">
      <div class="event_image">
+      {% thumbnail restaurant.logo "100x110" crop="center" as im%}
+      <img src="im.url" />
+      {% endthumbnail %}
      </div>
      <div class="event_details">
       <table width="100%" cellspacing="" cellpadding="" border="0">
