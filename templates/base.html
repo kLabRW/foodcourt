@@ -48,7 +48,6 @@
     {% block login %}
     
 
-    {{request.user.is_authenticated}}
     {% if request.user and request.user.is_authenticated %}
      <li class="pull-right">
       <a href="{% url users.user_profile request.user.id %}" style="float: left;">{{ request.user.username }}</a>
