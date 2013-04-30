@@ -73,18 +73,18 @@ class Order(SmartModel):
 	restaurant = models.ForeignKey(Restaurant,null=True,blank=True,default = None,help_text="The restaurant the customer order from")
 	#contact info
 #	email = models.EmailField(max_length=50,help_text="Needed as alternative")
-	mobile = PhoneNumberField(max_length=20,default='+25078######',help_text="Needed to communicate and confirm payment from mobile money")
+	mobile = PhoneNumberField(max_length=20,null=True,blank=True,help_text="For confirmation purposes..")
 	
 	#billing information
-	billing_name= models.CharField(max_length=50,help_text="Needed so we can deliver to the right individual")
-	billing_address= models.CharField(max_length=50,help_text="Needed for delivery purposes, should be office address.")	
-	billing_city = models.CharField(max_length=50,help_text="F4L services are only in selected cities.")
-
+	name= models.CharField(max_length=50,null=True,blank=True,help_text="Needed so that we can deliver to the right individual")
+	address = models.CharField(max_length=50,null=True,blank=True,help_text="Where do we find you. e.g Klab 6th floor,Telecom House,Kacyiru")
+	city = models.CharField(max_length=50,null=True,blank=True,help_text="F4L services are only in Kigali.")
+	additional_information = models.TextField(max_length=250,null=True,blank=True,help_text="Anything more we should know. E.g If the mobile number above is not the same as the one used to make payments,please provide the number you used to make payments")
 #	total_amount = models.integerField(max_length=6,defaulrhelp_text="Amount paid by customer F4L")
 
 		
 	def __unicode__(self):
-		return "%s %s %s" % (self.billing_name,self.billing_address,self.billing_city)
+		return "%s %s %s %s" % (self.name,self.address,self.city,self.additional_information)
 		
 	@property
 	def total(self): 
