@@ -29,6 +29,9 @@
   {% if perms.orders.order_list%}
   <li><a href="{% url orders.order_list %}">Orders</a></li>
   {% endif %}
+  {%if perms.restaurant_detail.restaurant_myprofile%}
+  <li><a href="{% url restaurant_detail.restaurant_myprofile %}"></a>
+  {% endif%}
 
   
     
