@@ -58,10 +58,11 @@ def show_checkout(request,id):
 	if order.is_empty(request):
 		cart_url = urlresolvers.reverse('order_index')
 		return HttpResponseRedirect(cart_url)
+	item = Item.objects.get(pk=id)
 	if request.method == 'POST':
-		item = Item.objects.get(pk=id)
 		postdata = request.POST.copy()
 		form = forms.CheckoutForm(request.POST,postdata)
+		
 		if form.is_valid():
 			order_created = create_order(request,item)
 			order_number = order_created.id
@@ -70,9 +71,14 @@ def show_checkout(request,id):
 			if postdata['submit'] == 'complete order':
 				reciept_url = urlresolvers.reverse('checkout_reciept')
 				return HttpResponseRedirect(reciept_url)
+		else:
+			order_created = None
 	else:
 		form = forms.CheckoutForm
+	order_subtotal = order.order_subtotal(request,item)
+	total = order_subtotal + item.owner.service_fee # Access the order total
 	context = {
+		'total':total,
 		'form':form,
 	}
 	return render(request,'checkout/checkout.html',context)
