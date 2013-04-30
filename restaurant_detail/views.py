@@ -132,7 +132,7 @@ class RestaurantCRUDL(SmartCRUDL):
 			token=self.kwargs.get('token')
 			return Restaurant.objects.get(token=token)
 	class Myprofile(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory')
+		fields=('restaurant_name','first_name','last_name','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','is_active')
 		def has_permission(self, request, *args, **kwargs):
 			super(RestaurantCRUDL.Myprofile,self).has_permission(request,*args,**kwargs)
 			return True
