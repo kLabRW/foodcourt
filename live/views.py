@@ -128,7 +128,7 @@ def show_item(request,id):
 	# need to evaluate the HTTP method
 	if request.method == 'POST':
 #		import pdb;pdb.set_trace()
-		a = Item.objects.get(pk=id).order_by('display_order')
+		a = Item.objects.get(pk=id)
 		form = PartialOrderItemForm(request.POST,instance=a)
 		# check validation of posted data
 		if form.is_valid():
