@@ -119,11 +119,11 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 #			return obj.order.email
 		def get_order_mobile(self,obj):
 			return obj.order.mobile
-		def get_order_billing_name(self,obj):
+		def get_order_name(self,obj):
 			return obj.order.name
-		def get_order_billing_address(self,obj):
+		def get_order_address(self,obj):
 			return obj.order.address
-		def get_order_billing_city(self,obj):
+		def get_order_city(self,obj):
 			return obj.order.city
 		def get_order_id(self,obj):
 			return obj.order.id
