@@ -79,7 +79,7 @@ class Order(SmartModel):
 	name= models.CharField(max_length=50,null=True,blank=True,help_text="Needed so that we can deliver to the right individual")
 	address = models.CharField(max_length=50,null=True,blank=True,help_text="Where do we find you. e.g Klab 6th floor,Telecom House,Kacyiru")
 	city = models.CharField(max_length=50,null=True,blank=True,help_text="F4L services are only in Kigali.")
-	additional_information = models.TextField(max_length=250,null=True,blank=True,help_text="Anything more we should know. E.g If the mobile number above is not the same as the one used to make payments,please provide the number you used to make payments")
+	additional_information = models.TextField(max_length=250,null=True,blank=True,help_text="Anything more we should know...")
 #	total_amount = models.integerField(max_length=6,defaulrhelp_text="Amount paid by customer F4L")
 
 		
