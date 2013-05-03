@@ -17,12 +17,8 @@
  <form action="" method = "post">
    <legend class="category_head">Contact & Order information</legend>
    <fieldset>
-   <div style="color: #40637f;" class="">
-    {{ form.mobile }}
-    {{ form.name }}
-    {{ form.address }}
-    {{ form.city }}
-    {{ form.additional_information}}
+   <table class="">
+    {{ form.as_table}}
    </table>
    </fieldset>
   <br />
