@@ -102,7 +102,7 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 		
 	
 	class List(SmartListView):
-		fields = ('order_date','order_status','order_mobile','order_name','order_address','order_city','item.name','item.price','quantity','order_id','order_restaurant','order_service_type','additional_information')
+		fields = ('order_date','order_status','order_mobile','order_name','order_address','order_city','item.name','item.price','quantity','order_id','order_restaurant','order_service_type','order_additional_information')
 		search_fields = ('order_id',)
 		
 		def get_queryset(self,*args,**kwargs):
