@@ -135,7 +135,7 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 			return obj.order.additional_information
 		
 	class Update(SmartUpdateView):
-		fields = ('is_active')
+		fields = ('is_active',)
 		
 	
 	
