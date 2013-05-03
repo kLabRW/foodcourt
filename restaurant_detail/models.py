@@ -42,8 +42,8 @@ class Restaurant_detail(SmartModel):
 	service_days=models.CharField(max_length=5,choices=DAYS, help_text= "Days on which you offer delivery/pickup services")
 	service_hours_start=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your delivery services start i.e HH:MM,don't include am or pm.")
 	service_hours_end=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your delivery services end i.e HH:MM, don't include am or pm.")
-	minimum_order_amount =models.IntegerField(max_length=5,help_text="The least amount you accept for online ordering")
-	delivery_territory = models.TextField(help_text="places where you will deliver e.g, kacyiru,kimihurura,kigali city centre..")
+	minimum_order_amount =models.IntegerField(max_length=5,null=True,blank=True,help_text="The least amount you accept for online ordering")
+	delivery_territory = models.TextField(max_length=500,null=True,blank=True,help_text="places where you will deliver e.g, kacyiru,kimihurura,kigali city centre..")
 #	delivery_hours=models.DateTimeField()
 	def __unicode__(self):
 		return "%s %s %s %s %s %s %s %s" % (self.restaurant_name,self.cusine,self.service_type,self.first_name, self.last_name, self.restaurant_name, self.address, self.mobile)
@@ -84,7 +84,7 @@ class Restaurant(SmartModel):
 	service_hours_start=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your services start i.e HH:MM, don't include am or pm.")
 	service_hours_end=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your  services end i.e HH:MM,don't include am or pm.")
 	minimum_order_amount =models.IntegerField(max_length=5,default='1',help_text="The least amount you accept for online ordering")
-	delivery_territory = models.TextField(help_text="places where you will deliver e.g, kacyiru,kimihurura,kigali city centre..")
+	delivery_territory = models.TextField(max_length=500,null=True,blank=True,help_text="places where you will deliver e.g, kacyiru,kimihurura,kigali city centre..")
 	token=models.CharField(max_length=32, unique=True, help_text="token used to activate account")
 	restaurant_detail=models.ForeignKey(Restaurant_detail,default='1',help_text="the initial application of the restaurant_details of restaurant")
 	rating = AnonymousRatingField(range=5, weight=10,allow_anonymous = True,use_cookies= True)# 5 possible rating values, 1-5 and weight of 10 
