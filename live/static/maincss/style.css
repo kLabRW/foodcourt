@@ -771,6 +771,7 @@ h3 {
     background-position: bottom;
     background-repeat: repeat-x;
     position: absolute;
+    margin-bottom: 0;
 }
 
 #footer_contents {
