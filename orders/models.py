@@ -73,7 +73,7 @@ class Order(SmartModel):
 	restaurant = models.ForeignKey(Restaurant,null=True,blank=True,default = None,help_text="The restaurant the customer order from")
 	#contact info
 #	email = models.EmailField(max_length=50,help_text="Needed as alternative")
-	mobile = PhoneNumberField(max_length=20,null=True,blank=True,help_text="For confirmation purposes..")
+	mobile = PhoneNumberField(max_length=20,null=True,blank=True,help_text="For confirmation purposes.Be sure to use format +250######")
 	
 	#billing information
 	name= models.CharField(max_length=50,null=True,blank=True,help_text="Needed so that we can deliver to the right individual")
