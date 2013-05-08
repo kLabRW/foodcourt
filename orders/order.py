@@ -111,7 +111,7 @@ def empty_cart(request):
 	user_cart.delete()
 	
 def below_minimum_amount(request,obj):
-	if order_subtotal < minimum_order_amount:
+	if order_subtotal < Restaurant.minimum_order_amount:
 		difference = Restaurant.minimum_order_amount - order_subtotal(request,obj)
 	return difference
 
