@@ -5,7 +5,6 @@ import decimal
 import random
 from django.conf import settings
 from django.contrib.auth.models import User
-from restaurant_detail.models import Restaurant
 
 
 ORDER_ID_SESSION_KEY = 'shopping_id'
@@ -111,8 +110,10 @@ def empty_cart(request):
 	user_cart.delete()
 	
 def below_minimum_amount(request,obj):
-	if order_subtotal < Restaurant.minimum_order_amount:
-		difference = Restaurant.minimum_order_amount - order_subtotal(request,obj)
+	order_items = get_order_items(request)
+	for order_item in order_items:
+		if order_subtotal < order_item.item.owner.minimum_order_amount:
+			difference = order_item.minimum_order_amount - order_subtotal(request,obj)
 	return difference
 
 	
