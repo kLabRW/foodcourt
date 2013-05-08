@@ -112,7 +112,6 @@ def empty_cart(request):
 def below_minimum_amount(request,obj):
 	order_items = get_order_items(request)
 	for order_item in order_items:
-		if order_subtotal < order_item.item.owner.minimum_order_amount:
 			difference = order_item.minimum_order_amount - order_subtotal(request,obj)
 	return difference
 
