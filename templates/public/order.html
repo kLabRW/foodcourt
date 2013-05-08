@@ -76,9 +76,10 @@
     </tr>
      {% endfor %}
      {% else %}
+     {% for item in order_items %}
     <tr>
     <td colspan="2" style="height:30px; color: #888888;">
-     Your F4L order is below amount we accept for online orders {{ item.item.owner.minimum_order_amount}}.
+     Your F4L order is below amount we accept for online orders {{ item.item.owner.minimum_order_amount }}.
     </td>
     </tr>
     {% endif %}
