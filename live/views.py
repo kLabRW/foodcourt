@@ -55,10 +55,10 @@ def create_order(request,obj):
 # views to do with the checkout page,reciept page.
 def show_checkout(request,id):
 	"""checkout form to collect order information"""
-#	if order.less(request,id):
-#		cart_url = urlresolvers.reverse('order_index')
-#		return HttpResponseRedirect(cart_url)
 	item = Item.objects.get(pk=id)
+	if order.is_less(request,id):
+		cart_url = urlresolvers.reverse('order_index',kwargs={'id':item.id})
+		return HttpResponseRedirect(cart_url)
 	if request.method == 'POST':
 		postdata = request.POST.copy()
 		form = forms.CheckoutForm(request.POST,postdata)
