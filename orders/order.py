@@ -110,10 +110,12 @@ def empty_cart(request):
 	user_cart = get_order_items(request)
 	user_cart.delete()
 	
-#def less(request,obj):
-#	resto=Restaurant.objects.get(pk=obj)
-#	if resto.minimum_order_amount > order_subtotal(request,obj):
-#		difference = resto.minimum_order_amount - order_subtotal(request,obj)
-#		return difference
+def is_less(request,obj):
+	"""Calculate if order_subtotal is less than resto acceptable order amount"""
+	order_items = get_order_items(request)
+	for order_item in order_items:
+		return order_subtotal(request, obj) < order_item.item.owner.minimum_order_amount
+	
+
 
 	
