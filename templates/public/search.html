@@ -11,7 +11,7 @@
    <br />
     <div class="alert">
      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      Please take note of the Service Time,don't assume the services are 24hr..
+      Please take note of the Service Time.
     </div>
    {% for restaurant in found_entries %}
    <div class="full_events">
@@ -40,8 +40,13 @@
        </tr>
        <tr>
         <td style="color: #888888;">Mobile: </td>
-        <td class="left" style="color: #888888;">{{ restaurant.mobile}}
+        <td class="left" style="color: #888888;">{{ restaurant.mobile}}</td>
        </tr>
+       {% if restaurant.closed %}
+       <tr>
+        <td style="color: Red;">Sorry we are closed. </td>
+       </tr>
+       {% endif %}
       </table>
      </div>
     </div>
