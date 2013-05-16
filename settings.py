@@ -186,7 +186,7 @@ INSTALLED_APPS = (
     'live',
     'debug_toolbar',
     'orders',
-    'south',
+    #'south',
     # marketing
     
     
