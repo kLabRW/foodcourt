@@ -12,7 +12,7 @@
  <h5 class="category_head"> {{ category.title }} </h5>
   {% for item in category.item.all %}
   <ul style="padding-left: 0px:">
-   <li style="display: block; padding-bottom: 20px;"><a href="{% url item_order item.id %}">{{item.name}}<span style="color: #888888; font-size: 30px;"> {{item.price}}frw</span></li><a/>
+   <li style="display: block; padding-bottom: 20px;"><a href="{% url item_order item.id %}" rel="tooltip" title="{{item.description	}}" id="example">{{item.name}}<span style="color: #888888; font-size: 30px;"> {{item.price}}frw</span></li><a/>
   </ul>
   {% endfor %}
 {% endfor %}
