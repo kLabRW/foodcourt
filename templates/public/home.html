@@ -1,43 +1,39 @@
 {% extends "public_base.html" %}
 
-{% block order-content %}
-<div id="ordering-content-wrapper">
- <div id="resto-search" class="frontbox searchbox">
-  <h2 class="headin"> START YOUR ORDER</h2>
-  <form style="position: absolute;" method="get" action="{% url search %}">
- <div class="radio-button">
-  <ul>
-   <li id="DeliveryOption" style="float: left; color: #40637f;
-   ;">
-    <input id="DelivrySelectionOption" type="radio" checked="checked" value="D" name="deliveryType" /> Delivery
-   </li>
-   <li id="PickupOption" style="color: #40637f; margin-left: 300px;">
-    <input id="PickupOptionSelection" class="" type="radio" value="P" name="deliveryType" /> Pickup
-   </li>
-  </ul>
-  <br>
-  <div style="padding-left: 40px;">
-   <input class="input-xxlarge" type="text" name="q" placeholder="search by location e.g,Kacyiru" />
-   <br>
-   <button class="btn btn-large btn-primary" type="submit">
-    <div class="text status">Search</div>
-   </button>
-  </div>
- </div> 
-  </form>
- </div>
- <div id="message-box" class="frontbox searchbox">
-  <h2 class="headin"> Hi there, </h2>
-  <p style="color:#888888; font-size: 16px; padding-right: 40px;padding-left: 40px;">We are glad to have you here.Food 4 Less(F4L) is an easy way to order food for delivery or pickup/takeout.In 3 simple steps.<br />
-  <ol>
-   <li style="color:#888888;">Select Delivery or Pickup then search for restaurant by name or location.</li>
-   <li style="color: #888888;">Build and pay for order.</li>
-   <li style="color: #888888;">Enjoy your meal.</li>
-  </ol>
- </div>
-</div>
-<div>
- <p class="wording lead">We are currently in BETA TEST and only working with the Klab Coffee Bar on the 6th floor of Telecom House.It's offering both delivery and pickup/takeout services within Telecom House.</p>
-</div>
 
-{% endblock %}
+ {% block order-content %}
+ <div id="home_page" class="backsplash">
+  <div class="container">
+   <div id="message-box" class="fronbox searchbox">
+    <h2 id="message-box_heading">START YOUR ORDER</h2>
+    <br>
+    <form style="top: 10px;"method="get" action="{% url search %}">
+     <div class="radio-button">
+      <ul>
+       <li style="float: left; color: #626262";>
+        <input id="DelivrySelectionOption" type="radio" checked="checked" value="D" name="deliveryType" /> Delivery
+       </li>
+       <li style="margin-left: 300px; color: #626262;">
+        <input id="PickupOptionSelection" type="radio" value="P" name="deliveryType" /> Pickup
+       </li>
+      </ul>
+      <br>
+      <div style="padding-left: 40px;">
+       <input class="input-xxlarge" type="text" name="q" placeholder="search by resto name or location">
+       <button class="btn btn-large btn-warning" type="submit">
+        <div class="text status">Search</div>
+       </button>
+      </div>
+     </div>
+    </form>
+   </div>
+   <div id="tag_line">
+    <strong>A smart way to order food for delivery or pickup.</strong>
+   </div>
+   <div id="hw_it_wrks">
+     <h2>Here is how it works.</h2>
+   </div>
+  </div>
+ </div>
+ {% endblock %}
+

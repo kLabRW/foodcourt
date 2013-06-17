@@ -11,21 +11,7 @@
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impression.css">
   
   <!-- javascript -->
-  <script type="text/javascript">
-	window.onload = function()
-    {
-		if(!window.jQuery)
-        {
-			alert('jQuery not loaded');
-        }
-		else
-        {
-			$(document).ready(function(){
-				$('#example').tooltip({'placement':'top', 'trigger' : 'hover'});
-            });
-        }
-    }
-  </script>
+  
   
   {%endblock %}
  </head>
@@ -34,22 +20,22 @@
 {% endblock %}
 
  {% load smartmin %}
-<div id="container">
- <div class="navbar">
-   <div class="">
-    <ul class="nav pull-right">
-    <li><a class="brand" style="color: #40637F;" href="{% url homepage %}">Food4Less</a></li>
+<div id="">
+ <div style="height: 62px; background: #f36c00;">
+   <div class="navbar" style="margin-bottom: 0px; padding-top: 10px;">
+    <ul class="nav pull-right" style="margin-right: 130px;">
+    <li><a class="brand" id="lettering" href="{% url homepage %}">Food4Less</a></li>
     
-     <li><a style="color: #40637F;" href="#">Contact Us</a></li>
-     <li><a style="color: #40637F;" href="#">FAQ</a></li>
-     <li><a style="color: #40637F;" href="#">Company</a></li>
+     <li><a id="lettering" href="{% url contact_us %}">Contact Us</a></li>
+     <li><a id="lettering" href="#">FAQ</a></li>
+     <li><a id="lettering" href="#">Company</a></li>
      {% if perms.orders.recieved_order_list %}
-     <li><a href="{% url orders.recieved_order_list %}">Admin</a></li>
+     <li><a id="lettering" href="{% url orders.recieved_order_list %}">Admin</a></li>
      {%endif%}
      {% if request.user.is_authenticated %}
-      <li><a style="color: #40637F;" href="{% url users.user_logout %}">logout</a></li>
+      <li><a id="lettering" href="{% url users.user_logout %}">Logout</a></li>
      {% else %}
-     <li><a style="color: #40637F;" href="{% url users.user_login %}">login</a></li>
+     <li><a id="lettering" href="{% url users.user_login %}">Login</a></li>
      {% endif %}
     </ul>
    </div><!--end .nav-->
@@ -57,10 +43,8 @@
 </div>
  <div style="clear: both;"></div>
  
- <div class="container">
   {% block order-content %}
   {% endblock %}
- </div><!--end #-->
  
  
  <div style="clear: both;"></div>

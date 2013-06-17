@@ -3,11 +3,9 @@
 {% load url from future %}
 {% block order-content %}
 <div class="clear"></div>
-<div class="results-area" style="position: static;">
- <div id="white-sep" class="white-sep" style="dipslay: none;"></div>
- <div id="background" style="height: 415px;margin-top:30px;">
+ <div class="container">
   {% if found_entries %}
-   <p style="color: #888888"> Click restaurant name to view name.</p>
+   <p style="color: #646464; margin-bottom: 20px; padding-top: 20px;"> Click restaurant to view menu.</p>
    <br />
     <div class="alert">
      <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -24,23 +22,23 @@
      <div class="event_details">
       <table width="100%" cellspacing="" cellpadding="" border="0">
        <tr>
-        <td colspan="2" class="category_head"><a href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name}}</a></td> 
+        <td colspan="2" class="category_head"><a style="color: #;"href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name}}</a></td> 
        </tr>
        <tr>
-        <td class="" style="color: #888888;">Location</td>
-        <td class="left" style="color: #888888;">{{restaurant.address}}</td>
+        <td class="" style="color: #888888;"></td>
+        <td class="left" style="color: #888888;"></td>
        </tr>
        <tr>
-        <td class="" style="color: #888888;">Service Time:</td>
-        <td class="left" style="color: #888888;">{{ restaurant.service_hours_start}} to {{ restaurant.service_hours_end }}</td>
+        <td class="" style="color: #646464;">Mobile</td>
+        <td class="left" style="color: #646464;">{{ restaurant.mobile}}</td>
        </tr>
        <tr>
-        <td class="" style="color: #888888">Services offered in: </td>
-        <td class="left" style="color: #888888">{{restaurant.delivery_territory}}</td>
+        <td class="" style="color: #646464">Service time </td>
+        <td class="left" style="color: #646464">{{ restaurant.service_hours_start}} to {{ restaurant.service_hours_end }}</td>
        </tr>
        <tr>
-        <td style="color: #888888;">Mobile: </td>
-        <td class="left" style="color: #888888;">{{ restaurant.mobile}}</td>
+        <td style="color: #646464;">Location</td>
+        <td class="left" style="color: #646464;">{{restaurant.address}}</td>
        </tr>
        {% if restaurant.closed %}
        <tr>
@@ -52,7 +50,6 @@
     </div>
    </div> 
  </div>
-</div>
 {% endfor %}
 {% endif %}
 {% if query_string and not found_entries %}

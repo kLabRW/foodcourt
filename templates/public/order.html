@@ -1,38 +1,37 @@
 {% extends "public_base.html" %}
 {% block order-content %}
-
+<div class="container" style="background-color: #f7f7ef;">
 <div class="alert">
  <button type="button" class="close" data-dismiss="alert">&times;</button>
   The site uses cookies,incase you don't complete order it will keep the information.Just provide new quantity and hit update.
 </div>
-<div style="top: 50px;">
- <p style="color: #888888;">Order more food <input type="submit" class="btn" value="Here" onClick="javascript:history.go(-2);"></p>
-</div>
+<p style="color: #646464; padding-top: 20px;">Order more food</p><span><input type="submit" class="btn btn-info" value="Here" onClick="javascript:history.go(-2);" />
+
 <br />
 
-<table class="table table-hover" summary="Your menu order">
-   <caption class="category_head">Your F4L Order</caption>
+<table class="table table-condensed" summary="Your menu order">
+   <caption class="category_head" style="color: #646464;">Your Order</caption>
    <thead>
     <tr>
-     <th style="color: #40637f;"scope="col">Item</th>
-     <th style="color: #40637f;"scope="col">Price</th>
+     <th style="color: #13a4db;"scope="col">Item</th>
+     <th style="color: #13a4db;"scope="col">Price</th>
     </tr>
    </thead>
    <tfoot>
    <tr>
-    <th style="color: #40637f;" colspan="2">
+    <th style="color: #13a4db;;" colspan="2">
      Order Subtotal:
     </th>
-    <th style="color: #40637f;">
-    {{order_subtotal}}<span style="color: #888888;"> frw</span>
+    <th style="color: #13a4db;;">
+    {{order_subtotal}}<span style="color: #646464;"> frw</span>
     </th>
    </tr>
    <tr>
-     <th style="color: #40637f;"colspan="2">
+     <th style="color: #13a4db;;"colspan="2">
       Order Total:
      </th>
-     <th style="color: #40637f;" colspan="2">
-      {{total}}<span style="color: #888888;"> frw, inclusive of {{item.owner.service_fee}} for {{ item.owner.service_type }}.</span>
+     <th style="color: #13a4db;;" colspan="2">
+      {{total}}<span style="color: #646464;"> frw, inclusive of {{item.owner.service_fee}} for {{ item.owner.service_type }}.</span>
      </th>
    </tr>
    {% if order_items %}
@@ -40,7 +39,7 @@
     <th class="" colspan="2">
      <form method="post" action=".">
       {% csrf_token %}
-      <input type="submit" class="btn" name="submit" value="checkout" alt="checkout" />
+      <input type="submit" class="btn btn-large btn-success" name="submit" value="checkout" alt="checkout" />
      </form> 
     </th>
    </tr>
@@ -50,12 +49,12 @@
     {% if order_items %}
      {% for item in order_items %}
     <tr style="margin: 0px;">
-     <td style="color: #888888;">
+     <td style="color: #646464;">
  
        {{ item.item.name }}
     
      </td>
-     <td style="color: #888888;">{{ item.item.price }}<span style="color: #888888;"> frw</span></td>
+     <td style="color: #646464;">{{ item.item.price }}<span style="color: #646464;"> frw</span></td>
      <td>
       <form class="" method="post" action=".">
        {% csrf_token %}
@@ -63,27 +62,20 @@
        <input type="hidden" name="item_id" value="{{ item.id }}" />
      </td>
      <td>
-      <input type="submit" class="btn" name="submit" value="Update" />
+      <input type="submit" class="btn btn-info" name="submit" value="Update" />
       </form>
      </td>
      <td>
      <form method="post" action="." class="">
       {% csrf_token %}
      <input type="hidden" name="item_id" value="{{ item.id }}" />
-     <input type="submit" class="btn" name="submit" value="Remove" />
+     <input type="submit" class="btn btn-danger" name="submit" value="Remove" />
      </form>
      </td>
     </tr>
      {% endfor %}
-     {% else %}
-     {% for item in order_items %}
-    <tr>
-    <td colspan="2" style="height:30px; color: #888888;">
-     Your F4L order is below amount we accept for online orders {{ item.item.owner.minimum_order_amount }}.
-    </td>
-    </tr>
-    {% endfor %}
     {% endif %}
    </tbody>
 </table>
+</div>
 {% endblock %}

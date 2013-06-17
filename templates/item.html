@@ -1,14 +1,15 @@
 {% extends "public_base.html" %}
 {% block order-content %}
-<div style="height:30px">
- <h1>{{item.name}}</h1>
-</div>
-<div id="order_form">
+
+<div class="container">
+ <div style="padding-top: 60px;">
+ <h5 style="color: #646464;" class="category_head">Quantity:</h5>
   <form method="post" action=".">
       {% csrf_token %}
        {{ form.as_p }}
       <br />
-      <input class="btn btn-large btn-primary" type="submit" id="submit_order" value="Add To Order" name="submit">
+      <input class="btn btn-large btn-success" type="submit" id="submit_order" value="Add To Order" name="submit">
   </form>
+ </div>
 </div>
 {% endblock%}

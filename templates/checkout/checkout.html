@@ -1,7 +1,4 @@
 {% extends "public_base.html" %}
-
-
-
 {% block order-content %}
 <h3 class="category_head">Checkout</h3>{% if error_message %}
  <ul class="errorlist">
@@ -9,15 +6,23 @@
  </ul>
 {% endif %}
 <br />
-<div>
- <p class="lead" style="color: #40637f;">Making Payments to F4L</p>
-<br />
-<p class="wording lead">kLab Coffee bar is accepting payments by hand.</p>
-<br />
+<div style="">
+ <div class="container">
+  <p class="category_head" style="color: #646464;">Making Payments to F4L.</p>
+ <br />
+ <p class="lead"style="color: #646464;">We are currently accepting payments by hand. Pay when we deliver or when you pick your food.</p>
+ <p style="color: #646464;">We will be introducing smarter payment methods in the near future.</p>
+ <br />
+ <p style="color: #646464;">Please fill out form below.</p>
+ <br />
+ </div>
+</div>
+<div style="background-color: #ffa540;">
+ <div class="container">
  <form action="" method = "post">
-   <legend class="category_head">Contact & Order information</legend>
+   <legend class="category_head" style="padding-top: 20px;">Contact & Order information</legend>
    <fieldset>
-   <table style="background-color: #40637f">
+   <table>
     {{ form.as_table}}
    </table>
    </fieldset>
@@ -27,11 +32,13 @@
   <form method="post" action="">
    {% csrf_token %}
    <th colspan="2">  
-    <input name="submit" type="submit" value="complete order" class="btn" />
+    <input name="submit" type="submit" value="complete order" class="btn btn-large btn-success" />
    </th>
   </form> 
   </tr>
   </table>
- </form>    
+ </form>
+ </div>
+</div>
  
 {% endblock %}
