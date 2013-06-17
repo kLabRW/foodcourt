@@ -5,7 +5,6 @@ import decimal
 import random
 from django.conf import settings
 from django.contrib.auth.models import User
-from restaurant_detail.models import Restaurant
 
 
 ORDER_ID_SESSION_KEY = 'shopping_id'
@@ -109,12 +108,7 @@ def is_empty(request):
 def empty_cart(request):
 	user_cart = get_order_items(request)
 	user_cart.delete()
-	
-def is_less(request,obj):
-	"""Calculate if order_subtotal is less than resto acceptable order amount"""
-	order_items = get_order_items(request)
-	for order_item in order_items:
-		return order_subtotal(request, obj) < order_item.item.owner.minimum_order_amount
+
 	
 
 
