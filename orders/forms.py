@@ -22,6 +22,13 @@ class PartialOrderItemForm(ModelForm):
 		}
 
 
+class ContactForm(forms.Form):
+	name = forms.CharField(max_length=100)
+	email= forms.EmailField()
+	message = forms.CharField(widget=forms.Textarea())
+	
+
+
 #______________________________________________________not needed for now# generates a list of years that we can use for our credit card expiration year dropdown
 #def cc_expire_years():
 #	current_year = datetime.datetime.now().year

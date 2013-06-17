@@ -112,8 +112,6 @@ class Recieved_Order(SmartModel):
 		return self.product.name
 
 
-
-
 #class OrderItems(SmartModel):
 #	order_items = models.ForeignKey(OrderItem)
 #	quantity = models.IntegerField(default=0)
