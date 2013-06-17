@@ -56,7 +56,8 @@ def create_order(request,obj):
 def show_checkout(request,id):
 	"""checkout form to collect order information"""
 	item = Item.objects.get(pk=id)
-	if order.is_less(request,id):
+	total = order.order_subtotal(request,item) + item.owner.service_fee
+	if total < item.owner.minimum_order_amount:
 		cart_url = urlresolvers.reverse('order_index',kwargs={'id':item.id})
 		return HttpResponseRedirect(cart_url)
 	if request.method == 'POST':
@@ -218,20 +219,20 @@ def search(request):
 #	email= forms.EmailField()
 #	message = forms.CharField(widget=forms.Textarea())
 	
-#def contact(request):
-#	if request.method == 'POST':
-#		form = ContactForm(request.POST)
-#		if form.valid():
-#			name=form.cleaned_data['name']
-#			email=form.cleaned_data['email']
-#			message = form.cleaned_data['message']
-#			recipients = ['f4l@gmail.com']
-#			title = 'F4L contact us message from %s' % name
-#			send_mail(title,message + '\n \nFrom ' + name + '\nReply to ' + email,email, recipients)
-#			return render_to_response('public/contact_success.html',context_instance=RequestContext(request))
-#	else:
-#		form = ContactForm()
-#	return render(request,'public/contact.html',{'form':form})
+def contact(request):
+	if request.method == 'POST':
+		form = forms.ContactForm(request.POST)
+		if form.is_valid():
+			name = form.cleaned_data['name']
+			email = form.cleaned_data['email']
+			message = form.cleaned_data['message']
+			recipients = ['food4lessrwanda@gmail.com']
+			title = 'F4L contact us message from %s' % name
+			send_mail(title,message + '\n \nFrom ' + name + '\nReply to ' + email,email, recipients)
+			return render_to_response('public/contact_success.html',context_instance=RequestContext(request))
+	else:
+		form = forms.ContactForm()
+	return render(request,'public/contact.html',{'form':form})
 
 # Not necessary at the moment.
 #def show_checkout(request):
