@@ -31,7 +31,7 @@
      <li><a id="lettering" href="#">Company</a></li>
      {% if perms.orders.recieved_order_list %}
      <li><a id="lettering" href="{% url orders.recieved_order_list %}">Admin</a></li>
-     {%endif%}
+     {% endif %}
      {% if request.user.is_authenticated %}
       <li><a id="lettering" href="{% url users.user_logout %}">Logout</a></li>
      {% else %}
