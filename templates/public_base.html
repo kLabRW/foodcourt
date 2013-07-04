@@ -20,11 +20,15 @@
 {% endblock %}
 
  {% load smartmin %}
-<div id="">
+<div id="logo" style="padding-left: 25px;">
+ <a href="{% url homepage %}">
+  <img src="{{STATIC_URL}}img/logo4.png" />
+ </a>
+</div>
  <div style="height: 62px; background: #f36c00;">
    <div class="navbar" style="margin-bottom: 0px; padding-top: 10px;">
     <ul class="nav pull-right" style="margin-right: 130px;">
-    <li><a class="brand" id="lettering" href="{% url homepage %}">Food4Less</a></li>
+    <li><a class="brand" id="lettering" href="{% url homepage %}"></a></li>
     
      <li><a id="lettering" href="{% url contact_us %}">Contact Us</a></li>
      <li><a id="lettering" href="#">FAQ</a></li>
