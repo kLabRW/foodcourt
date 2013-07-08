@@ -32,7 +32,7 @@ class OrderCRUDL(SmartCRUDL):
 			
 	
 	class List(SmartListView):
-		fields = ('date','status','name','mobile','address','city','restaurant.restaurant_name','restaurant.service_type','additional_information')
+		fields = ('date','status','name','mobile','address','restaurant.restaurant_name','restaurant.service_type','additional_information')
 		search_fields = ('status',)
 		
 		
@@ -102,7 +102,7 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 		
 	
 	class List(SmartListView):
-		fields = ('order_date','order_status','order_mobile','order_name','order_address','order_city','item.name','item.price','quantity','order_id','order_restaurant','order_service_type','order_additional_information')
+		fields = ('order_date','order_status','order_mobile','order_name','order_address','item.name','item.price','quantity','order_id','order_restaurant','order_service_type','order_additional_information')
 		search_fields = ('order_id',)
 		
 		def get_queryset(self,*args,**kwargs):
@@ -123,8 +123,8 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 			return obj.order.name
 		def get_order_address(self,obj):
 			return obj.order.address
-		def get_order_city(self,obj):
-			return obj.order.city
+#		def get_order_city(self,obj):
+#			return obj.order.city
 		def get_order_id(self,obj):
 			return obj.order.id
 		def get_order_restaurant(self,obj):

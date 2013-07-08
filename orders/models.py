@@ -73,18 +73,18 @@ class Order(SmartModel):
 	restaurant = models.ForeignKey(Restaurant,null=True,blank=True,default = None,help_text="The restaurant the customer order from")
 	#contact info
 #	email = models.EmailField(max_length=50,help_text="Needed as alternative")
-	mobile = PhoneNumberField(max_length=20,null=True,blank=True,help_text="For confirmation purposes.Be sure to use format +250######")
+	mobile = PhoneNumberField(max_length=20,help_text="For confirmation purposes.Be sure to use format +250######")
 	
-	#billing information
-	name= models.CharField(max_length=50,null=True,blank=True,help_text="Needed so that we can deliver to the right individual")
-	address = models.CharField(max_length=50,null=True,blank=True,help_text="Where do we find you. e.g Klab 6th floor,Telecom House,Kacyiru")
-	city = models.CharField(max_length=50,null=True,blank=True,help_text="F4L services are only in Kigali.")
+	#billing & contact information
+	name= models.CharField(max_length=50,help_text="Needed so that we can deliver to the right individual")
+	address = models.CharField(max_length=50,help_text="Where do we find you. e.g Klab 6th floor,Telecom House,Kacyiru")
+#	city = models.CharField(max_length=50,null=True,blank=True,help_text="F4L services are only in Kigali.")
 	additional_information = models.TextField(max_length=250,null=True,blank=True,help_text="Anything more we should know.")
 #	total_amount = models.integerField(max_length=6,defaulrhelp_text="Amount paid by customer F4L")
 
 		
 	def __unicode__(self):
-		return "%s %s %s %s" % (self.name,self.address,self.city,self.additional_information)
+		return "%s %s %s" % (self.name,self.address,self.additional_information)
 		
 	@property
 	def total(self): 
