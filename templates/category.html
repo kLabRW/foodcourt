@@ -2,18 +2,18 @@
 {% block order-content %}
 
 
-<p style="color: #646464; padding-top: 20px;">click an item to order</p>
-<br>
+
 
 <div class="container">
 <div style="clear:Both;"></div>
+ <p style="color: #646464; padding-top: 20px;">click an item to order</p>
 <br />
 
 {% for category in categories %}
  <h5 id="category_box"class="category_head"> {{ category.title }} </h5>
   {% for item in category.item.all %}
   <ul style="padding-left: 0px:">
-   <li style="display: block; padding-bottom: 20px;"><a href="{% url item_order item.id %}" rel="tooltip" title="{{item.description	}}" id="example">{{item.name}}<span style="color: #888888; font-size: 30px; position: absolute; right: 2px; text-align: right;z-index: 1;"> {{item.price}}frw</span></li><a/>
+   <li id="item_appearence"><a href="{% url item_order item.id %}" rel="tooltip" title="{{item.description	}}" id="example">{{item.name}}<span id="price_appearence"> {{item.price}}frw</span></li><a/>
   </ul>
   {% endfor %}
 {% endfor %}
