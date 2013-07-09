@@ -1,4 +1,4 @@
-from django.http import get_host, HttpResponsePermanentRedirect
+from django.http import HttpResponsePermanentRedirect
 from django.conf import settings
 
 #middleware to handle any redirects to the incorrect hostname,requires the full hostname to which the middleware will redirect to be in settings.py as:
