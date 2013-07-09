@@ -29,3 +29,4 @@ def do_auth_capture(amount='0.00', card_num=None, exp_date=None, card_cvv=None):
 	cn = httplib.HTTPSConnection(post_url,httplib.HTTPS_PORT)
 	cn.request('POST',post_path,params,headers)
 	return cn.getresponse().read().split(delimiter)
+
