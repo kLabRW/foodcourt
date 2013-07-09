@@ -14,23 +14,23 @@
   <ul class="nav">
   
   {% if perms.restaurant_detail.restaurant_detail_list %}
-  <li><a href="{% url restaurant_detail.restaurant_detail_list %}">Restaurant Details</a></li>
+  <li><a href="{% url 'restaurant_detail.restaurant_detail_list' %}">Restaurant Details</a></li>
   {% endif %}
   
   {% if perms.restaurant_detail.item_list %}
-  <li><a href="{% url restaurant_detail.item_list %}">Menu Items</a></li>
+  <li><a href="{% url 'restaurant_detail.item_list' %}">Menu Items</a></li>
   {% endif %}
   {% if perms.restaurant_detail.category_list %}
-  <li><a href="{% url restaurant_detail.category_list %}">Menu Category</a></li>
+  <li><a href="{% url 'restaurant_detail.category_list' %}">Menu Category</a></li>
   {% endif %}
   {% if perms.orders.recieved_order_list %}
-  <li><a href="{% url orders.recieved_order_list %}">Recieved Orders</a></li>
+  <li><a href="{% url 'orders.recieved_order_list' %}">Recieved Orders</a></li>
   {% endif %}
   {% if perms.orders.order_list%}
-  <li><a href="{% url orders.order_list %}">Orders</a></li>
+  <li><a href="{% url 'orders.order_list' %}">Orders</a></li>
   {% endif %}
   {%if perms.restaurant_detail.restaurant_myprofile%}
-  <li><a href="{% url restaurant_detail.restaurant_myprofile 0%}">Profile</a></li>
+  <li><a href="{% url 'restaurant_detail.restaurant_myprofile' 0%}">Profile</a></li>
   {% endif%}
 
   
@@ -53,11 +53,11 @@
 
     {% if request.user and request.user.is_authenticated %}
      <li class="pull-right">
-      <a href="{% url users.user_profile request.user.id %}" style="float: left;">{{ request.user.username }}</a>
-      <a href="{% url users.user_logout %}?go=/" style="float: right;">Logout</a>
+      <a href="{% url 'users.user_profile' request.user.id %}" style="float: left;">{{ request.user.username }}</a>
+      <a href="{% url 'users.user_logout' %}?go=/" style="float: right;">Logout</a>
      </li>
     {% else %}
-     <li class="pull-right"><a href="{% url users.user_login %}">Login</a></li>
+     <li class="pull-right"><a href="{% url 'users.user_login' %}">Login</a></li>
     {% endif %}
     {% endblock %}
   </ul>

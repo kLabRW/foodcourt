@@ -180,15 +180,15 @@ INSTALLED_APPS = (
     'django_extensions',
     'sorl.thumbnail',
     'pagination',
-    'djangoratings',
-    'agon_ratings',
+ #   'djangoratings',
+#    'agon_ratings',
     'restaurant_detail',
     'live',
     'debug_toolbar',
     'orders',
     'south',
     'storages',
-    # marketing
+
     
     
     # Uncomment the next line to enable the admin:

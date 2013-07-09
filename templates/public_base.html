@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Food4Less | Have it easy{% endblock %}</title>
   {% block styles %}
+  <link rel="icon" href="{{ STATIC_URL }}img/FAVICON-05.png" type="img/png">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/main.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/bootstrap.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/style.css">
@@ -21,25 +22,25 @@
 
  {% load smartmin %}
 <div id="logo" style="padding-left: 25px;">
- <a href="{% url homepage %}">
+ <a href="{% url 'homepage' %}">
   <img src="{{STATIC_URL}}img/logo4.png" />
  </a>
 </div>
  <div style="height: 62px; background: #f36c00;">
    <div class="navbar" style="margin-bottom: 0px; padding-top: 10px;">
     <ul class="nav pull-right" style="margin-right: 130px;">
-    <li><a class="brand" id="lettering" href="{% url homepage %}"></a></li>
+    <li><a class="brand" id="lettering" href="{% url 'homepage' %}"></a></li>
     
-     <li><a id="lettering" href="{% url contact_us %}">Contact Us</a></li>
+     <li><a id="lettering" href="{% url 'contact_us' %}">Contact Us</a></li>
      <li><a id="lettering" href="#">FAQ</a></li>
      <li><a id="lettering" href="#">Company</a></li>
      {% if perms.orders.recieved_order_list %}
-     <li><a id="lettering" href="{% url orders.recieved_order_list %}">Admin</a></li>
+     <li><a id="lettering" href="{% url 'orders.recieved_order_list' %}">Admin</a></li>
      {% endif %}
      {% if request.user.is_authenticated %}
-      <li><a id="lettering" href="{% url users.user_logout %}">Logout</a></li>
+      <li><a id="lettering" href="{% url 'users.user_logout' %}">Logout</a></li>
      {% else %}
-     <li><a id="lettering" href="{% url users.user_login %}">Login</a></li>
+     <li><a id="lettering" href="{% url 'users.user_login' %}">Login</a></li>
      {% endif %}
     </ul>
    </div><!--end .nav-->
