@@ -109,7 +109,7 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 			queryset = super(Recieved_OrderCRUDL.List, self).get_queryset(*args,**kwargs)
 			if self.request.user.is_superuser:
 				return queryset
-			return queryset.filter(order__restaurant__user=self.request.user).order_by('created_on')			
+			return queryset.filter(order__restaurant__user=self.request.user).order_by('-created_on')			
 		
 		def get_order_date(self,obj):
 			return obj.order.date
