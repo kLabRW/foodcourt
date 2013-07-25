@@ -21,9 +21,10 @@ urlpatterns = patterns('',
 'field_name':'rating',
 }),
 	url(r'^ratings/', include("agon_ratings.urls")),
-	url(r'^console/', include('nsms.console.urls')),
-	url(r'^',include('rapidsms_httprouter.urls')),
+#	url(r'^console/', include('nsms.console.urls')),
+#	url(r'^',include('rapidsms_httprouter.urls')),
 	url(r'^orders/', include('live.urls')),
+#	url(r'^', include('messaging.urls')),
 #	url(r'^search_results/$','f4l.views.search',),
 
     # Uncomment the admin/doc line below to enable admin documentation:
