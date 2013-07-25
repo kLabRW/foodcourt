@@ -172,7 +172,7 @@ INSTALLED_APPS = (
     'smartmin',
     'django_quickblocks',
     'rapidsms',
-    'rapidsms_httprouter',
+#    'rapidsms_httprouter',
     'nsms',
     'nsms.console',
     #project apps and packages
