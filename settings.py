@@ -40,9 +40,7 @@ else:
             'PASSWORD': "live4ever",
             "HOST": "localhost",
             "PORT": "5432",
-            "OPTIONS":{
-            	'autocommit': True,
-            }
+            "OPTIONS":{'autocommit': True,}
             }
         }
 
