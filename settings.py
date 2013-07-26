@@ -41,7 +41,7 @@ else:
             "HOST": "localhost",
             "PORT": "5432",
             "OPTIONS":{
-            	'autocommit':True,
+            	'autocommit': True,
             }
             }
         }
