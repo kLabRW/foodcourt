@@ -2,7 +2,7 @@
 <html>
  <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Food4Less | Have it easy{% endblock %}</title>
+  <title>{% block title %}FoodCourt | Have it easy{% endblock %}</title>
   {% block styles %}
   <link rel="icon" href="{{ STATIC_URL }}img/FAVICON-05.png" type="img/png">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/main.css">
@@ -32,8 +32,8 @@
     <li><a class="brand" id="lettering" href="{% url 'homepage' %}"></a></li>
     
      <li><a id="lettering" href="{% url 'contact_us' %}">Contact Us</a></li>
-     <li><a id="lettering" href="#">FAQ</a></li>
-     <li><a id="lettering" href="#">Company</a></li>
+     <li><a id="lettering" href="#"></a></li>
+     <li><a id="lettering" href="#"></a></li>
      {% if perms.orders.recieved_order_list %}
      <li><a id="lettering" href="{% url 'orders.recieved_order_list' %}">Admin</a></li>
      {% endif %}
