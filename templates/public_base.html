@@ -31,9 +31,10 @@
     <ul class="nav pull-right" style="margin-right: 130px;">
     <li><a class="brand" id="lettering" href="{% url 'homepage' %}"></a></li>
     
+     
+     <li><a id="lettering" href="#"></a></li>
+     <li><a id="lettering" href="#"></a></li>
      <li><a id="lettering" href="{% url 'contact_us' %}">Contact Us</a></li>
-     <li><a id="lettering" href="#"></a></li>
-     <li><a id="lettering" href="#"></a></li>
      {% if perms.orders.recieved_order_list %}
      <li><a id="lettering" href="{% url 'orders.recieved_order_list' %}">Admin</a></li>
      {% endif %}
