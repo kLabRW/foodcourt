@@ -49,8 +49,8 @@ class Restaurant_detailCRUDL(SmartCRUDL):
 		
 		def get_name(self, obj):	
 			return "%s" % (obj.restaurant_name)
-		def get_service_days(self,obj):
-			return obj.get_service_days_display()
+#		def get_service_days(self,obj):
+#			return obj.get_service_days_display()
 #		def get_delivery_hours_start(self,obj):
 #			return get_delivery_hours_start_display()
 #		def get_delivery_hours_end(self,obj):
@@ -73,8 +73,8 @@ class Restaurant_detailCRUDL(SmartCRUDL):
 		def get_name(self,obj):
 			return str(obj)
 		
-		def get_service_days(self,obj):
-			return obj.get_service_days_display()
+#		def get_service_days(self,obj):
+#x			return obj.get_service_days_display()
 		
 #		def get_delivery_days(self,obj):
 #			return obj.get_delivery_days_display()
