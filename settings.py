@@ -34,13 +34,13 @@ if 'VCAP_SERVICES' in os.environ:
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.postgres_psycopg2",
+            "ENGINE": "django.db.backends.mysql",
             "NAME": "dev_db",
             "USER": "matsinvasion",
             'PASSWORD': "live4ever",
             "HOST": "localhost",
-            "PORT": "5432",
-            "OPTIONS":{'autocommit': True,}
+            "PORT": "",
+            "OPTIONS":{'init_command':'SET storage_engine=INNODB','charset':'utf8'}
             }
         }
 
@@ -173,6 +173,8 @@ INSTALLED_APPS = (
     'smartmin',
     'django_quickblocks',
     'rapidsms',
+    'messaging',
+    'optionalitems',
 #    'rapidsms_httprouter',
     'nsms',
     'nsms.console',
@@ -234,8 +236,8 @@ PERMISSIONS = {
  
 }
 GROUP_PERMISSIONS = {
-    "Administrator": ('auth.user.*','restaurant_detail.restaurant_detail.*','restaurant_detail.restaurant_read','orders.order.*','orders.orderItem.*','orders.orderitem.*','orders.orderitem_list','orders.order.*','orders.recieved_order.*','django_quickblocks.quickblocks.*','django_quickblocks.quickblocktype.*',),
-    "Restaurants": ('restaurant_detail.restaurant_myprofile','restaurant_detail.restaurant_read','restaurant_detail.item.*','restaurant_detail.category.*','orders.order.*','orders.recieved_order.*',),
+    "Administrator": ('auth.user.*','restaurant_detail.restaurant_detail.*','restaurant_detail.restaurant_read','orders.order.*','orders.orderItem.*','orders.orderitem.*','orders.orderitem_list','orders.order.*','orders.recieved_order.*','messaging.subcategory.*','django_quickblocks.quickblocks.*','optionalitems.optional_item.*','optionalitems.optionalitemcategory.*','optionalitems.toppingsandextras.*','optionalitems.toppingsandextrascategory.*','django_quickblocks.quickblocktype.*',),
+    "Restaurants": ('restaurant_detail.restaurant_myprofile','restaurant_detail.restaurant_read','restaurant_detail.item.*','restaurant_detail.category.*','orders.order.*','orders.recieved_order.*','messaging.subcategory.*','optionalitems.optional_item.*','optionalitems.optionalitemcategory.*','optionalitems.toppingsandextras.*','optionalitems.toppingsandextrascategory.*',),
 }
 
 
@@ -302,17 +304,16 @@ LOGGING = {
      }
  }
 
-import dj_database_url
-DATABASES = {'default':dj_database_url.config(default='postgres://matsinvasion:live4ever@localhost:5432/dev_db')}
+#import dj_database_url
+#DATABASES = {'default':dj_database_url.config(default='postgres://matsinvasion:live4ever@localhost:5432/dev_db')}
 # Honor the 'x-Forwaded-Proto' header for request is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 #Hooking up Amazon S3 for static files storage
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
 AWS_ACCESS_KEY_ID = 'AKIAIDQLHBDL5IX6DWUQ'
 AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'food4less'
+AWS_STORAGE_BUCKET_NAME = 'foodcourtrwanda'
 S3_url = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = S3_url
 
