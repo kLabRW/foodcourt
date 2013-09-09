@@ -10,11 +10,16 @@
 <br />
 
 {% for category in categories %}
- <h5 id="category_box"class="category_head"> {{ category.title }} </h5>
+ <h5 style="color: #646464; font-size: 14pt; font-weight: Bold;"> {{ category.title }} </h5>
   {% for item in category.item.all %}
   <ul style="padding-left: 0px:">
-   <li id="item_appearence" style="font-size: 30px;"><a href="{% url 'item_order' item.id %}" rel="tooltip" title="{{item.description	}}" id="example">{{item.name}}<span id="price_appearence" style="font-size: 25px;"> {{item.price}}frw</span></li><a/>
+   <li id="item_appearence" style="font-size: 30px; color: #888888;"><a data-toggle="modal" href="{% url 'item_order' item.id %}" rel="tooltip" title="{{item.description}}" id="example">{{item.name}}
+   {% if item.price %}
+    <span id="price_appearence" style="font-size: 25px;"> {{item.price}}frw</span></li><a/>
+   {% else %}
+    <span id = "price_appearence" style= "font-size: 25px;"> <span></li></a>
   </ul>
+   {% endif %}
   {% endfor %}
 {% endfor %}
 </div>
