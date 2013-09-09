@@ -4,7 +4,7 @@
  {% block order-content %}
  <div id="home_page" class="back_splash">
   <div class="container">
-   <div id="message-box" class="frontbox searchbox" style="background-color: #FFFFFF;">
+   <div id="message-box" class="frontbox searchbox" style=" height: 220px; background-color: #FFFFFF;">
     <h2 id="message-box_heading">START YOUR ORDER</h2>
     <br>
     <form style="top: 10px;"method="get" action="{% url 'search' %}">
@@ -19,8 +19,8 @@
       </ul>
       <br>
       <div style="padding-left: 40px;">
-       <input class="input-xxlarge" type="text" name="q" placeholder="search by resto name or location">
-       <button class="btn btn-large btn-warning" type="submit">
+       <input class="input-md col-lg-*" type="text" name="q" placeholder="search by resto or location">
+       <button class="btn btn-md btn-warning" type="submit">
         <div class="text status">Search</div>
        </button>
       </div>
