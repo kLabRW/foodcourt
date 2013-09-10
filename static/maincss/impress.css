@@ -1,0 +1,61 @@
+/* Home page css */
+#home_page{
+	background-image: url('/img/homepageimages/homepage_image_burger.png');
+	height: 722px;
+}
+#message-box{
+	-moz-user-select: none;
+	height: 170px;
+	float: right;
+	margin: 0;
+	top: 155px;
+	width:450px;
+	z-index: 2;
+}
+
+.searchbox{
+	filter: none;
+	position: relative;
+}
+.frontbox,.searchbox{
+	background: -moz-linear-gradient(center top , #FFFFFF 0px, #DDDDDD 100%) repeat scroll 0 0 transparent;
+	border:1px solid #EEEEEE;
+	border-radius: 4px 4px 4px 4px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+#tag_line{
+	font-size: 30px;
+	position: relative;
+	text-align: right;
+	text-shadow: 1px 1px #333333;
+	top: 199px;
+	right: 30px;
+	width: 450px;
+	line-height: 44px;
+}
+#hw_it_wrks{
+	top: 527px;
+	position: relative;
+}
+#category_box{
+	padding-top: 5px;
+	height: 25px;
+	width: 180px;
+	/*border: 1px solid black;*/
+	background-color: #fe9600;
+	text-align: center;
+	/*text-shadow: 1px 1px #333333;*/
+	border-radius: 2px 2px 2px 2px;
+	
+}
+#message-box_heading{
+	padding-top: 10px;
+	text-align: center;
+	color: #626262;
+	font-size: 20px;
+	text-shadow: 1px 1px #333333;
+	
+}
+#lettering{
+	color: #ffffff;
+}
