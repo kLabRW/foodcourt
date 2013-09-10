@@ -309,12 +309,12 @@ LOGGING = {
 # Honor the 'x-Forwaded-Proto' header for request is_secure()
 #SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 #Hooking up Amazon S3 for static files storage
-#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
-#AWS_ACCESS_KEY_ID = 'AKIAIDQLHBDL5IX6DWUQ'
-#AWS_SECRET_ACCESS_KEY = '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'
-#AWS_STORAGE_BUCKET_NAME = 'foodcourtrwanda'
-#S3_url = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-#STATIC_URL = S3_url
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = DEFAULT_FILE_STORAGE
+AWS_ACCESS_KEY_ID = 'AKIAIDQLHBDL5IX6DWUQ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'foodcourtrwanda'
+S3_url = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+STATIC_URL = S3_url
 
 
