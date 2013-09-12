@@ -3,12 +3,42 @@
 
 <div class="container">
  <div style="padding-top: 60px;">
- <h5 style="color: #646464;" class="category_head">Quantity:</h5>
+ 
   <form method="post" action=".">
       {% csrf_token %}
-       {{ form.as_p }}
-      <br />
-      <input class="btn btn-large btn-success" type="submit" id="submit_order" value="Add To Order" name="submit">
+      {%for optionalcategory in optionalcategories %}
+   <h5 style="color: #646464; font-size: 14pt; font-weight: Bold;"> {{ optionalcategory.title }} </h5>
+   {% for optionalitem in optionalcategory.optional_items.all %}
+    <ul style="padding-left: 0px:">
+     <li id= "item_appearence" style="font-size: 30px; color: #888888;" rel="tooltip" title="{{optionalitem.description}}" id="example"><input type="radio" value="{{optionalitem.id}}" name="option">{{optionalitem.name}}
+    {% if optionalitem.price%} 
+     <span id="price_appearence" style="font-size: 25px;"> {{optionalitem.price}}frw</span></li><a/>
+    </ul>
+   {% else %}
+    <span id="price_appearence" style="font-size: 25px;"></span></li><a/>
+    </ul>
+    {% endif %}
+  {% endfor %}
+ {% endfor %}
+ {% for toppingcategory in toppingcategories %}
+  <h5 style="color: #646464; font-size: 14pt; font-weight: Bold;"> {{ toppingcategory.title }} </h5>
+  {%for topping in toppingcategory.toppings_and_extras.all %}
+   <ul style="padding-left: 0px:">
+     <li id= "item_appearence" style="font-size: 30px; color: #888888;" rel="tooltip" title="{{topping.description}}" id="example"><input type="checkbox" value="{{topping.id}}" name="topping">{{topping.name}}
+     {% if topping.price %}
+      <span id="price_appearence" style="font-size: 25px;"> {{topping.price}}frw</span></li><a/>
+    </ul>
+      {%else%}
+       <span id="price_appearence" style="font-size: 25px;"></span></li><a/>
+    </ul>
+     {%endif%}
+  {% endfor%}
+ {% endfor%}
+ <br />
+ <h5 style="color: #646464; font-size: 14pt; font-weight: Bold;">Quantity</h5>
+ {{ form.quantity }}
+ <br />
+ <input class="btn btn-large btn-success" type="submit" id="submit_order" value="Add To Order" name="submit">
   </form>
  </div>
 </div>
