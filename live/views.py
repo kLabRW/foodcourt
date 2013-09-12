@@ -7,7 +7,6 @@ from django.shortcuts import render_to_response,render,get_object_or_404
 from django import forms
 from orders import order
 from orders.models import Recieved_Order,Order
-from orders import formz
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
