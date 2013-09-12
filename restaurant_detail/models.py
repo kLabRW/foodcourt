@@ -7,6 +7,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import User
 from djangoratings import AnonymousRatingField
 
+
+
 	
 class Restaurant_detail(SmartModel):
 	# Official details of restaurants.
@@ -16,12 +18,6 @@ class Restaurant_detail(SmartModel):
 	#	('BF', 'Buffet'),
 		
 	#)
-	
-	DAYS=(
-		('SDW','Seven days a week'),
-		('AWUS','All Weekdays,untill Saturday'),
-		('OWD','Only in the weekdays'),
-	)
 	
 	
 	SERVICES=(
@@ -116,11 +112,15 @@ class Restaurant(SmartModel):
 # note that this is items...
 class Item(SmartModel):
 	#restaurant_name=models.CharField(max_length=100,help_text="please provide name of your restaurant")
-	name= models.CharField(max_length=64,help_text="Name for this item e.g Hamburger")
-	description= models.CharField(max_length=200,help_text="Describe the item in a few words e.g Ham with bread")
-	display_order=models.IntegerField(max_length=3,help_text="in what order should items appear")
-	price=models.DecimalField(max_digits=9,decimal_places=2)
+	name= models.CharField(max_length=140,help_text="Name for this item e.g Hamburger")
+	description= models.CharField(max_length=200,null=True,blank=True,help_text="Describe the item in a few words e.g Ham with bread")
+#	display_order=models.IntegerField(max_length=3,help_text="in what order should items appear")
+	price=models.DecimalField(max_digits=9,null=True, blank = True, decimal_places=2,help_text="if item has no price indicate 0.00")
 	owner = models.ForeignKey(Restaurant,help_text="Owner of an item")
+	optionalitems = models.ManyToManyField('optionalitems.OptionalItemCategory',null=True,blank=True)
+	toppings_and_extras = models.ManyToManyField('optionalitems.ToppingsAndExtrasCategory',null = True, blank = True)
+	
+	
 #	slug = models.SlugField(max_length=50, unique=True, help_text='Unique value for product page URL, created from name.')
 	
 	
@@ -129,7 +129,7 @@ class Item(SmartModel):
 		verbose_name_plural = 'items'
 
 	def __unicode__(self):
-		return "%s %s" % (self.name,self.owner)
+		return u"%s (%s)" % (self.name, u", ".join([item.title for item in self.optionalitems.all()]))
 #	def get_absolute_url(self):
 #		return('menu_items', (),{'menu_items':self.slug})
 #		return()
@@ -139,9 +139,8 @@ class Item(SmartModel):
 class Category(SmartModel):
 	item=models.ManyToManyField(Item)
 	title=models.CharField(max_length=64,help_text="Title of category e.g BreakFast")
-	description=models.CharField(max_length=64,help_text="Describe the category e.g the items included in the category")
-	display_order=models.IntegerField(max_length=3,help_text="in what order should categories appear")
 	owner = models.ForeignKey(Restaurant,related_name='category',help_text="owner of category")
+	display_order = models.IntegerField(max_length=3, help_text = "Order in which Categories are displayed.")
 
 	
 	class Meta:
@@ -150,7 +149,10 @@ class Category(SmartModel):
 
 
 	def __unicode__(self):
-		return "%s %s %s %s %s" % (self.item, self.title,self.display_order,self.description, self.owner)
+		return u"%s (%s)" % (self.title, u", ".join([item.name for item in self.item.all()]))
+	
+
+	
 
 
 
