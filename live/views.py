@@ -1,24 +1,18 @@
 from restaurant_detail.models import Restaurant
 from restaurant_detail.models import Category,Item
 from django.db.models import Q
-#from django import forms
-#from django.conf import settings
+from optionalitems.models import Optional_Item
 from django.template import RequestContext
-from django.shortcuts import render_to_response,render
+from django.shortcuts import render_to_response,render,get_object_or_404
+from django import forms
 from orders import order
 from orders.models import Recieved_Order,Order
+from orders import formz
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
-#from cart.models import OrderItem
-from orders.forms import PartialOrderItemForm
-from orders import forms
-#from orders.models import Order
-#from orders import checkout
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.conf import settings
-#from django import forms
-#from restaurant_detail.models import Restaurant
 
 def create_order(request,obj):
 	"""create new online_order containing each orderitem instance,save order and empty the order."""
@@ -26,7 +20,7 @@ def create_order(request,obj):
 	resto = Item.objects.get(pk=obj.id)
 	orders = Order()
 	
-	checkout_form = forms.CheckoutForm(request.POST,instance=orders)
+	checkout_form = formz.CheckoutForm(request.POST,instance=orders)
 	checkout = checkout_form.save(commit=False)
 	
 	checkout.created_by = anon_user
@@ -48,7 +42,13 @@ def create_order(request,obj):
 			oi.modified_by = anon_user
 			oi.item = ci.item
 			oi.price = ci.price
+			oi.option = ci.option
+			toppings = ci.toppings_and_extras
 			oi.save()
+			for topping in toppings.all():
+				import pdb; pdb.set_trace()
+				oi.toppings_and_extras.add(topping)
+			#oi.toppings_and_extras.create()
 		order.empty_cart(request)
 	return orders
 #-------------------------------------------------------------------------
@@ -56,13 +56,14 @@ def create_order(request,obj):
 def show_checkout(request,id):
 	"""checkout form to collect order information"""
 	item = Item.objects.get(pk=id)
-	total = order.order_subtotal(request,item) + item.owner.service_fee
+	option = Optional_Item.objects.get(pk=id)
+	total = order.order_subtotal(request) + item.owner.service_fee
 	if total < item.owner.minimum_order_amount:
 		cart_url = urlresolvers.reverse('order_index',kwargs={'id':item.id})
 		return HttpResponseRedirect(cart_url)
 	if request.method == 'POST':
 		postdata = request.POST.copy()
-		form = forms.CheckoutForm(request.POST,postdata)
+		form = formz.CheckoutForm(request.POST,postdata)
 		
 		if form.is_valid():
 			order_created = create_order(request,item)
@@ -75,8 +76,8 @@ def show_checkout(request,id):
 		else:
 			order_created = None
 	else:
-		form = forms.CheckoutForm
-	order_subtotal = order.order_subtotal(request,item)
+		form = formz.CheckoutForm
+	order_subtotal = order.order_subtotal(request)
 	total = order_subtotal + item.owner.service_fee # Access the order total
 	context = {
 		'total':total,
@@ -110,6 +111,7 @@ def get_category(request,restaurant_id):
 #------------------------------------------------------------------------------------------------------
 def show_order(request,id):
 	item = Item.objects.get(pk=id)
+	option = Optional_Item.objects.get(pk=id)
 	if request.method == 'POST':
 		postdata = request.POST.copy()
 		if postdata['submit'] == 'Remove':
@@ -120,7 +122,7 @@ def show_order(request,id):
 #			checkout_url = show_checkout(request)
 			return HttpResponseRedirect(urlresolvers.reverse('checkout',kwargs={'id':item.id}))
 	order_items = order.get_order_items(request)
-	order_subtotal = order.order_subtotal(request,item)
+	order_subtotal = order.order_subtotal(request)
 	total = order_subtotal + item.owner.service_fee
 	
 	context = {
@@ -131,14 +133,32 @@ def show_order(request,id):
 	}
 	return render_to_response('public/order.html',context,context_instance=RequestContext(request))
 
+def partial_order_item_form():
+	"""dynamic form limiting optional_items to their items"""
+	class PartialOrderItemform(forms.Form):
+		quantity = forms.IntegerField(widget=forms.TextInput(attrs={'size':'2', 'class':'quantity','maxlength':'5'}))
+#		option = forms.ModelChoiceField(queryset = Optional_Item.objects.all(),widget= forms.RadioSelect())
+	
+	return PartialOrderItemform
+		
 def show_item(request,id):
+	a = Item.objects.get(pk=id)
+	categories=Category.objects.filter(pk=id).prefetch_related('item').order_by('display_order')
+	item = Item.objects.filter(pk=id) # use filter since it returns list which is iterable
+	# lookup optional items belonging to  an item
+	for optionalitem in item: optionalcategories = optionalitem.optionalitems.order_by('display_order')
+	# lookup toppings belonging to an item
+	for topping in item: toppingcategories = topping.toppings_and_extras.order_by('display_order')
+	
 	# need to evaluate the HTTP method
 	if request.method == 'POST':
-#		import pdb;pdb.set_trace()
-		a = Item.objects.get(pk=id)
-		form = PartialOrderItemForm(request.POST,instance=a)
+		# pass the right argument to form instance,if form is bound to POST data before providing right argument,we get error.
+		form = partial_order_item_form()
+		#then bound form to POST data, 
+		final_form = form(request.POST)
 		# check validation of posted data
-		if form.is_valid():
+		if final_form.is_valid():
+			# 
 			order.add_to_order(request,a)
 			 
 			# if test cookie worked, get rid of it
@@ -148,16 +168,20 @@ def show_item(request,id):
 			# redirect to order page
 			return HttpResponseRedirect(url)
 	else:
-		form = PartialOrderItemForm()
+		final_form = partial_order_item_form()
+#		form = final_form.fields['option'].queryset = OptionalItems.objects.filter(item=id)
 	request.session.set_test_cookie()
 	context={
-#		'categories':categories,
-		'form':form,
-#		'menu':menu,
+		'categories':categories,
+		'form':final_form,
+		'optionalcategories':optionalcategories,
+		'toppingcategories':toppingcategories,
 		
 	}
 	return render_to_response('item.html',context,context_instance=RequestContext(request))
 #-------------------------------------------------------------------------------------------------------------------------
+
+
 #homepage
 def homepage(request):
 	context={}
@@ -233,46 +257,10 @@ def contact(request):
 	else:
 		form = forms.ContactForm()
 	return render(request,'public/contact.html',{'form':form})
-
-# Not necessary at the moment.
-#def show_checkout(request):
-#	if order.is_empty(request):
-#		cart_url = urlresolvers.reverse('order_index')
-#		return HttpResponseRedirect(cart_url)
-#	if request.method == 'POST':
-#		postdata = request.POST.copy()
-#		form = forms.CheckoutForm(request.POST,postdata)
-#		if form.is_valid():
-#			response = checkout.process(request)
-#			order_number = response.get('order_number',0)
-#			error_message = response.get('message','')
-#			if order_number:			
-#				request.session['order_number'] = order_number
-#			if postdata['submit'] == 'place order':
-#				reciept_url = urlresolvers.reverse('checkout_reciept')
-#				return HttpResponseRedirect(reciept_url)
-#		else:
-#			error_messages = u'Correct these errors'
-#	else:
-#		form = forms.CheckoutForm()
-#	context = {
-#		'form':form,
-#		'error_message':error_message
-#	}
-#	return render_to_response('checkout/checkout.html',context,context_instance=RequestContext(request))
 	
-#def reciept(request):	
-#	order_number = request.session.get('order_number','')
-#	if order_number:
-#		order = Order.objects.filter(id=order_number)[0]
-#		order_items = OrderItem.objects.filter(order=order)
-#		del request.session['order_number']
-#	else:
-#		order_url = urlresolvers.reverse('order_index')
-#		return HttpResponseRedirect(order_url)
-#	context = {
-#		'order':order,
-#		'order_items':order_items,
-#	}
-#	return render_to_response('checkout/reciept.html',context,context_instance=RequestContext(request))
-#------------
+	
+#	headers = {}
+#	url = https://api.textit.in/api/v1/sms.json?phone=["250789385878"]&text="wazaA"&relayer=81
+#	foo=requests.post(url, headers)
+
+
