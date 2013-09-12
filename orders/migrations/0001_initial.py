@@ -19,6 +19,7 @@ class Migration(SchemaMigration):
             ('shopping_id', self.gf('django.db.models.fields.CharField')(max_length=255, db_index=True)),
             ('quantity', self.gf('django.db.models.fields.IntegerField')()),
             ('item', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['restaurant_detail.Item'])),
+            ('option', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['optionalitems.Optional_Item'])),
         ))
         db.send_create_signal(u'orders', ['OrderItem'])
 
@@ -53,6 +54,7 @@ class Migration(SchemaMigration):
             ('quantity', self.gf('django.db.models.fields.IntegerField')(default=0)),
             ('price', self.gf('django.db.models.fields.DecimalField')(max_digits=9, decimal_places=2)),
             ('order', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['orders.Order'])),
+            ('option', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['optionalitems.Optional_Item'])),
         ))
         db.send_create_signal(u'orders', ['Recieved_Order'])
 
@@ -105,6 +107,32 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
+        u'optionalitems.optional_item': {
+            'Meta': {'object_name': 'Optional_Item'},
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'optional_item_creations'", 'to': u"orm['auth.User']"}),
+            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'optional_item_modifications'", 'to': u"orm['auth.User']"}),
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['restaurant_detail.Restaurant']"}),
+            'price': ('django.db.models.fields.DecimalField', [], {'null': 'True', 'max_digits': '9', 'decimal_places': '2', 'blank': 'True'})
+        },
+        u'optionalitems.optionalitemcategory': {
+            'Meta': {'object_name': 'OptionalItemCategory'},
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'optionalitemcategory_creations'", 'to': u"orm['auth.User']"}),
+            'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'display_order': ('django.db.models.fields.IntegerField', [], {'max_length': '3'}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
+            'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'optionalitemcategory_modifications'", 'to': u"orm['auth.User']"}),
+            'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'optional_items': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['optionalitems.Optional_Item']", 'symmetrical': 'False'}),
+            'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['restaurant_detail.Restaurant']"}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '20'})
+        },
         u'orders.order': {
             'Meta': {'object_name': 'Order'},
             'additional_information': ('django.db.models.fields.TextField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
@@ -130,6 +158,7 @@ class Migration(SchemaMigration):
             'item': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['restaurant_detail.Item']"}),
             'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'orderitem_modifications'", 'to': u"orm['auth.User']"}),
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'option': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['optionalitems.Optional_Item']"}),
             'quantity': ('django.db.models.fields.IntegerField', [], {}),
             'shopping_id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'})
         },
@@ -143,12 +172,14 @@ class Migration(SchemaMigration):
             'item': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['restaurant_detail.Item']"}),
             'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'recieved_order_modifications'", 'to': u"orm['auth.User']"}),
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'option': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['optionalitems.Optional_Item']"}),
             'order': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['orders.Order']"}),
             'price': ('django.db.models.fields.DecimalField', [], {'max_digits': '9', 'decimal_places': '2'}),
             'quantity': ('django.db.models.fields.IntegerField', [], {'default': '0'})
         },
         u'restaurant_detail.item': {
             'Meta': {'object_name': 'Item', 'db_table': "'items'"},
+            'Options': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['optionalitems.Optional_Item']", 'null': 'True', 'blank': 'True'}),
             'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'item_creations'", 'to': u"orm['auth.User']"}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
@@ -158,6 +189,7 @@ class Migration(SchemaMigration):
             'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'item_modifications'", 'to': u"orm['auth.User']"}),
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '64'}),
+            'optionalitems': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': u"orm['optionalitems.OptionalItemCategory']", 'null': 'True', 'blank': 'True'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['restaurant_detail.Restaurant']"}),
             'price': ('django.db.models.fields.DecimalField', [], {'max_digits': '9', 'decimal_places': '2'})
         },
@@ -183,7 +215,7 @@ class Migration(SchemaMigration):
             'rating_votes': ('django.db.models.fields.PositiveIntegerField', [], {'default': '0', 'blank': 'True'}),
             'restaurant_detail': ('django.db.models.fields.related.ForeignKey', [], {'default': "'1'", 'to': u"orm['restaurant_detail.Restaurant_detail']"}),
             'restaurant_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'service_days': ('django.db.models.fields.CharField', [], {'max_length': '5', 'null': 'True', 'blank': 'True'}),
+            'service_days': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
             'service_fee': ('django.db.models.fields.IntegerField', [], {'max_length': '5', 'null': 'True', 'blank': 'True'}),
             'service_hours_end': ('django.db.models.fields.TimeField', [], {}),
             'service_hours_start': ('django.db.models.fields.TimeField', [], {}),
@@ -210,7 +242,7 @@ class Migration(SchemaMigration):
             'modified_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'restaurant_detail_modifications'", 'to': u"orm['auth.User']"}),
             'modified_on': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'restaurant_name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            'service_days': ('django.db.models.fields.CharField', [], {'max_length': '5'}),
+            'service_days': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'service_fee': ('django.db.models.fields.IntegerField', [], {'max_length': '5', 'null': 'True', 'blank': 'True'}),
             'service_hours_end': ('django.db.models.fields.TimeField', [], {}),
             'service_hours_start': ('django.db.models.fields.TimeField', [], {}),
