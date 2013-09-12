@@ -21,7 +21,7 @@
   <li><a href="{% url 'restaurant_detail.item_list' %}">Menu Items</a></li>
   {% endif %}
   {% if perms.restaurant_detail.category_list %}
-  <li><a href="{% url 'restaurant_detail.category_list' %}">Menu Category</a></li>
+  <li><a href="{% url 'restaurant_detail.category_list' %}">Menu Categories</a></li>
   {% endif %}
   {% if perms.orders.recieved_order_list %}
   <li><a href="{% url 'orders.recieved_order_list' %}">Recieved Orders</a></li>
@@ -29,9 +29,21 @@
   {% if perms.orders.order_list%}
   <li><a href="{% url 'orders.order_list' %}">Orders</a></li>
   {% endif %}
+  {% if perms.optionalitems.optional_item_list %}
+  <li><a href="{% url 'optionalitems.optional_item_list' %}">Optional Items</a></li>
+  {% endif %}
+  {% if perms.optionalitems.optionalitemcategory_list %}
+  <li><a href="{% url 'optionalitems.optionalitemcategory_list' %}">Optional Categories</a></li>
+  {% endif %}
+  {% if perms.optionalitems.toppingsandextras_list %}
+   <li><a href="{% url 'optionalitems.toppingsandextras_list' %}">Toppings & Extras</a></li>
+  {%endif%}
+  {% if perms.optionalitems.toppingsandextrascategory_list%}
+   <li><a href="{% url 'optionalitems.toppingsandextrascategory_list' %}">Toppings & Extras Categories</a></li>
+  {%endif%}
   {%if perms.restaurant_detail.restaurant_myprofile%}
   <li><a href="{% url 'restaurant_detail.restaurant_myprofile' 0%}">Profile</a></li>
-  {% endif%}
+  {% endif %}
 
   
     
