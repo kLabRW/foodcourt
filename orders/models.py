@@ -5,6 +5,7 @@ import decimal
 from phonenumber_field.modelfields import PhoneNumberField
 #from cart.models import OrderItem
 from restaurant_detail.models import Restaurant,Item
+from optionalitems.models import Optional_Item,ToppingsAndExtras
 import django.db.models.options as options
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('augment_quantity','name','price','total',)
 
@@ -26,11 +27,15 @@ options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('augment_quantity','name','pric
 #		return "%s %s %s %s %s" % (self.email,self.mobile,self.billing_name,self.billing_address,self.billing_city)
 
 class OrderItem(SmartModel):
-	"""model to store information of the item instance in customers online_order"""
+	""" create an order item """
+	
 	shopping_id = models.CharField(max_length=255,db_index=True)
 #	date_added = models.DateTimeField(auto_now_add=True)
 	quantity = models.IntegerField()
 	item = models.ForeignKey(Item)
+	option = models.ForeignKey(Optional_Item,null=True,blank=True)
+	toppings_and_extras = models.ManyToManyField(ToppingsAndExtras,null=True, blank=True)
+#	toppings_and_extras = models.ForeignKey(ToppingsAndExtras,null=True, blank=True)
 #	item_slug = models.CharField(max_length=50)
 
 
@@ -53,10 +58,9 @@ class OrderItem(SmartModel):
 		self.quantity = self.quantity + int(quantity)
 		self.save()
 
-
-
 class Order(SmartModel):
-	"""model to store each item instance """
+	"""model to store information of the item instance in customers online_order"""
+	
 	#each individual status
 	SUBMITTED = 1 # the credit card was valid or mobilemoney was recieved.It is ready for us to process the order
 	PROCESSED = 2 # After submitted orders are reviewed, we can mark them as processed, letting deliverers know order is ready to be shipped
@@ -100,6 +104,8 @@ class Recieved_Order(SmartModel):
 	quantity = models.IntegerField(default=0)
 	price = models.DecimalField(max_digits=9,decimal_places=2)
 	order = models.ForeignKey(Order)
+	option = models.ForeignKey(Optional_Item,blank=True,null=True)
+	toppings_and_extras = models.ManyToManyField(ToppingsAndExtras, blank=True, null=True)
 	
 	def __unicode__(self):
 		return unicode(self.order)
