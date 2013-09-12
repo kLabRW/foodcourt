@@ -97,12 +97,12 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 	actions = ('create','read','delete','list','update')
 	permissions = True
 	
-#	class Create(SmartCreateView):
-#		fields = ('date_added','quantity','item.name','item.')
+	class Create(SmartCreateView):
+		fields = ('date_added','quantity','item.name','item.')
 		
 	
 	class List(SmartListView):
-		fields = ('order_date','order_status','order_mobile','order_name','order_address','item.name','item.price','quantity','order_id','order_restaurant','order_service_type','order_additional_information')
+		fields = ('order_date','order_status','order_mobile','order_name','order_address','item.name','item.price','option_name','option_price','toppings_and_extras_count','quantity','order_id','order_restaurant','order_service_type','order_additional_information')
 		search_fields = ('order_id',)
 		
 		def get_queryset(self,*args,**kwargs):
@@ -113,6 +113,18 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 		
 		def get_order_date(self,obj):
 			return obj.order.date
+		def get_option_name(self,obj):
+			if obj.option:
+				return obj.option.name
+			return None
+		
+		def get_toppings_and_extras_count(self,obj):
+			return obj.toppings_and_extras.count()
+
+		def get_option_price(self,obj):
+			if obj.option:
+				return obj.option.price
+			return None
 		def get_order_status(self,obj):
 			return obj.order.status
 #		def get_order_email(self,obj):
@@ -137,6 +149,17 @@ class Recieved_OrderCRUDL(SmartCRUDL):
 	class Update(SmartUpdateView):
 		fields = ('is_active',)
 		
+#		def get_order_status(self,obj):
+#			return obj.order.status
+	
+	class Read(SmartReadView):
+		fields = ('toppings_and_extras',)
+		
+		def get_toppings_and_extras(self,obj):
+			result=[]
+			for topping in obj.toppings_and_extras.all():		
+				result.append(str(topping.name) + ' ' + str((topping.price))) 
+			return result
 	
 	
 			
