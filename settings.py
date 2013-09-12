@@ -304,7 +304,7 @@ LOGGING = {
      }
  }
 
-#import dj_database_url
+import dj_database_url
 DATABASES = {'default':dj_database_url.config(default='postgres://matsinvasion:live4ever@localhost:5432/dev_db')}
 # Honor the 'x-Forwaded-Proto' header for request is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
