@@ -1,10 +1,12 @@
 from .models import OrderItem
 from restaurant_detail.models import Item
+from optionalitems.models import Optional_Item,ToppingsAndExtras
 from django.shortcuts import get_object_or_404
 import decimal
 import random
 from django.conf import settings
 from django.contrib.auth.models import User
+
 
 
 ORDER_ID_SESSION_KEY = 'shopping_id'
@@ -26,13 +28,24 @@ def _generate_shopping_id():
 def get_order_items(request):
 	return OrderItem.objects.filter(shopping_id=_shopping_id(request))
 # add an item to order
+
+
 def add_to_order(request,obj): 	
 	postdata = request.POST.copy()
 	#get quantity added, return 0 if empty
 	quantity = postdata.get('quantity',0)
+	op = postdata.get('option',None)
+	optional_item = None
+	# get optional_item or return missing page error_message
+	if op: 
+		optional_item = get_object_or_404(Optional_Item, pk=op)
+	toppings = postdata.getlist('topping',None)
+	toppings_and_extras = []
+	if toppings: 
+		toppings_and_extras = ToppingsAndExtras.objects.filter(pk__in=toppings)
+
 	# fetch the item or return  missing page error_message
 	i = get_object_or_404(Item,pk=obj.id)
-#	order = get_object_or_404(Order,pk=obj.id)
 	# get items in order
 	order_items = get_order_items(request)
 	item_in_orders = False
@@ -45,24 +58,14 @@ def add_to_order(request,obj):
 	if not item_in_orders:
 		# creat and save a new order item
 		anon_user = User.objects.get(id=settings.ANONYMOUS_USER_ID)	
-#		try:
-#			customer = Customer.objects.get(pk=customer_id)
-#			order= Order.objects.get(pk=order_id)
-#			restaurant = Restaurant.objects.get(pk=restaurant_id)
-#		except:
-#			customer = Customer.objects.create(created_by=anon_user,modified_by=anon_user)
-#			customer.save()
-#			import pdb;pdb.set_trace()
-#			restaurant = Restaurant(created_by=anon_user,modified_by=anon_user)
-#			restaurant.save()
-			
-			
 		oi=OrderItem.objects.create(shopping_id=_shopping_id(request),
 		                                  quantity=quantity,
 		                                  item=i,
+		                                  option = optional_item,
 		                                  created_by=anon_user,
 		                                  modified_by=anon_user)
-		oi.save()
+		for topping in toppings_and_extras:
+			oi.toppings_and_extras.add(topping)
 	
 						                                  
 		                                  
@@ -95,11 +98,21 @@ def update_order(request):
 		else:
 			remove_from_order(request)
 # gets the total for the current order
-def order_subtotal(request,obj):		
+def order_subtotal(request):		
 	order_total = decimal.Decimal('0.00')
 	order_items = get_order_items(request)
 	for order_item in order_items:
-		order_total += order_item.item.price * order_item.quantity
+		if order_item.item:
+			for topping in order_item.toppings_and_extras.all():
+				order_total += (order_item.item.price + order_item.option.price) + topping.price * order_item.quantity
+		if not order_item.option:
+			order_total += order_item.item.price * order_item.quantity
+#			order_total += order_item.item.price + order_item.option.price * order_item.quantity
+#		if order_item.option:
+#			order_total = order_item.option.price * order_item.quantity# correct
+#		for topping in order_item.toppings_and_extras.all():
+#			if topping:
+#			 order_total += topping.price * order_item.quantity #correct
 	return order_total
 
 def is_empty(request):
