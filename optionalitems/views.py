@@ -2,8 +2,8 @@
 from .models import *
 from smartmin.views import *
 
-class Optional_ItemCRUDL(SmartCRUDL):
-	model = Optional_Item
+class OptionalItemCRUDL(SmartCRUDL):
+	model = OptionalItem
 	actions = ('create','list','read','update',)
 	permissions = True
 	
@@ -32,7 +32,7 @@ class OptionalItemCategoryCreateForm(forms.ModelForm):
 		del kwargs['user']
 		super(OptionalItemCategoryCreateForm, self).__init__(*args, **kwargs)
 		#query on field, item created by user.
-		self.fields['optional_items'].queryset = Optional_Item.objects.filter(created_by=user)
+		self.fields['optional_items'].queryset = OptionalItem.objects.filter(created_by=user)
 	
 	class Meta:
 		model = OptionalItemCategory
@@ -44,7 +44,7 @@ class OptionalItemCategoryUpdateForm(forms.ModelForm):
 		del kwargs['user']
 		super(OptionalItemCategoryUpdateForm, self).__init__(*args, **kwargs)
 		#query on field, item created by user.
-		self.fields['optional_items'].queryset = Optional_Item.objects.filter(created_by=user)
+		self.fields['optional_items'].queryset = OptionalItem.objects.filter(created_by=user)
 #		self.fields['owner'].queryset = Item.objects.filter(owner=user)
 	
 	class Meta:
@@ -96,7 +96,7 @@ class ToppingsAndExtrasCategoryCreateForm(forms.ModelForm):
 		del kwargs['user']
 		super(ToppingsAndExtrasCategoryCreateForm, self).__init__(*args, **kwargs)
 		#query on field, item created by user.
-		self.fields['toppings_and_extras'].queryset = ToppingsAndExtras.objects.filter(created_by=user)
+		self.fields['toppings_and_extras'].queryset = ToppingsAndExtra.objects.filter(created_by=user)
 	
 	class Meta:
 		model = ToppingsAndExtrasCategory
@@ -108,7 +108,7 @@ class ToppingsAndExtrasCategoryUpdateForm(forms.ModelForm):
 		del kwargs['user']
 		super(ToppingsAndExtrasCategoryUpdateForm, self).__init__(*args, **kwargs)
 		#query on field, item created by user.
-		self.fields['toppings_and_extras'].queryset = ToppingsAndExtras.objects.filter(created_by=user)
+		self.fields['toppings_and_extras'].queryset = ToppingsAndExtra.objects.filter(created_by=user)
 #		self.fields['owner'].queryset = Item.objects.filter(owner=user)
 	
 	class Meta:
@@ -152,7 +152,7 @@ class ToppingsAndExtrasCategoryCRUDL(SmartCRUDL):
 	class List(SmartListView):
 		fields = ('title','display_order',)
 
-class ToppingsAndExtrasCRUDL(SmartCRUDL):
+class ToppingsAndExtraCRUDL(SmartCRUDL):
 	actions = ('create','update','list','read',)
 	model = ToppingsAndExtras
 	permissions = True
