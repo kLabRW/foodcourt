@@ -88,14 +88,14 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 		success_url='id@restaurant_detail.restaurant_detail_thanks'
 		
 		def pre_save(self,obj):
-			obj = super(Restaurant_detailCRUDL.Create,self).pre_save(obj)
+			obj = super(RestaurantDetailCRUDL.Create,self).pre_save(obj)
 			anon_user=User.objects.get(id=settings.ANONYMOUS_USER_ID)
 			obj.created_by=anon_user
 			obj.modified_by=anon_user
 			obj.save()
 			return obj
 		def post_save(self,obj):
-			obj=super(Restaurant_detailCRUDL.Create, self).post_save(obj)
+			obj=super(RestaurantDetailCRUDL.Create, self).post_save(obj)
 			anon_user=User.objects.get(id=settings.ANONYMOUS_USER_ID)
 			obj.created_by=anon_user
 			obj.modified_by=anon_user
@@ -103,7 +103,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 			return obj
 			
 			#make any application with the same email inactive
-			Restaurant_detail.objects.filter(is_active=True, email=obj.email).exclude(id=obj.id).update(is_active=False)
+			RestaurantDetail.objects.filter(is_active=True, email=obj.email).exclude(id=obj.id).update(is_active=False)
 			return obj
 		def form_valid(self,form):
 			#is our hidden field displayed? we are probably a bot, return 200 request
