@@ -110,7 +110,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 			if 'message' in self.request.REQUEST and len(self.request.REQUEST['message'])>0: 
 				return HttpResponse("Thanks for your application. You appear to be slightly automated however so we may not actually use it. If you think you have received this in error, please contact the F4L team")
 			else:
-				return super(Restaurant_detailCRUDL.Create, self).form_valid(form)
+				return super(RestaurantDetailCRUDL.Create, self).form_valid(form)
 	class Thanks(SmartReadView):
 		permission=None
 #		success_url='/'
