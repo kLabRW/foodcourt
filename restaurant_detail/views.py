@@ -1,7 +1,7 @@
 # Create your views here.
 from .models import *
 from smartmin.views import *
-from .models import Restaurant_detail,Restaurant,Item,Category
+from .models import RestaurantDetail,Restaurant,Item,Category
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from orders import models
@@ -34,8 +34,8 @@ class RestaurantForm(forms.ModelForm):
 
 
 #----------------------------------------------------------------
-class Restaurant_detailCRUDL(SmartCRUDL):
-	model = Restaurant_detail
+class RestaurantDetailCRUDL(SmartCRUDL):
+	model = RestaurantDetail
 	actions = ('create', 'read','list','update','thanks',)
 	permissions = True
 	
