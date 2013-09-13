@@ -10,7 +10,7 @@ from djangoratings import AnonymousRatingField
 
 
 	
-class Restaurant_detail(SmartModel):
+class RestaurantDetail(SmartModel):
 	# Official details of restaurants.
 	#FOOD_TYPE=(
 	#	('FF', 'FastFood'),
@@ -84,7 +84,7 @@ class Restaurant(SmartModel):
 	delivery_territory = models.TextField(max_length=500,null=True,blank=True,help_text="places where you will deliver e.g, kacyiru,kimihurura,kigali city centre..")
 	closed = models.BooleanField(default=False,help_text="choose True if you are closed.")
 	token=models.CharField(max_length=32, unique=True, help_text="token used to activate account")
-	restaurant_detail=models.ForeignKey(Restaurant_detail,default='1',help_text="the initial application of the restaurant_details of restaurant")
+	restaurant_detail=models.ForeignKey(RestaurantDetail,default='1',help_text="the initial application of the restaurant_details of restaurant")
 	rating = AnonymousRatingField(range=5, weight=10,allow_anonymous = True,use_cookies= True)# 5 possible rating values, 1-5 and weight of 10 
 #	delivery_hours=models.DateTimeField()
 	def __unicode__(self):
