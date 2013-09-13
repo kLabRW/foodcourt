@@ -92,8 +92,8 @@ class OrderItemCRUDL(SmartCRUDL):
 		fields = ('item.name','item.price','quantity')
 
 
-class Recieved_OrderCRUDL(SmartCRUDL):
-	model = Recieved_Order
+class RecievedOrderCRUDL(SmartCRUDL):
+	model = RecievedOrder
 	actions = ('create','read','delete','list','update')
 	permissions = True
 	

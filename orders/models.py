@@ -5,7 +5,7 @@ import decimal
 from phonenumber_field.modelfields import PhoneNumberField
 #from cart.models import OrderItem
 from restaurant_detail.models import Restaurant,Item
-from optionalitems.models import Optional_Item,ToppingsAndExtras
+from optionalitems.models import OptionalItem,ToppingsAndExtra
 import django.db.models.options as options
 options.DEFAULT_NAMES = options.DEFAULT_NAMES + ('augment_quantity','name','price','total',)
 
@@ -33,8 +33,8 @@ class OrderItem(SmartModel):
 #	date_added = models.DateTimeField(auto_now_add=True)
 	quantity = models.IntegerField()
 	item = models.ForeignKey(Item)
-	option = models.ForeignKey(Optional_Item,null=True,blank=True)
-	toppings_and_extras = models.ManyToManyField(ToppingsAndExtras,null=True, blank=True)
+	option = models.ForeignKey(OptionalItem,null=True,blank=True)
+	toppings_and_extras = models.ManyToManyField(ToppingsAndExtra,null=True, blank=True)
 #	toppings_and_extras = models.ForeignKey(ToppingsAndExtras,null=True, blank=True)
 #	item_slug = models.CharField(max_length=50)
 
@@ -98,14 +98,14 @@ class Order(SmartModel):
 			total += item.total
 		return total
 
-class Recieved_Order(SmartModel):
+class RecievedOrder(SmartModel):
 	item = models.ForeignKey(Item)
 	date_added = models.DateTimeField(auto_now=True,auto_now_add=True)
 	quantity = models.IntegerField(default=0)
 	price = models.DecimalField(max_digits=9,decimal_places=2)
 	order = models.ForeignKey(Order)
-	option = models.ForeignKey(Optional_Item,blank=True,null=True)
-	toppings_and_extras = models.ManyToManyField(ToppingsAndExtras, blank=True, null=True)
+	option = models.ForeignKey(OptionalItem,blank=True,null=True)
+	toppings_and_extras = models.ManyToManyField(ToppingsAndExtra, blank=True, null=True)
 	
 	def __unicode__(self):
 		return unicode(self.order)
