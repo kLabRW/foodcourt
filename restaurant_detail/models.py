@@ -85,7 +85,6 @@ class Restaurant(SmartModel):
 	closed = models.BooleanField(default=False,help_text="choose True if you are closed.")
 	token=models.CharField(max_length=32, unique=True, help_text="token used to activate account")
 	restaurant_detail=models.ForeignKey(RestaurantDetail,default='1',help_text="the initial application of the restaurant_details of restaurant")
-	rating = AnonymousRatingField(range=5, weight=10,allow_anonymous = True,use_cookies= True)# 5 possible rating values, 1-5 and weight of 10 
 #	delivery_hours=models.DateTimeField()
 	def __unicode__(self):
 		return "%s %s %s %s %s %s %s %s" % (self.restaurant_name,self.cusine, self.service_type,self.first_name, self.last_name, self.restaurant_name, self.address, self.mobile)	
