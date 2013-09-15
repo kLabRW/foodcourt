@@ -14,6 +14,7 @@ urlpatterns = patterns('',
 	url(r'^users/', include('smartmin.users.urls')),
 	url(r'^incoming_orders/',include('orders.urls')),
 	url(r'^restaurant_detail/', include('restaurant_detail.urls')),
+#	url(r'^messaging/', include('messaging.urls')),
 	url(r'^content/', include('django_quickblocks.urls')),
 	url(r'rate-restaurant/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(),{
 'app_label':'restaurant_detail',
