@@ -13,8 +13,8 @@
             
   <ul class="nav">
   
-  {% if perms.restaurant_detail.restaurant_detail_list %}
-  <li><a href="{% url 'restaurant_detail.restaurant_detail_list' %}">Restaurant Details</a></li>
+  {% if perms.restaurant_detail.restaurantdetail_list %}
+  <li><a href="{% url 'restaurant_detail.restaurantdetail_list' %}">Restaurant Details</a></li>
   {% endif %}
   
   {% if perms.restaurant_detail.item_list %}
@@ -23,23 +23,23 @@
   {% if perms.restaurant_detail.category_list %}
   <li><a href="{% url 'restaurant_detail.category_list' %}">Menu Categories</a></li>
   {% endif %}
-  {% if perms.orders.recieved_order_list %}
-  <li><a href="{% url 'orders.recieved_order_list' %}">Recieved Orders</a></li>
+  {% if perms.orders.recievedorder_list %}
+  <li><a href="{% url 'orders.recievedorder_list' %}">Recieved Orders</a></li>
   {% endif %}
   {% if perms.orders.order_list%}
   <li><a href="{% url 'orders.order_list' %}">Orders</a></li>
   {% endif %}
-  {% if perms.optionalitems.optional_item_list %}
-  <li><a href="{% url 'optionalitems.optional_item_list' %}">Optional Items</a></li>
+  {% if perms.optionalitems.optionalitem_list %}
+  <li><a href="{% url 'optionalitems.optionalitem_list' %}">Optional Items</a></li>
   {% endif %}
   {% if perms.optionalitems.optionalitemcategory_list %}
   <li><a href="{% url 'optionalitems.optionalitemcategory_list' %}">Optional Categories</a></li>
   {% endif %}
-  {% if perms.optionalitems.toppingsandextras_list %}
-   <li><a href="{% url 'optionalitems.toppingsandextras_list' %}">Toppings & Extras</a></li>
+  {% if perms.optionalitems.toppingsandextra_list %}
+   <li><a href="{% url 'optionalitems.toppingsandextra_list' %}">Toppings</a></li>
   {%endif%}
   {% if perms.optionalitems.toppingsandextrascategory_list%}
-   <li><a href="{% url 'optionalitems.toppingsandextrascategory_list' %}">Toppings & Extras Categories</a></li>
+   <li><a href="{% url 'optionalitems.toppingsandextrascategory_list' %}">Toppings Categories</a></li>
   {%endif%}
   {%if perms.restaurant_detail.restaurant_myprofile%}
   <li><a href="{% url 'restaurant_detail.restaurant_myprofile' 0%}">Profile</a></li>
