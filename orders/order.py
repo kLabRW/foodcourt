@@ -1,6 +1,6 @@
 from .models import OrderItem
 from restaurant_detail.models import Item
-from optionalitems.models import Optional_Item,ToppingsAndExtras
+from optionalitems.models import OptionalItem,ToppingsAndExtra
 from django.shortcuts import get_object_or_404
 import decimal
 import random
@@ -38,11 +38,11 @@ def add_to_order(request,obj):
 	optional_item = None
 	# get optional_item or return missing page error_message
 	if op: 
-		optional_item = get_object_or_404(Optional_Item, pk=op)
+		optional_item = get_object_or_404(OptionalItem, pk=op)
 	toppings = postdata.getlist('topping',None)
 	toppings_and_extras = []
 	if toppings: 
-		toppings_and_extras = ToppingsAndExtras.objects.filter(pk__in=toppings)
+		toppings_and_extras = ToppingsAndExtra.objects.filter(pk__in=toppings)
 
 	# fetch the item or return  missing page error_message
 	i = get_object_or_404(Item,pk=obj.id)

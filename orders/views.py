@@ -106,7 +106,7 @@ class RecievedOrderCRUDL(SmartCRUDL):
 		search_fields = ('order_id',)
 		
 		def get_queryset(self,*args,**kwargs):
-			queryset = super(Recieved_OrderCRUDL.List, self).get_queryset(*args,**kwargs)
+			queryset = super(RecievedOrderCRUDL.List, self).get_queryset(*args,**kwargs)
 			if self.request.user.is_superuser:
 				return queryset
 			return queryset.filter(order__restaurant__user=self.request.user).order_by('-created_on')			

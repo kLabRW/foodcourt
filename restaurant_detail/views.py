@@ -45,7 +45,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 		field_config = {'services': dict(label = "SERVICES")}
 		
 		def derive_queryset(self, **kwargs):
-			queryset = super(Restaurant_detailCRUDL.List, self).derive_queryset(**kwargs)
+			queryset = super(RestaurantDetailCRUDL.List, self).derive_queryset(**kwargs)
 			return queryset.filter(is_active=True)
 		
 		def get_name(self, obj):	
@@ -85,7 +85,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 		permission=None
 		submit_button_name="Join the F4L restaurant network"
 #		success_url = '/'
-		success_url='id@restaurant_detail.restaurant_detail_thanks'
+		success_url='id@restaurant_detail.restaurantdetail_thanks'
 		
 		def pre_save(self,obj):
 			obj = super(RestaurantDetailCRUDL.Create,self).pre_save(obj)

@@ -11,7 +11,7 @@ class OptionalItemCRUDL(SmartCRUDL):
 		fields = ('name','price','description',)
 		
 		def pre_save(self,obj):
-			obj = super(Optional_ItemCRUDL.Create, self).pre_save(obj)
+			obj = super(OptionalItemCRUDL.Create, self).pre_save(obj)
 			restaurant = Restaurant.objects.get(user=self.request.user)
 			obj.owner = restaurant
 			return obj
@@ -71,7 +71,7 @@ class OptionalItemCategoryCRUDL(SmartCRUDL):
 			return obj
 		
 	class Update(SmartUpdateView):
-		fields = ('title','optional_items','display_order',)
+		fields = ('title','optional_items','display_order','is_active')
 		form_class = OptionalItemCategoryUpdateForm
 		
 		def get_form_kwargs(self):
@@ -154,14 +154,14 @@ class ToppingsAndExtrasCategoryCRUDL(SmartCRUDL):
 
 class ToppingsAndExtraCRUDL(SmartCRUDL):
 	actions = ('create','update','list','read',)
-	model = ToppingsAndExtras
+	model = ToppingsAndExtra
 	permissions = True
 	
 	class Create(SmartCreateView):
 		fields = ('name','price','description')
 		
 		def pre_save(self,obj):
-			obj = super(ToppingsAndExtrasCRUDL.Create, self).pre_save(obj)
+			obj = super(ToppingsAndExtraCRUDL.Create, self).pre_save(obj)
 			restaurant = Restaurant.objects.get(user=self.request.user)
 			obj.owner = restaurant
 			return obj
