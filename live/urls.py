@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 	url(r'^reciept/$',reciept,name="checkout_reciept"),
 	url(r'^search_results/$',search,name="search"),
 	url(r'^contact/$',contact,name="contact_us"),
+#	url(r'^form/$',tryout_form,name="tryout")
  #   url(r'^search/(\d+)$',search,name="search"),
 )
 #urlpatterns += patterns('/^item/',url(r'^$', show_item, name = "item_order"),)

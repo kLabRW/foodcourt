@@ -1,12 +1,12 @@
 from restaurant_detail.models import Restaurant
 from restaurant_detail.models import Category,Item
 from django.db.models import Q
-from optionalitems.models import Optional_Item
+from optionalitems.models import OptionalItem
 from django.template import RequestContext
-from django.shortcuts import render_to_response,render,get_object_or_404
+from django.shortcuts import render_to_response,render
 from django import forms
-from orders import order
-from orders.models import Recieved_Order,Order
+from orders import order,formz
+from orders.models import RecievedOrder,Order
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
@@ -34,7 +34,7 @@ def create_order(request,obj):
 		cart_items = order.get_order_items(request)
 		for ci in cart_items:
 			"""create online_order for each order_item"""
-			oi = Recieved_Order()
+			oi = RecievedOrder()
 			oi.order = checkout
 			oi.quantity = ci.quantity
 			oi.created_by = anon_user
@@ -55,7 +55,7 @@ def create_order(request,obj):
 def show_checkout(request,id):
 	"""checkout form to collect order information"""
 	item = Item.objects.get(pk=id)
-	option = Optional_Item.objects.get(pk=id)
+	option = OptionalItem.objects.get(pk=id)
 	total = order.order_subtotal(request) + item.owner.service_fee
 	if total < item.owner.minimum_order_amount:
 		cart_url = urlresolvers.reverse('order_index',kwargs={'id':item.id})
@@ -88,7 +88,7 @@ def reciept(request):
 	order_number = request.session.get('order_number','')
 	if order_number:
 		order = Order.objects.filter(id=order_number)[0]
-		order_items = Recieved_Order.objects.filter(order=order)
+		order_items = RecievedOrder.objects.filter(order=order)
 #		order_subtotal = order.subtotal(request)
 	else:
 		cart_url = urlresolvers.reverse('order_index')
@@ -110,7 +110,7 @@ def get_category(request,restaurant_id):
 #------------------------------------------------------------------------------------------------------
 def show_order(request,id):
 	item = Item.objects.get(pk=id)
-	option = Optional_Item.objects.get(pk=id)
+	option = OptionalItem.objects.get(pk=id)
 	if request.method == 'POST':
 		postdata = request.POST.copy()
 		if postdata['submit'] == 'Remove':
@@ -133,10 +133,10 @@ def show_order(request,id):
 	return render_to_response('public/order.html',context,context_instance=RequestContext(request))
 
 def partial_order_item_form():
-	"""dynamic form limiting optional_items to their items"""
+	"""dynamic form limiting optionalitems to their items"""
 	class PartialOrderItemform(forms.Form):
 		quantity = forms.IntegerField(widget=forms.TextInput(attrs={'size':'2', 'class':'quantity','maxlength':'5'}))
-#		option = forms.ModelChoiceField(queryset = Optional_Item.objects.all(),widget= forms.RadioSelect())
+#		option = forms.ModelChoiceField(queryset = OptionalItem.objects.all(),widget= forms.RadioSelect())
 	
 	return PartialOrderItemform
 		
