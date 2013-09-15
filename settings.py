@@ -236,8 +236,8 @@ PERMISSIONS = {
  
 }
 GROUP_PERMISSIONS = {
-    "Administrator": ('auth.user.*','restaurant_detail.restaurant_detail.*','restaurant_detail.restaurant_read','orders.order.*','orders.orderItem.*','orders.orderitem.*','orders.orderitem_list','orders.order.*','orders.recieved_order.*','messaging.subcategory.*','django_quickblocks.quickblocks.*','optionalitems.optional_item.*','optionalitems.optionalitemcategory.*','optionalitems.toppingsandextras.*','optionalitems.toppingsandextrascategory.*','django_quickblocks.quickblocktype.*',),
-    "Restaurants": ('restaurant_detail.restaurant_myprofile','restaurant_detail.restaurant_read','restaurant_detail.item.*','restaurant_detail.category.*','orders.order.*','orders.recieved_order.*','messaging.subcategory.*','optionalitems.optional_item.*','optionalitems.optionalitemcategory.*','optionalitems.toppingsandextras.*','optionalitems.toppingsandextrascategory.*',),
+    "Administrator": ('auth.user.*','restaurant_detail.restaurantdetail.*','restaurant_detail.restaurant_read','orders.order.*','orders.orderItem.*','orders.orderitem.*','orders.orderitem_list','orders.order.*','orders.recievedorder.*','messaging.subcategory.*','django_quickblocks.quickblocks.*','optionalitems.optionalitem.*','optionalitems.optionalitemcategory.*','optionalitems.toppingsandextra.*','optionalitems.toppingsandextrascategory.*','django_quickblocks.quickblocktype.*',),
+    "Restaurants": ('restaurant_detail.restaurant_myprofile','restaurant_detail.restaurant_read','restaurant_detail.item.*','restaurant_detail.category.*','orders.order.*','orders.recievedorder.*','messaging.subcategory.*','optionalitems.optionalitem.*','optionalitems.optionalitemcategory.*','optionalitems.toppingsandextra.*','optionalitems.toppingsandextrascategory.*',),
 }
 
 
