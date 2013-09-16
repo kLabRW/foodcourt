@@ -45,7 +45,6 @@ def create_order(request,obj):
 			toppings = ci.toppings_and_extras
 			oi.save()
 			for topping in toppings.all():
-				import pdb; pdb.set_trace()
 				oi.toppings_and_extras.add(topping)
 			#oi.toppings_and_extras.create()
 		order.empty_cart(request)
