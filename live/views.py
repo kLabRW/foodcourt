@@ -110,7 +110,7 @@ def get_category(request,restaurant_id):
 #------------------------------------------------------------------------------------------------------
 def show_order(request,id):
 	item = Item.objects.get(pk=id)
-	option = OptionalItem.objects.get(pk=id)
+#	option = OptionalItem.objects.get(pk=id)
 	if request.method == 'POST':
 		postdata = request.POST.copy()
 		if postdata['submit'] == 'Remove':
