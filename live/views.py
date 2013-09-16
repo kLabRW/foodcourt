@@ -55,7 +55,6 @@ def create_order(request,obj):
 def show_checkout(request,id):
 	"""checkout form to collect order information"""
 	item = Item.objects.get(pk=id)
-	option = OptionalItem.objects.get(pk=id)
 	total = order.order_subtotal(request) + item.owner.service_fee
 	if total < item.owner.minimum_order_amount:
 		cart_url = urlresolvers.reverse('order_index',kwargs={'id':item.id})
