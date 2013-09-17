@@ -41,9 +41,9 @@
   {% if perms.optionalitems.toppingsandextrascategory_list%}
    <li><a href="{% url 'optionalitems.toppingsandextrascategory_list' %}">Toppings Categories</a></li>
   {%endif%}
-<!--  {%if perms.restaurant_detail.restaurant_myprofile%}
- <li><a href="{% url 'restaurant_detail.restaurant_myprofile' 0%}">Profile</a></li>
-  {% endif %} -->
+  {%if perms.restaurant_detail.restaurant_myprofile%}
+  <li><a href="{% url 'restaurant_detail.restaurant_myprofile' 0%}">Profile</a></li>
+  {% endif %}
 
   
     
@@ -65,7 +65,7 @@
 
     {% if request.user and request.user.is_authenticated %}
      <li class="pull-right">
-      <a href="{% url 'users.user_profile' request.user.id %}" style="float: left;">{{ request.user.username }}</a>
+<!--      <a href="{% url 'users.user_profile' request.user.id %}" style="float: left;">{{ request.user.username }}</a> -->
       <a href="{% url 'users.user_logout' %}?go=/" style="float: right;">Logout</a>
      </li>
     {% else %}
