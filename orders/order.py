@@ -102,6 +102,8 @@ def order_subtotal(request):
 	order_total = decimal.Decimal('0.00')
 	order_items = get_order_items(request)
 	for order_item in order_items:
+		if not order_item.option:
+			order_total += order_item.item.price * order_item.quantity
 		if order_item.item:
 			item_and_option = decimal.Decimal('0.00')
 			item_and_option += order_item.item.price + order_item.option.price
@@ -109,8 +111,7 @@ def order_subtotal(request):
 				item_and_option += topping.price
 				order = item_and_option * order_item.quantity
 			order_total += order
-		if not order_item.option:
-			order_total += order_item.item.price * order_item.quantity
+		
 	return order_total
 
 def is_empty(request):
