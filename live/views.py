@@ -120,7 +120,7 @@ def show_order(request,id):
 			return HttpResponseRedirect(urlresolvers.reverse('checkout',kwargs={'id':item.id}))
 	order_items = order.get_order_items(request)
 	order_subtotal = order.order_subtotal(request)
-	total = order_subtotal + item.owner.service_fee
+	total = order_subtotal + item.owner.service_fee + 100
 	
 	context = {
 		'order_items':order_items,
