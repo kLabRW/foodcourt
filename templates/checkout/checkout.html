@@ -19,7 +19,7 @@
 </div>
 <div style="background-color: #ffa540;">
  <div class="container">
- <form action="" method = "post" style="margin-left: 250px;">
+ <form action="" method = "post" style="margin-left: 250px;">{% crsf_token %}
    <legend class="category_head" style="padding-top: 20px;">Contact & Order information</legend>
    <p >
     {{ form.as_p}}
