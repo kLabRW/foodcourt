@@ -77,11 +77,11 @@ class Order(SmartModel):
 	restaurant = models.ForeignKey(Restaurant,null=True,blank=True,default = None,help_text="The restaurant the customer order from")
 	#contact info
 #	email = models.EmailField(max_length=50,help_text="Needed as alternative")
-	mobile = PhoneNumberField(max_length=20,help_text="For confirmation purposes.Be sure to use format +250######")
+	mobile = PhoneNumberField(max_length=20,help_text="Be sure to use format +25078###")
 	
 	#billing & contact information
-	name= models.CharField(max_length=50,help_text="Needed so that we can deliver to the right individual")
-	address = models.CharField(max_length=50,help_text="Where do we find you. e.g Klab 6th floor,Telecom House,Kacyiru")
+	name= models.CharField(max_length=50,help_text="")
+	address = models.CharField(max_length=50,help_text="I.e Street Number,House Number / Office location.")
 #	city = models.CharField(max_length=50,null=True,blank=True,help_text="F4L services are only in Kigali.")
 	additional_information = models.TextField(max_length=250,null=True,blank=True,help_text="Anything more we should know.")
 #	total_amount = models.integerField(max_length=6,defaulrhelp_text="Amount paid by customer F4L")
