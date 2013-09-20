@@ -234,15 +234,9 @@ def search(request):
 	}
 	return render_to_response('public/search.html',context,context_instance=RequestContext(request))
 
-#-----------------------------------
-#class ContactForm(forms.Form):
-#	name = forms.CharField(max_length=100)
-#	email= forms.EmailField()
-#	message = forms.CharField(widget=forms.Textarea())
-	
 def contact(request):
 	if request.method == 'POST':
-		form = forms.ContactForm(request.POST)
+		form = formz.ContactForm(request.POST)
 		if form.is_valid():
 			name = form.cleaned_data['name']
 			email = form.cleaned_data['email']
