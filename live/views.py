@@ -111,11 +111,11 @@ def show_order(request,id):
 #	option = OptionalItem.objects.get(pk=id)
 	if request.method == 'POST':
 		postdata = request.POST.copy()
-		if postdata['submit'] == 'Remove':
+		if postdata['submit'] == 'Remove order':
 			order.remove_from_order(request)
-		if postdata['submit'] == 'Update':
+		if postdata['submit'] == 'Update quantity':
 			order.update_order(request)
-		if postdata['submit'] == 'checkout':
+		if postdata['submit'] == 'submit order':
 #			checkout_url = show_checkout(request)
 			return HttpResponseRedirect(urlresolvers.reverse('checkout',kwargs={'id':item.id}))
 	order_items = order.get_order_items(request)
