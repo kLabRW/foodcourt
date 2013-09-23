@@ -81,7 +81,7 @@ class Order(SmartModel):
 	
 	#billing & contact information
 	name= models.CharField(max_length=50,help_text="")
-	address = models.CharField(max_length=50,help_text="I.e Street Number,House Number / Office location.")
+	address = models.CharField(max_length=140,help_text="I.e Remera,KG 8 AV,House no. 10# / kLab,Telecom House,Kacyiru.")
 #	city = models.CharField(max_length=50,null=True,blank=True,help_text="F4L services are only in Kigali.")
 	additional_information = models.TextField(max_length=250,null=True,blank=True,help_text="Anything more we should know.")
 #	total_amount = models.integerField(max_length=6,defaulrhelp_text="Amount paid by customer F4L")
