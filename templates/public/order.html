@@ -1,7 +1,7 @@
 {% extends "public_base.html" %}
 {% block order-content %}
 <div class="container" style="background-color: #f7f7ef;">
-<div class="alert">
+<div class="alert alert-warning">
  <button type="button" class="close" data-dismiss="alert">&times;</button>
   The site uses cookies,incase you don't complete order it will keep the information.Just provide new quantity and hit update.
 </div>
@@ -39,7 +39,7 @@
     <th class="" colspan="2">
      <form method="post" action=".">
       {% csrf_token %}
-      <input type="submit" class="btn btn-success" name="submit" value="checkout" alt="checkout" />
+      <input type="submit" class="btn btn-success" name="submit" value="submit order" alt="checkout" />
      </form> 
     </th>
    </tr>
@@ -66,14 +66,14 @@
        <input type="hidden" name="item_id" value="{{ item.id }}" />
      </td>
      <td>
-      <input type="submit" class="btn btn-success" name="submit" value="Update" />
+      <input type="submit" class="btn btn-success" name="submit" value="Update quantity" />
       </form>
      </td>
      <td>
      <form method="post" action="." class="">
       {% csrf_token %}
      <input type="hidden" name="item_id" value="{{ item.id }}" />
-     <input type="submit" class="btn btn-danger" name="submit" value="Remove" />
+     <input type="submit" class="btn btn-danger" name="submit" value="Remove order" />
      </form>
      </td>
     </tr>
