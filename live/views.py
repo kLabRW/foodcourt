@@ -246,7 +246,7 @@ def contact(request):
 			send_mail(title,message + '\n \nFrom ' + name + '\nReply to ' + email,email, recipients)
 			return render_to_response('public/contact_success.html',context_instance=RequestContext(request))
 	else:
-		form = forms.ContactForm()
+		form = formz.ContactForm()
 	return render(request,'public/contact.html',{'form':form})
 	
 	
