@@ -1,7 +1,6 @@
 from restaurant_detail.models import Restaurant
 from restaurant_detail.models import Category,Item
 from django.db.models import Q
-from optionalitems.models import OptionalItem
 from django.template import RequestContext
 from django.shortcuts import render_to_response,render
 from django import forms
@@ -79,6 +78,7 @@ def show_checkout(request,id):
 	context = {
 		'total':total,
 		'form':form,
+		
 	}
 	return render(request,'checkout/checkout.html',context)
 	
