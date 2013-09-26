@@ -249,6 +249,8 @@ def contact(request):
 		form = formz.ContactForm()
 	return render(request,'public/contact.html',{'form':form})
 	
+def how_it_works_page(request):
+	return render(request,'public/how_it_works.html')
 	
 #	headers = {}
 #	url = https://api.textit.in/api/v1/sms.json?phone=["250789385878"]&text="wazaA"&relayer=81

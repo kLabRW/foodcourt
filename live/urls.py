@@ -1,4 +1,4 @@
-from .views import show_item,show_checkout,show_order,get_category,search,homepage,reciept,contact
+from .views import show_item,show_checkout,show_order,get_category,search,homepage,reciept,contact,how_it_works_page
 from django.conf.urls.defaults import patterns, include, url
 
 
@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 	url(r'^reciept/$',reciept,name="checkout_reciept"),
 	url(r'^search_results/$',search,name="search"),
 	url(r'^contact/$',contact,name="contact_us"),
+	url(r'^how_it_works/$',how_it_works_page,name="how_it_works")
 #	url(r'^form/$',tryout_form,name="tryout")
  #   url(r'^search/(\d+)$',search,name="search"),
 )
