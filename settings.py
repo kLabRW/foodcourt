@@ -182,6 +182,7 @@ INSTALLED_APPS = (
     'echo',
     'django_extensions',
     'sorl.thumbnail',
+    'gunicorn',
     'pagination',
  #   'djangoratings',
 #    'agon_ratings',
