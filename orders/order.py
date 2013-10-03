@@ -105,10 +105,11 @@ def order_subtotal(request):
 		if order_item.option:
 			item_and_option = decimal.Decimal('0.00')
 			item_and_option += order_item.item.price + order_item.option.price
+			order = item_and_option
 			for topping in order_item.toppings_and_extras.all():
-				item_and_option += topping.price
-				order = item_and_option * order_item.quantity
-			order_total += order
+				order += topping.price
+			order_subtotal = order * order_item.quantity
+			order_total += order_subtotal
 		else:
 			order_total += order_item.item.price * order_item.quantity
 	return order_total
