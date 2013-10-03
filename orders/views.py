@@ -153,13 +153,35 @@ class RecievedOrderCRUDL(SmartCRUDL):
 #			return obj.order.status
 	
 	class Read(SmartReadView):
-		fields = ('toppings_and_extras',)
+		fields = ('order_status','order_id','order_name','order_mobile','order_address','item.name','item.price','option_name','option_price','toppings_and_extras','quantity','order_restaurant','order_service_type',)
 		
+		def get_order_status(self,obj):
+			return obj.order.status
+		def get_order_name(self,obj):
+			return obj.order.name
+		def get_order_mobile(self,obj):
+			return obj.order.mobile
+		def get_order_address(self,obj):
+			return obj.order.address
+		def get_option_name(self,obj):
+			if obj.option:
+				return obj.option.name
+			return None
+		def get_option_price(self,obj):
+			if obj.option:
+				return obj.option.price
+			return None
 		def get_toppings_and_extras(self,obj):
 			result=[]
 			for topping in obj.toppings_and_extras.all():		
 				result.append(str(topping.name) + ' ' + str((topping.price))) 
 			return result
+		def get_order_restaurant(self,obj):
+			return obj.order.restaurant.restaurant_name
+		def get_order_service_type(self,obj):
+			return obj.order.restaurant.service_type
+		def get_order_id(self,obj):
+			return obj.order.id
 	
 	
 			
