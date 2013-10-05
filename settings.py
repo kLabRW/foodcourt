@@ -1,9 +1,9 @@
 # Django settings for a generic project.
 import os
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-#ALLOWED_HOSTS = [".herokuapp.com"]
+ALLOWED_HOSTS = ['foodcourt.rw', 'localhost']
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -80,9 +80,9 @@ USE_L10N = True
 #MEDIA_URL = ''
 DATE_FORMAT = "d-m-Y"
 DATETIME_FORMAT = "d-m-Y H:i"
-SITE_NAME = 'Food for less'
+SITE_NAME = 'foodcourt'
 META_KEYWORDS = 'Food,order,online,delivery,pickup,service,restaurant,kigali,Rwanda'
-META_DESCRIPTION = "Food for less is an online food ordering, delivery and pickup service from kigali,Rwandas' finest restaurants."
+META_DESCRIPTION = "foodcourt is an easy way to order food for delivery in kigali."
 RATINGS_VOTES_PER_IP = 3 #to limit the number of unique IPs per object/rating-field combination. 
 
 # Absolute path to the directory static files should be collected to.
@@ -134,7 +134,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'pagination.middleware.PaginationMiddleware',
-    'marketing.urlcanon.URLCanonicalizationMiddleware',
+    #'marketing.urlcanon.URLCanonicalizationMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -172,12 +172,12 @@ INSTALLED_APPS = (
     #nyaruka packages,
     'smartmin',
     'django_quickblocks',
-    'rapidsms',
+ #   'rapidsms',
  #   'messaging',
     'optionalitems',
 #    'rapidsms_httprouter',
-    'nsms',
-    'nsms.console',
+#    'nsms',
+#    'nsms.console',
     #project apps and packages
     'echo',
     'django_extensions',
@@ -188,7 +188,7 @@ INSTALLED_APPS = (
 #    'agon_ratings',
     'restaurant_detail',
     'live',
-    'debug_toolbar',
+#    'debug_toolbar',
     'orders',
     'south',
     'storages',
@@ -269,12 +269,10 @@ DEBUG_TOOLBAR_CONFIG = {
 	'INTERCEPT_REDIRECTS':False
 }
 
-INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar',)
-
-
-INTERNAL_IPS = ('127.0.0.1',)
-
-MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+if DEBUG:
+	INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar',)
+	INTERNAL_IPS = ('127.0.0.1',)
+	MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
