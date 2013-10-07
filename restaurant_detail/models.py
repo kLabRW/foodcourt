@@ -40,8 +40,8 @@ class RestaurantDetail(SmartModel):
 	service_hours_end=models.TimeField(auto_now=False,auto_now_add=False,help_text="Time when your delivery services end i.e HH:MM, don't include am or pm.")
 	minimum_order_amount =models.IntegerField(max_length=5,null=True,blank=True,help_text="The least amount you accept for online ordering")
 	delivery_territory = models.TextField(max_length=500,null=True,blank=True,help_text="places where you will deliver e.g, kacyiru,kimihurura,kigali city centre..")
-	closed = models.BooleanField(default=False,help_text="choose True if you are closed.")
-#	delivery_hours=models.DateTimeField()
+	closed = models.BooleanField(default=False,help_text="check to closed.")
+	closing_message = models.CharField(max_length=35, null=True,blank=True,help_text="Closing message in 35 characters e.g, Sorry,FoodCourt is closed for now.")
 	def __unicode__(self):
 		return "%s %s %s %s %s %s %s %s" % (self.restaurant_name,self.cusine,self.service_type,self.first_name, self.last_name, self.restaurant_name, self.address, self.mobile)
 
@@ -83,6 +83,7 @@ class Restaurant(SmartModel):
 	minimum_order_amount =models.IntegerField(max_length=5,default='1',help_text="The least amount you accept for online ordering")
 	delivery_territory = models.TextField(max_length=500,null=True,blank=True,help_text="places where you will deliver e.g, kacyiru,kimihurura,kigali city centre..")
 	closed = models.BooleanField(default=False,help_text="choose True if you are closed.")
+	closing_message = models.CharField(max_length=35, null=True,blank=True,help_text="Closing message in 35 characters e.g, Sorry,FoodCourt is closed for now.")
 	token=models.CharField(max_length=32, unique=True, help_text="token used to activate account")
 	restaurant_detail=models.ForeignKey(RestaurantDetail,default='1',help_text="the initial application of the restaurant_details of restaurant")
 #	delivery_hours=models.DateTimeField()

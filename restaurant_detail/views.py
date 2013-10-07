@@ -40,7 +40,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 	permissions = True
 	
    	class List(SmartListView):
-		fields = ('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','closed')
+		fields = ('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','closed','closing_message')
 		search_fields =('restaurant_name__icontains','cusine__icontains',)
 		field_config = {'services': dict(label = "SERVICES")}
 		
@@ -64,7 +64,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 #			return get_pickup_hours_end_display()
 		
 	class Read(SmartReadView):
-		fields= ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address','service_type','delivery_fee','approve','service_hours_start','service_hours_end','service_days','minimum_order_amount','delivery_territory','closed')
+		fields= ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address','service_type','delivery_fee','approve','service_hours_start','service_hours_end','service_days','minimum_order_amount','delivery_territory','closed','closing_message')
 		def get_approve(self,obj):
 			restaurant=Restaurant.objects.filter(restaurant_detail=obj)
 			if restaurant:
@@ -80,10 +80,10 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 #		def get_delivery_days(self,obj):
 #			return obj.get_delivery_days_display()
 	class Update(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','is_active',)
+		fields=('restaurant_name','first_name','last_name','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','closing_message','delivery_territory','is_active')
 	class Create(SmartCreateView):
 		permission=None
-		submit_button_name="Join the F4L restaurant network"
+		submit_button_name="Join the Foodcourt restaurant network"
 #		success_url = '/'
 		success_url='id@restaurant_detail.restaurantdetail_thanks'
 		
@@ -108,7 +108,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 		def form_valid(self,form):
 			#is our hidden field displayed? we are probably a bot, return 200 request
 			if 'message' in self.request.REQUEST and len(self.request.REQUEST['message'])>0: 
-				return HttpResponse("Thanks for your application. You appear to be slightly automated however so we may not actually use it. If you think you have received this in error, please contact the F4L team")
+				return HttpResponse("Thanks for your application. You appear to be slightly automated however so we may not actually use it. If you think you have received this in error, please contact the Foodcourt team")
 			else:
 				return super(RestaurantDetailCRUDL.Create, self).form_valid(form)
 	class Thanks(SmartReadView):
@@ -133,14 +133,14 @@ class RestaurantCRUDL(SmartCRUDL):
 			token=self.kwargs.get('token')
 			return Restaurant.objects.get(token=token)
 	class Myprofile(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','address','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','is_active')
+		fields=('restaurant_name','first_name','last_name','address','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','closing_message','delivery_territory','is_active')
 		def has_permission(self, request, *args, **kwargs):
 			super(RestaurantCRUDL.Myprofile,self).has_permission(request,*args,**kwargs)
 			return True
 		def get_object(self, queryset=None):
 			return Restaurant.objects.get(user=self.request.user)
 	class Read(SmartReadView):
-		fields = ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory')
+		fields = ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','closing_message')
 	class List(SmartListView):
 		fields =('restaurant_name,first_name','last_name','mobile','email','address')
 		field_config={'email':dict(label="Email/User")}
@@ -172,6 +172,7 @@ class RestaurantCRUDL(SmartCRUDL):
 			obj.service_hours_end=userapp.service_hours_end
 			obj.minimum_order_amount=userapp.minimum_order_amount
 			obj.closed = userapp.closed
+			obj.closing_message = userapp.closing_message
 			obj.delivery_territory=userapp.delivery_territory
 			obj.token=''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
 				
@@ -266,8 +267,7 @@ class CategoryCRUDL(SmartCRUDL):
 		
 		def get_form_kwargs(self):
 			kwargs = super(CategoryCRUDL.Update,self).get_form_kwargs()
-			kwargs['user'] = self.request.user
-			return kwargs
+			kwargs['user'] = self.request.user#			return kwargs
 		
 		def derive_queryset(self):
 			restaurant = Restaurant.objects.get(user=self.request.user)
