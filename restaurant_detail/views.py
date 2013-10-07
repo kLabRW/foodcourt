@@ -40,7 +40,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 	permissions = True
 	
    	class List(SmartListView):
-		fields = ('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','closed','closing_message')
+		fields = ('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','closed')
 		search_fields =('restaurant_name__icontains','cusine__icontains',)
 		field_config = {'services': dict(label = "SERVICES")}
 		
@@ -64,7 +64,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 #			return get_pickup_hours_end_display()
 		
 	class Read(SmartReadView):
-		fields= ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address','service_type','delivery_fee','approve','service_hours_start','service_hours_end','service_days','minimum_order_amount','delivery_territory','closed','closing_message')
+		fields= ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address','service_type','delivery_fee','approve','service_hours_start','service_hours_end','service_days','minimum_order_amount','delivery_territory','closed')
 		def get_approve(self,obj):
 			restaurant=Restaurant.objects.filter(restaurant_detail=obj)
 			if restaurant:
@@ -80,7 +80,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 #		def get_delivery_days(self,obj):
 #			return obj.get_delivery_days_display()
 	class Update(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','closing_message','delivery_territory','is_active')
+		fields=('restaurant_name','first_name','last_name','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','is_active')
 	class Create(SmartCreateView):
 		permission=None
 		submit_button_name="Join the Foodcourt restaurant network"
@@ -133,14 +133,14 @@ class RestaurantCRUDL(SmartCRUDL):
 			token=self.kwargs.get('token')
 			return Restaurant.objects.get(token=token)
 	class Myprofile(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','address','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','closing_message','delivery_territory','is_active')
+		fields=('restaurant_name','first_name','last_name','address','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','is_active')
 		def has_permission(self, request, *args, **kwargs):
 			super(RestaurantCRUDL.Myprofile,self).has_permission(request,*args,**kwargs)
 			return True
 		def get_object(self, queryset=None):
 			return Restaurant.objects.get(user=self.request.user)
 	class Read(SmartReadView):
-		fields = ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','closing_message')
+		fields = ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory')
 	class List(SmartListView):
 		fields =('restaurant_name,first_name','last_name','mobile','email','address')
 		field_config={'email':dict(label="Email/User")}
@@ -172,7 +172,7 @@ class RestaurantCRUDL(SmartCRUDL):
 			obj.service_hours_end=userapp.service_hours_end
 			obj.minimum_order_amount=userapp.minimum_order_amount
 			obj.closed = userapp.closed
-			obj.closing_message = userapp.closing_message
+#			obj.closing_message = userapp.closing_message
 			obj.delivery_territory=userapp.delivery_territory
 			obj.token=''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
 				
