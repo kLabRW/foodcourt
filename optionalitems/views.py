@@ -23,6 +23,10 @@ class OptionalItemCRUDL(SmartCRUDL):
 	class List(SmartListView):
 		fields=('name','description',)
 		
+		def derive_queryset(self):
+			restaurant = Restaurant.objects.get(user=self.request.user)
+			return OptionalItem.objects.filter(owner=restaurant)
+		
 	class Read(SmartReadView):
 		fields = ('name','price','description')
 class OptionalItemCategoryCreateForm(forms.ModelForm):
@@ -87,6 +91,9 @@ class OptionalItemCategoryCRUDL(SmartCRUDL):
 			
 	class List(SmartListView):
 		fields = ('title','display_order',)
+		def derive_queryset(self):
+			restaurant= Restaurant.objects.get(user=self.request.user)
+			return OptionalItemCategory.objects.filter(owner=restaurant)
 		
 		
 class ToppingsAndExtrasCategoryCreateForm(forms.ModelForm):
@@ -135,7 +142,7 @@ class ToppingsAndExtrasCategoryCRUDL(SmartCRUDL):
 			return obj
 		
 	class Update(SmartUpdateView):
-		fields = ('title','toppings_and_extras','display_order',)
+		fields = ('title','toppings_and_extras','display_order','is_active',)
 		form_class = ToppingsAndExtrasCategoryUpdateForm
 		
 		def get_form_kwargs(self):
@@ -151,6 +158,10 @@ class ToppingsAndExtrasCategoryCRUDL(SmartCRUDL):
 			
 	class List(SmartListView):
 		fields = ('title','display_order',)
+		def derive_queryset(self):
+			restaurant = Restaurant.objects.get(user=self.request.user)
+			return ToppingsAndExtrasCategory.objects.filter(owner=restaurant)
+			
 
 class ToppingsAndExtraCRUDL(SmartCRUDL):
 	actions = ('create','update','list','read',)
@@ -168,6 +179,9 @@ class ToppingsAndExtraCRUDL(SmartCRUDL):
 		
 	class List(SmartListView):
 		fields = ('name','price',)
+		def derive_queryset(self):
+			restaurant = Restaurant.objects.get(user=self.request.user)
+			return ToppingsAndExtra.objects.filter(owner=restaurant)
 	class Update(SmartUpdateView):
 		fields = ('name','price','description')
 	class Read(SmartReadView):
