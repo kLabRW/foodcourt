@@ -40,9 +40,10 @@
     <ul class="nav navbar-nav pull-right" style="margin-right: 53px;">
      
      <li><a id="lettering" href="#"></a></li>
-     <li><a id="lettering" style="float: Left;" href="{% url 'homepage'%}">Home</a></li>
-     <li><a id="lettering" style="float: Left;" href="{% url 'how_it_works' %}">How It Works</a></li>
-     <li><a id="lettering" style="float: Left;" href="{% url 'contact_us' %}">Contact Us</a></li>
+     <li><a id="lettering" style="float: Left;" href="{% url 'homepage'%}"></a></li>
+     <li><a id="lettering" style="float: Left;" href="{% url 'how_it_works' %}"></a></li>
+     <li><a id="lettering" style="float: Left;" href="{% url 'contact_us' %}"></a></li>
+     <li><a id="lettering" style="float: Left;" href="{% url 'maintence' %}"></a></li>
      {% if perms.orders.recievedorder_list %}
      <li><a id="lettering" href="{% url 'orders.recievedorder_list' %}">Admin</a></li>
      {% endif %}
@@ -62,7 +63,7 @@
  
  <div style="clear: both;"></div>
  
-  <script type="text/javascript" src="code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/jquery.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
  
 
