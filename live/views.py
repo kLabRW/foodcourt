@@ -215,6 +215,8 @@ def get_query(query_string, search_fields):
 def search(request):
 	query_string = ''
 	found_entries = None
+	offering_pickup = Restaurant.objects.filter(service_type='PICKUP')
+	offering_delivery = Restaurant.objects.filter(service_type='DELIVERY')
 	search_fields = ('delivery_territory','restaurant_name',)
 	option = request.REQUEST.get('deliveryType',None)
 	if option == 'D':
@@ -231,6 +233,9 @@ def search(request):
 	context = {
 		'query_string':query_string,
 		'found_entries':found_entries,
+		'offering_pickup':offering_pickup,
+		'offering_delivery':offering_delivery,
+		'option':option,
 	}
 	return render_to_response('public/search.html',context,context_instance=RequestContext(request))
 
@@ -251,6 +256,8 @@ def contact(request):
 	
 def how_it_works_page(request):
 	return render(request,'public/how_it_works.html')
+def maintence(request):
+	return render(request, 'public/maintence.html')
 	
 #	headers = {}
 #	url = https://api.textit.in/api/v1/sms.json?phone=["250789385878"]&text="wazaA"&relayer=81
