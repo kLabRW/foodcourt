@@ -30,7 +30,7 @@ class RestaurantForm(forms.ModelForm):
 
     class Meta:
         model = Restaurant
-        fields = ('is_active','restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','token','restaurant_name','logo','cusine','closed',)
+        fields = ('is_active','restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','token','restaurant_name','logo','cusine','closed','closing_message',)
 
 
 #----------------------------------------------------------------
@@ -40,7 +40,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 	permissions = True
 	
    	class List(SmartListView):
-		fields = ('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','closed')
+		fields = ('restaurant_name','first_name','last_name','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','delivery_territory','closed','closing_message')
 		search_fields =('restaurant_name__icontains','cusine__icontains',)
 		field_config = {'services': dict(label = "SERVICES")}
 		
@@ -64,7 +64,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 #			return get_pickup_hours_end_display()
 		
 	class Read(SmartReadView):
-		fields= ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address','service_type','delivery_fee','approve','service_hours_start','service_hours_end','service_days','minimum_order_amount','delivery_territory','closed')
+		fields= ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address','service_type','delivery_fee','approve','service_hours_start','service_hours_end','service_days','minimum_order_amount','delivery_territory','closed','closing_message')
 		def get_approve(self,obj):
 			restaurant=Restaurant.objects.filter(restaurant_detail=obj)
 			if restaurant:
@@ -80,7 +80,7 @@ class RestaurantDetailCRUDL(SmartCRUDL):
 #		def get_delivery_days(self,obj):
 #			return obj.get_delivery_days_display()
 	class Update(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','is_active')
+		fields=('restaurant_name','first_name','last_name','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','closing_message','delivery_territory','is_active')
 	class Create(SmartCreateView):
 		permission=None
 		submit_button_name="Join the Foodcourt restaurant network"
@@ -133,14 +133,14 @@ class RestaurantCRUDL(SmartCRUDL):
 			token=self.kwargs.get('token')
 			return Restaurant.objects.get(token=token)
 	class Myprofile(SmartUpdateView):
-		fields=('restaurant_name','first_name','last_name','address','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','is_active')
+		fields=('restaurant_name','first_name','last_name','address','logo','mobile','cusine', 'service_type','service_fee','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','closing_message','delivery_territory','is_active')
 		def has_permission(self, request, *args, **kwargs):
 			super(RestaurantCRUDL.Myprofile,self).has_permission(request,*args,**kwargs)
 			return True
 		def get_object(self, queryset=None):
 			return Restaurant.objects.get(user=self.request.user)
 	class Read(SmartReadView):
-		fields = ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory')
+		fields = ('restaurant_name','first_name','last_name','mobile','email','cusine','logo','address', 'service_type','service_days','service_hours_start','service_hours_end','minimum_order_amount','closed','delivery_territory','closing_message')
 	class List(SmartListView):
 		fields =('restaurant_name,first_name','last_name','mobile','email','address')
 		field_config={'email':dict(label="Email/User")}
@@ -172,12 +172,12 @@ class RestaurantCRUDL(SmartCRUDL):
 			obj.service_hours_end=userapp.service_hours_end
 			obj.minimum_order_amount=userapp.minimum_order_amount
 			obj.closed = userapp.closed
-#			obj.closing_message = userapp.closing_message
+			obj.closing_message = userapp.closing_message
 			obj.delivery_territory=userapp.delivery_territory
 			obj.token=''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(32))
 				
 			user=User.objects.create(username=obj.restaurant_detail.email,email=obj.restaurant_detail.email)
-			user.email_user("FoodCourt account activation","Your membership to FoodCourt has been approved go to the following link to activate your account \n \n http://foodcourt.herokuapp.com/restaurant_detail/restaurant/activate/%s/ \n \n After you have activated your account, login using your email address as username and your password \n \n And customize what will be published on your F4L website profile by clicking the profile link on the left of members \n \n This email is generated by the FoodCourt website do not reply to it. " % obj.token,"website@foodcourt.herokuapp.com")
+			user.email_user("FoodCourt account activation","Your membership to FoodCourt has been approved,please click the following link to activate your account \n \n http://foodcourt.herokuapp.com/restaurant_detail/restaurant/activate/%s/ \n \n After you have activated your account, login using your email address as username and your password \n \n This email is generated by the FoodCourt website do not reply to it. " % obj.token,"website@foodcourt.herokuapp.com")
 			group=Group.objects.get(name='Restaurants')
 			user.first_name=userapp.first_name
 			user.last_name=userapp.last_name

@@ -28,6 +28,7 @@ class ToppingsAndExtra(SmartModel):
 	name = models.CharField(max_length= 140,)
 	price = models.DecimalField(max_digits=9,decimal_places=2, null=True, blank=True, help_text="if item has no price indicate 0.00")
 	description = models.CharField(max_length=140, null=True,blank=True)
+	owner = models.ForeignKey(Restaurant)
 	
 	def __unicode__(self):
 		return "%s" % (self.name)
