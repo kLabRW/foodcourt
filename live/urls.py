@@ -3,8 +3,8 @@ from django.conf.urls.defaults import patterns, include, url
 
 
 urlpatterns = patterns('',
-	url(r'^$',homepage,name="homepage"),
-#	url(r'^$',maintence,name="maintence"),
+#	url(r'^$',homepage,name="homepage"),
+	url(r'^$',maintence,name="maintence"),
 	url(r'^menu/(\d+)$',get_category, name="f4l_menu"),
 	url(r'^your_order/(?P<id>\d+)/$',show_order,name="order_index"),
 	url(r'^item/(?P<id>\d+)/$',show_item, name="item_order"),
@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 	url(r'^search_results/$',search,name="search"),
 	url(r'^contact/$',contact,name="contact_us"),
 	url(r'^how_it_works/$',how_it_works_page,name="how_it_works"),
-#	url(r'^homepage$',homepage,name="homepage"),
+	url(r'^homepage$',homepage,name="homepage"),
 #	url(r'^form/$',tryout_form,name="tryout")
  #   url(r'^search/(\d+)$',search,name="search"),
 )
