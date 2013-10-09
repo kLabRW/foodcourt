@@ -42,7 +42,7 @@
        </tr>
        {% if restaurant.closed %}
        <tr>
-        <td style="color: Red;">Sorry,we are closed.</td>
+        <td style="color: Red;">{{restaurant.closing_message}}</td>
        </tr>
        {% endif %}
       </table>
@@ -57,5 +57,21 @@
   <button type="button" class="close" data-dismiss="alert">&times;</button>
       No results found. Please search by restaurant name or location.
  </div> 
+<div>
+ <h5 style="color: #888888; font-size: 20px;"> You may also be interested in: </h5>
+ {% if option == 'P' %}
+  {% for restaurant in offering_pickup %}
+  <ol>
+   <li style="color: #646464;"><a href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name }}</a><span style="color: #646464;"> {{ restaurant.address }}</span></li>
+  </ol>
+  {% endfor %}
+ {% else %}
+  {% for restaurant in offering_delivery %}
+   <ol>
+   <li style="color: #646464;"><a href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name }}</a><span style="color: #646464;"> {{ restaurant.address }}</span></li>
+  </ol>
+  {% endfor %}
+ {% endif %} 
+</div>
 {% endif %}
 {% endblock %}
