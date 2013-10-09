@@ -43,6 +43,8 @@
        {% if restaurant.closed %}
        <tr>
         <td style="color: Red;">{{restaurant.closing_message}}</td>
+       {%else%}
+       	<td style="color: #74c62b;"> Foodcourt open for delivery.</td>
        </tr>
        {% endif %}
       </table>
