@@ -145,7 +145,7 @@ def show_item(request,id):
 	# lookup optional items belonging to  an item
 	for optionalitem in item: optionalcategories = optionalitem.optionalitems.order_by('display_order')
 	# lookup toppings belonging to an item
-	for topping in item: toppingcategories = topping.toppings_and_extras.order_by('-created_on')
+	for topping in item: toppingcategories = topping.toppings_and_extras.order_by('display_order')
 	
 	# need to evaluate the HTTP method
 	if request.method == 'POST':
