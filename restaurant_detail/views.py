@@ -268,7 +268,8 @@ class CategoryCRUDL(SmartCRUDL):
 		def get_form_kwargs(self):
 			kwargs = super(CategoryCRUDL.Update,self).get_form_kwargs()
 			kwargs['user'] = self.request.user#			return kwargs
-		
+			return kwargs
+	
 		def derive_queryset(self):
 			restaurant = Restaurant.objects.get(user=self.request.user)
 			return Category.objects.filter(owner=restaurant)
