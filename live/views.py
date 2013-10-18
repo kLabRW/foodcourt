@@ -164,7 +164,7 @@ def show_item(request,id):
 		if final_form.is_valid():
 			# 
 			order.add_to_order(request,a)
-			 
+			
 			# if test cookie worked, get rid of it
 			if request.session.test_cookie_worked():
 				request.session.delete_test_cookie()
