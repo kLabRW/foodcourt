@@ -14,7 +14,7 @@ framework.
 
 """
 import newrelic.agent
-newrelic.agent.initialize('/home/matsinvasion/food4less/newrewlic.ini')
+newrelic.agent.initialize('/home/matsinvasion/food4less/newrelic.ini')
 import os
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
