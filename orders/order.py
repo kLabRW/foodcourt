@@ -8,7 +8,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 
-
 ORDER_ID_SESSION_KEY = 'shopping_id'
 
 # get the current user's cart id, sets new one if blank
@@ -39,6 +38,8 @@ def add_to_order(request,obj):
 	# get optional_item or return missing page error_message
 	if op: 
 		optional_item = get_object_or_404(OptionalItem, pk=op)
+
+	
 	toppings = postdata.getlist('topping',None)
 	toppings_and_extras = []
 	if toppings: 
