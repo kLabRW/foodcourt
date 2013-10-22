@@ -4,7 +4,7 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
 	url(r'^$',homepage,name="homepage"),
-#	url(r'^$',maintence,name="maintence"),
+	url(r'^maintenance/$',maintence,name="maintenance"),
 	url(r'^menu/(\d+)$',get_category, name="f4l_menu"),
 	url(r'^your_order/(?P<id>\d+)/$',show_order,name="order_index"),
 	url(r'^item/(?P<id>\d+)/$',show_item, name="item_order"),
