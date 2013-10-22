@@ -23,7 +23,7 @@
 
  {% load smartmin %}
 <div id="logo" style="padding-left: 25px;">
- <a href="{% url 'homepage' %}">
+ <a href="">
   <img src="{{STATIC_URL}}img/" />
  </a>
 </div>
@@ -40,7 +40,7 @@
    <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav pull-right" style="margin-right: 53px;">
      
-     <li><a id="lettering" style="float: Left;" href="{% url 'homepage'%}">Home</a></li>
+     <li><a id="lettering" style="float: Left;" href=""></a></li>
      <li><a id="lettering" style="float: Left;" href="{% url 'how_it_works' %}">How It Works</a></li>
      <li><a id="lettering" style="float: Left;" href="{% url 'contact_us' %}">Contact Us</a></li>
      {% if perms.orders.recievedorder_list %}
