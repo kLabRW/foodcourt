@@ -13,8 +13,8 @@ middleware here, or combine a Django application with an application of another
 framework.
 
 """
-import newrelic.agent
-newrelic.agent.initialize('/home/matsinvasion/food4less/newrelic.ini')
+#import newrelic.agent
+#newrelic.agent.initialize('/home/matsinvasion/food4less/newrelic.ini')
 
 import os
 
@@ -25,7 +25,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 # setting points here.
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
-application = newrelic.agent.wsgi_application()(application)
+#application = newrelic.agent.wsgi_application()(application)
 
 # Apply WSGI middleware here.
 # from helloworld.wsgi import HelloWorldApplication

@@ -24,7 +24,6 @@ django-templatetag-sugar==0.1
 djappsettings==0.1.0
 djtables==0.1.2
 gunicorn==0.17.2
-newrelic
 nose==1.2.1
 -e git+http://github.com/nyaruka/nsms.git@bb92e2712112a38dbf85f1ff95ddef3a20757c33#egg=nsms-dev
 phonenumbers==5.2b1
