@@ -228,7 +228,7 @@ class CategoryUpdateForm(forms.ModelForm):
 class CategoryCRUDL(SmartCRUDL):
 	model = Category
 	permissions = True
-	fields = ('create','read','update','list','shortlist')
+	actions = ('create','read','update','list')
 	
 	class Create(SmartCreateView):
 		fields = ('title','item','display_order')
