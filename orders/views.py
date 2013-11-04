@@ -116,8 +116,8 @@ class RecievedOrderCRUDL(SmartCRUDL):
 		def get_option_name(self,obj):
 			if obj.option:
 				return obj.option.name
-			return None
-		
+			return None 
+			
 		def get_toppings_and_extras_count(self,obj):
 			return obj.toppings_and_extras.count()
 
