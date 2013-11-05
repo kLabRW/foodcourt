@@ -9,8 +9,10 @@
  <p class= "lead" style="color: #646464; padding-top: 20px;">Click an item to order.</p>
 <br />
 <div style="float:left; width:1000px; background:#ccc;">
+ {%for category in cateories %}
+ 
 <span style="width:300px; float:left; background:#ddd; height:300px; margin-left:10px;margin-top:10px;">
-	 <h5>category one</h5>
+	 <h5>{{category.title}}</h5>
 	 <span style="float:left; width:200px;">
 	 	<a href="">item one</a><br>
 	 	<a href="">item two</a><br>
@@ -23,7 +25,7 @@
 	 	300.00<br>
 	 	300.00<br>
 	</span>
-</span>
+</span><!--
 <span style="width:300px; float:left; background:#ddd; height:300px; margin-left:10px;margin-top:10px;">
 	 <h5>category two</h5>
 	 <span style="float:left; width:200px;">
@@ -77,9 +79,9 @@
 	<span style="float:right; width:100px;">
 	 	300.00<br>
 	</span>
-</span>
+</span>-->
 
-
+{% endfor %}
 </div>
 </div>
 <div style="clear:Both;"></div>
