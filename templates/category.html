@@ -12,12 +12,12 @@
  {%for category in categories %}
  
 <span style="width:300px; float:left; background:blue; height:300px; margin-left:10px;margin-top:10px;">
-	 <h5>{{category.title}}</h5>
+	 <h5 style="background:#f36c00; padding:5px 0px;color:#fff; width:300px; text-align:center;">{{category.title}}</h5>
 	 {% for item in category.item.all %}
 	 <span style="float:left; width:200px;">
-	 	<a href="">{{item.name}}</a><br>
+	 	<a href="" style="">{{item.name}}</a><br>
 	</span>
-	<span style="float:right; width:100px;">
+	<span style="float:right; width:100px; color:#333;">
 	 	{{item.price}}<br>
 	</span>
 	{% endfor %}
