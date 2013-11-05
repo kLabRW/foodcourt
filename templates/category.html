@@ -13,18 +13,14 @@
  
 <span style="width:300px; float:left; background:blue; height:300px; margin-left:10px;margin-top:10px;">
 	 <h5>{{category.title}}</h5>
+	 {% for item in category.item.all %}
 	 <span style="float:left; width:200px;">
-	 	<a href="">item one</a><br>
-	 	<a href="">item two</a><br>
-	 	<a href="">item three</a><br>
-	 	<a href="">item four</a>
+	 	<a href="">{{item.name}}</a><br>
 	</span>
 	<span style="float:right; width:100px;">
-	 	300.00<br>
-	 	300.00<br>
-	 	300.00<br>
-	 	300.00<br>
+	 	{{item.price}}<br>
 	</span>
+	{% endfor %}
 </span><!--
 <span style="width:300px; float:left; background:#ddd; height:300px; margin-left:10px;margin-top:10px;">
 	 <h5>category two</h5>
