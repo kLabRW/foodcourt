@@ -4,13 +4,13 @@
 
 
 
-<div class="container"  style="background:none;">
+<div class="container"  style="background:none; width:1000px;">
 <div style="clear:Both;"></div>
  <p class= "lead" style="color: #646464; padding-top: 20px;">Click an item to order.</p>
 <br />
 
 {% for category in categories %}
-<span style="width:350px; float:left; background:none; margin-bottom:10px;margin-left:10px;">
+<span style="width:350px; float:left; background:#eee; margin-bottom:10px;margin-left:10px;">
  <h5 id="category_box"style="width:100% display:block; text-align:center; font-size:18px;"> {{ category.title }} </h5>
   {% for item in category.item.all %}
   <ul style="padding: 0 0 0 0px;">
