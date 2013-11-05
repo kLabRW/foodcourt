@@ -15,10 +15,10 @@
   {% for item in category.item.all %}
   <!--<ul style="padding: 0 0 0 0px;">
    <li id="item_appearence" style="font-size: 16px; line-height:18px;color: #888888;">-->
-   <span style=" width:70%;float:left;">
+   <span style=" width:200px;float:left; background:#ccc;">
    <a data-toggle="modal" href="{% url 'item_order' item.id %}" rel="tooltip" title="{{item.description}}" id="example">{{item.name}}</a></span>
    {% if item.price %}
-    <span style="width:30%; float:right; color:#333;">{{item.price}}frw
+    <span style="width:120px%; float:right; color:#333; background:#666;">{{item.price}}frw
        {% else %} 
     </span>
     <!--<span id = "price_appearence" style= "font-size: 25px;"> <span>-->
