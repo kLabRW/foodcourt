@@ -11,8 +11,8 @@
 
  {%for category in categories %}
  
-<span style="width:30%; float:left; height:300px; margin-left:10px;margin-top:10px;">
-	 <h5 style="background:#f36c00; padding:5px; margin-bottom:10px; 0px;color:#fff; width:300px; text-align:center;">{{category.title}}</h5>
+<span style="width:300px; float:left; height:300px; margin-left:10px;margin-top:10px;">
+	 <h5 style="background:#f36c00; padding:5px 0px; margin-bottom:10px; color:#fff; width:300px; text-align:center;">{{category.title}}</h5>
 	 {% for item in category.item.all %}
 	 <span style="float:left; width:200px;">
 	 	<a href="" style="">{{item.name}}</a><br>
