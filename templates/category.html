@@ -8,26 +8,27 @@
 <div style="clear:Both;"></div>
  <p class= "lead" style="color: #646464; padding-top: 20px;">Click an item to order.</p>
 <br />
-
+<div style="float:left; width:950px; background:#ccc;">
 {% for category in categories %}
-<div style="width:350px; float:left;height:400px; background:#eee; margin-bottom:10px;margin-left:10px;">
+<span style="width:300px; float:left;height:400px; background:#eee; margin-bottom:10px;margin-left:10px;">
  <h5 id="category_box"style="width:100% display:block; text-align:center; font-size:18px;"> {{ category.title }} </h5>
   {% for item in category.item.all %}
   <ul style="padding: 0 0 0 0px;">
    <li id="item_appearence" style="font-size: 16px; line-height:18px;color: #888888;">
-   <div style=" width:70%;float:left;">
-   <a data-toggle="modal" href="{% url 'item_order' item.id %}" rel="tooltip" title="{{item.description}}" id="example">{{item.name}}</a></div>
+   <span style=" width:70%;float:left;">
+   <a data-toggle="modal" href="{% url 'item_order' item.id %}" rel="tooltip" title="{{item.description}}" id="example">{{item.name}}</a></span>
    {% if item.price %}
-    <div style="width:30%; float:right; color:#333;">{{item.price}}frw
-    {% else %} </div>
+    <span style="width:30%; float:right; color:#333;">{{item.price}}frw
+    {% else %} </span>
     <!--<span id = "price_appearence" style= "font-size: 25px;"> <span>-->
     </li>
    
   </ul>
    {% endif %}
   {% endfor %}
-  </div>
+  </span>
 {% endfor %}
+</div>
 </div>
 <div style="clear:Both;"></div>
 {% endblock %}
