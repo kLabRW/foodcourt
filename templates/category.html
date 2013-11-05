@@ -15,7 +15,7 @@
 	 <h5 style="background:#f36c00; padding:5px 0px; margin-bottom:10px; color:#fff; width:300px; text-align:center;">{{category.title}}</h5>
 	 {% for item in category.item.all %}
 	 <span style="float:left; width:200px; margin-top:10px;">
-	 	<a href="" style="">{{item.name}}</a><br>
+	 	<a data-toggle="modal" href="{% url 'item_order' item.id %}" rel="tooltip" title="{{item.description}}" id="example">{{item.name}}</a><br>
 	</span>
 	<span style="float:right; width:100px; color:#333;margin-top:10px;">
 	 	{{item.price}}<br>
