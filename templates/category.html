@@ -5,12 +5,12 @@
 
 
 <div class="container"  style="background:#ddd; width:1000px;">
-<div style="clear:Both;"></div>
+
  <p class= "lead" style="color: #646464; padding-top: 20px;">Click an item to order.</p>
 <br />
 <div style="float:left; width:950px; background:#ccc;">
 {% for category in categories %}
-<span style="width:300px; float:left;height:400px; background:#eee; margin-bottom:10px;margin-left:10px;">
+<span style="width:350px; position:relative;height:400px; background:#eee; margin-bottom:10px;margin-left:10px;">
  <h5 id="category_box"style="width:100% display:block; text-align:center; font-size:18px;"> {{ category.title }} </h5>
   {% for item in category.item.all %}
   <ul style="padding: 0 0 0 0px;">
@@ -19,7 +19,8 @@
    <a data-toggle="modal" href="{% url 'item_order' item.id %}" rel="tooltip" title="{{item.description}}" id="example">{{item.name}}</a></span>
    {% if item.price %}
     <span style="width:30%; float:right; color:#333;">{{item.price}}frw
-    {% else %} </span>
+       {% else %} 
+    </span>
     <!--<span id = "price_appearence" style= "font-size: 25px;"> <span>-->
     </li>
    
