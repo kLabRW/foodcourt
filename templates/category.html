@@ -4,14 +4,14 @@
 
 
 
-<div class="container"  style="background:#ddd; width:1000px;">
+<div class="container"  style="background:none; width:1000px;">
 
  <p class= "lead" style="color: #646464; padding-top: 20px;">Click an item to order.</p>
 <br />
-<div style="float:left; width:1000px; background:#ccc;">
+
  {%for category in categories %}
  
-<span style="width:300px; float:left; background:blue; height:300px; margin-left:10px;margin-top:10px;">
+<span style="width:300px; float:left; height:300px; margin-left:10px;margin-top:10px;">
 	 <h5 style="background:#f36c00; padding:5px 0px;color:#fff; width:300px; text-align:center;">{{category.title}}</h5>
 	 {% for item in category.item.all %}
 	 <span style="float:left; width:200px;">
@@ -21,64 +21,10 @@
 	 	{{item.price}}<br>
 	</span>
 	{% endfor %}
-</span><!--
-<span style="width:300px; float:left; background:#ddd; height:300px; margin-left:10px;margin-top:10px;">
-	 <h5>category two</h5>
-	 <span style="float:left; width:200px;">
-	 	<a href="">item one</a><br>
-	 	<a href="">item two</a><br>
-	 	<a href="">item three</a><br>
-	 	<a href="">item four</a>
-	</span>
-	<span style="float:right; width:100px;">
-	 	300.00<br>
-	 	300.00<br>
-	 	300.00<br>
-	 	300.00<br>
-	</span>
 </span>
-<span style="width:300px; float:left; background:#ddd; height:300px; margin-left:10px; margin-top:10px;">
-	 <h5>category three</h5>
-	 <span style="float:left; width:200px;">
-	 	<a href="">item one</a><br>
-	 	<a href="">item two</a><br>
-	 	<a href="">item three</a><br>
-	 	<a href="">item four</a>
-	</span>
-	<span style="float:right; width:100px;">
-	 	300.00<br>
-	 	300.00<br>
-	 	300.00<br>
-	 	300.00<br>
-	</span>
-</span>
-<span style="width:300px; float:left; background:#ddd; height:300px; margin-left:10px;margin-top:10px;">
-	 <h5>category four</h5>
-	 <span style="float:left; width:200px;">
-	 	<a href="">item one</a><br>
-	 	<a href="">item two</a><br>
-	 	<a href="">item three</a><br>
-	 	<a href="">item four</a>
-	</span>
-	<span style="float:right; width:100px;">
-	 	300.00
-	</span>
-</span>
-<span style="width:300px; float:left; background:#ddd; height:300px; margin-left:10px;margin-top:10px;">
-	 <h5>category five</h5>
-	 <span style="float:left; width:200px;">
-	 	<a href="">item one</a><br>
-	 	<a href="">item two</a><br>
-	 	<a href="">item three</a><br>
-	 	<a href="">item four</a>
-	</span>
-	<span style="float:right; width:100px;">
-	 	300.00<br>
-	</span>
-</span>-->
 
 {% endfor %}
-</div>
+
 </div>
 <div style="clear:Both;"></div>
 {% endblock %}
