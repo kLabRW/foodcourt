@@ -107,7 +107,10 @@ def reciept(request):
 #---------------------------------------------------------------------------------------------------------
 # Returns Menu of a given restaurant by returning all its categories
 def get_category(request,restaurant_id):
-	categories=Category.objects.filter(is_active=True).prefetch_related('item').order_by('display_order')
+	#get category object belonging to a specific restaurant
+	category = Category.objects.filter(owner=restaurant_id)
+	#Now only display active categories 
+	categories=category.filter(is_active=True).prefetch_related('item').order_by('display_order')
 	context={
 		'categories':categories,
 	}
