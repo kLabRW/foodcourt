@@ -14,11 +14,12 @@
    <div class="full_events">
     <div class="event_main">
     {% for restaurant in found_entries %}
-    <div style="width:150px; float:left; "> 
+    <div style="width:150px; float:left; margin-bottom: 10px;"> 
     
     {% thumbnail restaurant.logo "100x110" crop="center" as im%}
        <img src="{{im.url}}" />
-      {% endthumbnail %}  </div>
+      {% endthumbnail %} 
+    </div>
     
     <div style="width:550px; float:right; "> 
     <table width="100%" cellspacing="" cellpadding="" border="0">
