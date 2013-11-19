@@ -11,16 +11,17 @@
      <button type="button" class="close" data-dismiss="alert">&times;</button>
       Please take note of the Service Time.
     </div>
-   {% for restaurant in found_entries %}
    <div class="full_events">
     <div class="event_main">
-     <div class="event_image">
-      {% thumbnail restaurant.logo "100x110" crop="center" as im%}
+    {% for restaurant in found_entries %}
+    <div style="width:150px; float:left; "> 
+    
+    {% thumbnail restaurant.logo "100x110" crop="center" as im%}
        <img src="{{im.url}}" />
-      {% endthumbnail %}
-     </div>
-     <div class="event_details">
-      <table width="100%" cellspacing="" cellpadding="" border="0">
+      {% endthumbnail %}  </div>
+    
+    <div style="width:550px; float:right; "> 
+    <table width="100%" cellspacing="" cellpadding="" border="0">
        <tr>
         <td colspan="2" class="category_head"><a style="color: #;"href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name}}</a></td> 
        </tr>
@@ -47,12 +48,13 @@
        	<td style="color: #74c62b;"> Foodcourt open for delivery.</td>
        </tr>
        {% endif %}
-      </table>
-     </div>
+      </table> </div>
+    <div  style="clear:both; height:0px; width:0px;"> &nbsp; </div>
+    {% endfor %}
     </div>
    </div> 
  </div>
-{% endfor %}
+
 {% endif %}
 {% if query_string and not found_entries %}
  <div class="alert alert-warning">
