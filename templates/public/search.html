@@ -22,25 +22,17 @@
     </div>
     
     <div style="width:550px; float:right; "> 
-    <table width="100%" cellspacing="" cellpadding="" border="0">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-bottom:30px;">
        <tr>
-        <td colspan="2" class="category_head"><a style="color: #;"href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name}}</a></td> 
+        <td colspan="2" width="100%" class="category_head"><a style="color: #;"href="{% url 'f4l_menu' restaurant.id %}">{{ restaurant.restaurant_name}}</a></td> 
        </tr>
        <tr>
-        <td class="" style="color: #888888;"></td>
-        <td class="left" style="color: #888888;"></td>
+        <td width="50%"class="" style="color: #646464">Service time </td>
+        <td width="50%"class="" style="color: #646464">{{ restaurant.service_hours_start}} to {{ restaurant.service_hours_end }}</td>
        </tr>
        <tr>
-        <td class="" style="color: #646464;"></td>
-        <td class="left" style="color: #646464;"></td>
-       </tr>
-       <tr>
-        <td class="" style="color: #646464">Service time </td>
-        <td class="left" style="color: #646464">{{ restaurant.service_hours_start}} to {{ restaurant.service_hours_end }}</td>
-       </tr>
-       <tr>
-        <td style="color: #646464;">Address</td>
-        <td class="left" style="color: #646464;">{{restaurant.address}}</td>
+        <td width="50%"style="color: #646464;">Address</td>
+        <td width="50%"style="color: #646464;">{{restaurant.address}}</td>
        </tr>
        {% if restaurant.closed %}
        <tr>
