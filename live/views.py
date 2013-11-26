@@ -268,6 +268,13 @@ def how_it_works_page(request):
 	return render(request,'public/how_it_works.html')
 def maintence(request):
 	return render(request, 'public/maintence.html')
+def resto_list(request):
+	restaurants = Restaurant.objects.all()
+	context = {
+		'restaurants': restaurants
+	}
+	return render_to_response('public/restaurants.html',context,context_instance=RequestContext(request))
+
 	
 #	headers = {}
 #	url = https://api.textit.in/api/v1/sms.json?phone=["250789385878"]&text="wazaA"&relayer=81
