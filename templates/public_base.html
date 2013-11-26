@@ -5,7 +5,6 @@
   <title>{% block title %}FoodCourt | Have it easy{% endblock %}</title>
   {% block styles %}
   <link rel="icon" href="{{ STATIC_URL }}img/new_fav.png" type="img/png">
-  <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/main.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/bootstrap.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/style.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impress.css">
@@ -42,6 +41,7 @@
      
      <li><a id="lettering" style="float: Left;" href="{% url 'homepage'%}">Home</a></li>
      <li><a id="lettering" style="float: Left;" href="{% url 'how_it_works' %}">How It Works</a></li>
+     <li><a id="lettering" style="float: Left;" href="{% url 'restaurant_list' %}">Restaurants</a></li>
      <li><a id="lettering" style="float: Left;" href="{% url 'contact_us' %}">Contact Us</a></li>
      {% if perms.orders.recievedorder_list %}
      <li><a id="lettering" href="{% url 'orders.recievedorder_list' %}">Admin</a></li>
