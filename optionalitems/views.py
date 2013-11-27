@@ -21,7 +21,7 @@ class OptionalItemCRUDL(SmartCRUDL):
 		
 	
 	class List(SmartListView):
-		fields=('name','description',)
+		fields=('name','price',)
 		
 		def derive_queryset(self):
 			restaurant = Restaurant.objects.get(user=self.request.user)
