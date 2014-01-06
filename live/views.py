@@ -13,7 +13,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 def create_order(request,obj):
-	"""create new online_order containing each orderitem instance,save order and empty the order."""
+	"""create new order containing each orderitem instance,save order and empty the order."""
 	anon_user = User.objects.get(id=settings.ANONYMOUS_USER_ID)
 	resto = Item.objects.get(pk=obj.id)
 	orders = Order()
@@ -46,25 +46,31 @@ def create_order(request,obj):
 			for topping in toppings.all():
 				oi.toppings_and_extras.add(topping)
 			#oi.toppings_and_extras.create()
+		#empty order cart
 		order.empty_cart(request)
 	return orders
 #-------------------------------------------------------------------------
 # views to do with the checkout page,reciept page.
 def show_checkout(request,id):
-	"""checkout form to collect order information"""
+	"""checkout form to collect order information and send email notification"""
 	item = Item.objects.get(pk=id)
 	total = order.order_subtotal(request) + item.owner.service_fee
 	if total < item.owner.minimum_order_amount:
 		cart_url = urlresolvers.reverse('order_index',kwargs={'id':item.id})
+		# redirect if total is less than minimum order amount
 		return HttpResponseRedirect(cart_url)
 	if request.method == 'POST':
 		postdata = request.POST.copy()
 		form = formz.CheckoutForm(request.POST,postdata)
-		
+		#validate check out form	
 		if form.is_valid():
+			#current order
 			order_created = create_order(request,item)
+			#current order id
 			order_number = order_created.id
+			# if order in cart
 			if order_number:
+				#session for this order
 				request.session['order_number'] = order_number
 			if postdata['submit'] == 'complete order':
 				#send email notification of incoming order
