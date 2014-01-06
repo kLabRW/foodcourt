@@ -67,12 +67,12 @@ def show_checkout(request,id):
 			if order_number:
 				request.session['order_number'] = order_number
 			if postdata['submit'] == 'complete order':
-				"""send email notification of incoming order"""
+				#send email notification of incoming order
 				recipients = ['food4lessrwanda@gmail.com']
-				order_id = str(order_created.id)
-				title = 'Order Recieved, number %s' % order_id
+				order_resto = item.owner.restaurant_name
+				title = 'Order Recieved, for %s' % order_resto
 				name = form.cleaned_data['name']
-				send_mail(title,name,order_id, recipients)
+				send_mail(title,name,order_resto,recipients)
 				reciept_url = urlresolvers.reverse('checkout_reciept') 
 				# redirect at this point to reciept page.
 				return HttpResponseRedirect(reciept_url)
