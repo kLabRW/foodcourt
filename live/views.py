@@ -275,7 +275,7 @@ def how_it_works_page(request):
 def maintence(request):
 	return render(request, 'public/maintence.html')
 def resto_list(request):
-	restaurants = Restaurant.objects.all()
+	restaurants = Restaurant.objects.filter(is_active=True)
 	context = {
 		'restaurants': restaurants
 	}
