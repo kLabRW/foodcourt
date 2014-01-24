@@ -245,7 +245,7 @@ def search(request):
 	if ('q' in request.GET) and request.GET['q'].strip():
 		query_string= request.GET['q']
 		entry_query= get_query(query_string,search_fields)
-		found_entries= start_set.filter(entry_query).order_by('created_on')
+		found_entries= start_set.filter(entry_query).order_by('created_on').filter(is_active=True)
 	context = {
 		'query_string':query_string,
 		'found_entries':found_entries,
