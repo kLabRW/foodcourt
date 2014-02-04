@@ -5,6 +5,7 @@ from .models import RestaurantDetail,Restaurant,Item,Category
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from orders import models
+from optionalitems.models import OptionalItemCategory,ToppingsAndExtrasCategory
 import random
 import string
 from django import forms
@@ -297,8 +298,8 @@ class ItemUpdateForm(forms.ModelForm):
 		del kwargs['user']
 		super(ItemUpdateForm, self).__init__(*args, **kwargs)
 		#query on field, item created by user.
-		self.fields['subcategory'].queryset = models.SubCategory.objects.filter(created_by=user)
-#		self.fields['owner'].queryset = Item.objects.filter(owner=user)
+		self.fields['optionalitems'].queryset = OptionalItemCategory.objects.filter(created_by=user)
+		self.fields['toppings_and_extras'].queryset = ToppingsAndExtrasCategory.objects.filter(created_by=user)
 	
 	class Meta:
 		model = Item
@@ -341,12 +342,14 @@ class ItemCRUDL(SmartCRUDL):
 			return Item.objects.filter(owner=restaurant)
 	class Update(SmartUpdateView):
 		fields = ('name','optionalitems','toppings_and_extras','description','price','is_active')
-#		form_class = ItemUpdateForm
+		form_class = ItemUpdateForm
 		
-#		def get_form_kwargs(self):
-#			kwargs = super(ItemCRUDL.Update,self).get_form_kwargs()
-#			kwargs['user'] = self.request.user
-#			return kwargs
+		def get_form_kwargs(self):
+			kwargs = super(ItemCRUDL.Update,self).get_form_kwargs()
+			kwargs['user'] = self.request.user
+			return kwargs
+
+			
 		
 		def derive_queryset(self):
 			restaurant = Restaurant.objects.get(user=self.request.user)
