@@ -231,8 +231,8 @@ def get_query(query_string, search_fields):
 def search(request):
 	query_string = ''
 	found_entries = None
-	offering_pickup = Restaurant.objects.filter(service_type='PICKUP')
-	offering_delivery = Restaurant.objects.filter(service_type='DELIVERY')
+	offering_pickup = Restaurant.objects.filter(service_type='PICKUP').filter(is_active=True)
+	offering_delivery = Restaurant.objects.filter(service_type='DELIVERY').filter(is_active=True)
 	search_fields = ('delivery_territory','restaurant_name',)
 	option = request.REQUEST.get('deliveryType',None)
 	if option == 'D':
