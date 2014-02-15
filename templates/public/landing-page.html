@@ -1,0 +1,25 @@
+{% extends "public_base.html"%}
+{%load thumbnail%}
+{%block order-content%}
+<div id="content">
+		<div class="content">
+			<div class="ccontent">
+				<h3 style="color:#555555; font-weight: Bold;">Choose a Restaurant...</h3>
+                {%for restaurant in restaurants%}
+				<div class="ccenter">
+					<li><a href="{%url 'f4l_menu' restaurant.id%}">
+						<h4>{{restaurant.restaurant_name}}</h4>
+                        {% if restaurant.closed %}
+                        <span>{{restaurant.closing_message}}</span>
+                        {%else%}
+						<span style="color: #74c62b;">Delivery Available</span>
+                        {% endif %}
+						<i><img src="{{STATIC_URL}}img/ico1.png" /></i>
+                        </a></li>
+                  {%endfor%}
+				</div>
+				<br><br>
+			</div>
+		</div>
+	</div>
+{%endblock%}

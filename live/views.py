@@ -17,17 +17,17 @@ def create_order(request,obj):
 	anon_user = User.objects.get(id=settings.ANONYMOUS_USER_ID)
 	resto = Item.objects.get(pk=obj.id)
 	orders = Order()
-	
+
 	checkout_form = formz.CheckoutForm(request.POST,instance=orders)
 	checkout = checkout_form.save(commit=False)
-	
+
 	checkout.created_by = anon_user
 	checkout.modified_by = anon_user
 	checkout.restaurant = resto.owner
 #	orders.restaurant = Restaurant.objects.get(pk=id)
 	checkout.status = Order.SUBMITTED
 	checkout.save()
-	
+
 	if checkout.pk:
 		"""if the order save suceeded"""
 		cart_items = order.get_order_items(request)
@@ -62,7 +62,7 @@ def show_checkout(request,id):
 	if request.method == 'POST':
 		postdata = request.POST.copy()
 		form = formz.CheckoutForm(request.POST,postdata)
-		#validate check out form	
+		#validate check out form
 		if form.is_valid():
 			#current order
 			order_created = create_order(request,item)
@@ -79,7 +79,7 @@ def show_checkout(request,id):
 				title = 'Order Recieved, for %s' % order_resto
 				name = form.cleaned_data['name']
 				send_mail(title,name,order_resto,recipients)
-				reciept_url = urlresolvers.reverse('checkout_reciept') 
+				reciept_url = urlresolvers.reverse('checkout_reciept')
 				# redirect at this point to reciept page.
 				return HttpResponseRedirect(reciept_url)
 		else:
@@ -91,11 +91,11 @@ def show_checkout(request,id):
 	context = {
 		'total':total,
 		'form':form,
-		
+
 	}
 	return render(request,'checkout/checkout.html',context)
-	
-def reciept(request):	
+
+def reciept(request):
 	order_number = request.session.get('order_number','')
 	if order_number:
 		order = Order.objects.filter(id=order_number)[0]
@@ -115,7 +115,7 @@ def reciept(request):
 def get_category(request,restaurant_id):
 	#get category object belonging to a specific restaurant
 	category = Category.objects.filter(owner=restaurant_id)
-	#Now only display active categories 
+	#Now only display active categories
 	categories=category.filter(is_active=True).prefetch_related('item').order_by('display_order')
 	context={
 		'categories':categories,
@@ -137,7 +137,7 @@ def show_order(request,id):
 	order_items = order.get_order_items(request)
 	order_subtotal = order.order_subtotal(request)
 	total = order_subtotal + item.owner.service_fee
-	
+
 	context = {
 		'order_items':order_items,
 		'order_subtotal':order_subtotal,
@@ -151,9 +151,9 @@ def partial_order_item_form():
 	class PartialOrderItemform(forms.Form):
 		quantity = forms.IntegerField(widget=forms.TextInput(attrs={'size':'2', 'class':'quantity','maxlength':'5'}))
 #		option = forms.ModelChoiceField(queryset = OptionalItem.objects.all(),widget= forms.RadioSelect())
-	
+
 	return PartialOrderItemform
-		
+
 def show_item(request,id):
 	a = Item.objects.get(pk=id)
 	categories=Category.objects.filter(pk=id).prefetch_related('item').order_by('display_order')
@@ -162,18 +162,18 @@ def show_item(request,id):
 	for optionalitem in item: optionalcategories = optionalitem.optionalitems.order_by('display_order')
 	# lookup toppings belonging to an item
 	for topping in item: toppingcategories = topping.toppings_and_extras.order_by('display_order')
-	
+
 	# need to evaluate the HTTP method
 	if request.method == 'POST':
 		# pass the right argument to form instance,if form is bound to POST data before providing right argument,we get error.
 		form = partial_order_item_form()
-		#then bound form to POST data, 
+		#then bound form to POST data,
 		final_form = form(request.POST)
 		# check validation of posted data
 		if final_form.is_valid():
-			# 
+			#
 			order.add_to_order(request,a)
-			
+
 			# if test cookie worked, get rid of it
 			if request.session.test_cookie_worked():
 				request.session.delete_test_cookie()
@@ -189,7 +189,7 @@ def show_item(request,id):
 		'form':final_form,
 		'optionalcategories':optionalcategories,
 		'toppingcategories':toppingcategories,
-		
+
 	}
 	return render_to_response('item.html',context,context_instance=RequestContext(request))
 #-------------------------------------------------------------------------------------------------------------------------
@@ -205,14 +205,14 @@ def normalize_query(query_string,findterms=re.compile(r'"([^"]+)"|(\S+)').findal
 	"""Splits the query string in invidual keywords, getting rid of unecessary spaces
         and grouping quoted words together.
         Example:
-        
+
         >>> normalize_query('  some random  words "with   quotes  " and   spaces')
         ['some', 'random', 'words', 'with quotes', 'and', 'spaces']"""
-	return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)] 
+	return [normspace(' ', (t[0] or t[1]).strip()) for t in findterms(query_string)]
 
 def get_query(query_string, search_fields):
 	"""returns a query, that is a combination of Q objects. That combination aims to search keywords within a model by testing the given search fields"""
-	query = None # Query to search for every search term 
+	query = None # Query to search for every search term
 	terms = normalize_query(query_string)
 	for term in terms:
 		or_query = None # Query to search for a given term in each field
@@ -269,19 +269,19 @@ def contact(request):
 	else:
 		form = formz.ContactForm()
 	return render(request,'public/contact.html',{'form':form})
-	
+
 def how_it_works_page(request):
 	return render(request,'public/how_it_works.html')
 def maintence(request):
 	return render(request, 'public/maintence.html')
-def resto_list(request):
+def restaurant_list(request):
 	restaurants = Restaurant.objects.filter(is_active=True)
 	context = {
 		'restaurants': restaurants
 	}
-	return render_to_response('public/restaurants.html',context,context_instance=RequestContext(request))
+	return render_to_response('public/landing-page.html',context,context_instance=RequestContext(request))
 
-	
+
 #	headers = {}
 #	url = https://api.textit.in/api/v1/sms.json?phone=["250789385878"]&text="wazaA"&relayer=81
 #	foo=requests.post(url, headers)
