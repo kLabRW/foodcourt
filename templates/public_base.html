@@ -10,10 +10,9 @@
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/style.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impress.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impression.css">
-  
-  <!-- javascript -->
-  
-  
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+
   {%endblock %}
  </head>
  <body>
@@ -35,13 +34,12 @@
       <span class="icon-bar"></span>
     </button>
    </div>
-   
+
    <div class="collapse navbar-collapse navbar-responsive-ex1-collapse">
     <ul class="nav navbar-nav pull-right" style="margin-right: 53px;">
-     
-     <li><a id="lettering" style="float: Left;" href="{% url 'homepage'%}">Home</a></li>
+
+     <li><a id="lettering" style="float: Left;" href="{% url 'restaurant_list'%}">Home</a></li>
      <li><a id="lettering" style="float: Left;" href="{% url 'how_it_works' %}">How It Works</a></li>
-     <li><a id="lettering" style="float: Left;" href="{% url 'restaurant_list' %}">Restaurants</a></li>
      <li><a id="lettering" style="float: Left;" href="{% url 'contact_us' %}">Contact Us</a></li>
      {% if perms.orders.recievedorder_list %}
      <li><a id="lettering" href="{% url 'orders.recievedorder_list' %}">Admin</a></li>
@@ -58,17 +56,16 @@
  <div style="clear: both;"></div>
   {% block order-content %}
   {% endblock %}
- 
- 
+
+
+
  <div style="clear: both;"></div>
- 
+
   <script type="text/javascript" src="//code.jquery.com/jquery.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
-  <link type="text/javascript" href="{{ STATIC_URL }}js/semantic.js">
+  <link type="text/javascript" href="{{ STATIC_URL }}js/semantic.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js"></script>
- 
-
  </body>
 </html>
-	
+
