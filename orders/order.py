@@ -6,6 +6,7 @@ import decimal
 import random
 from django.conf import settings
 from django.contrib.auth.models import User
+from operator import eq
 
 
 ORDER_ID_SESSION_KEY = 'shopping_id'
@@ -49,15 +50,22 @@ def add_to_order(request,obj):
 	i = get_object_or_404(Item,pk=obj.id)
 	# get items in order
 	order_items = get_order_items(request)
-	item_in_orders = False
+	item_in_order = False
 	# check to see if item is already in order
 	for order_item in order_items:
-		if order_item.item.id == i.id:
+		import pdb;pdb.set_trace()
+		#item in order but has not option
+		if order_item.item.id == i.id and not order_item.toppings_and_extras.all():
 			#update the quantity if found
 			order_item.augment_quantity(quantity)
-			item_in_orders = True
-	if not item_in_orders:
-		# creat and save a new order item
+			item_in_order = True
+		#item in order but same toppings, augment the quantity
+		elif order_item.item.id == i.id and any(map(eq,toppings_and_extras,order_item.toppings_and_extras.all())):
+			order_item.augment_quantity(quantity)
+			item_in_order = True
+	
+	if not item_in_order:
+		# creat and save a new order item,conditions above are false
 		anon_user = User.objects.get(id=settings.ANONYMOUS_USER_ID)	
 		oi=OrderItem.objects.create(shopping_id=_shopping_id(request),
 		                                  quantity=quantity,
