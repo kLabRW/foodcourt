@@ -53,7 +53,7 @@ def add_to_order(request,obj):
 	item_in_order = False
 	# check to see if item is already in order
 	for order_item in order_items:
-		import pdb;pdb.set_trace()
+
 		#item in order but has not option
 		if order_item.item.id == i.id and not order_item.toppings_and_extras.all():
 			#update the quantity if found
