@@ -60,7 +60,7 @@ def add_to_order(request,obj):
 			order_item.augment_quantity(quantity)
 			item_in_order = True
 		#item in order but same toppings, augment the quantity
-		elif order_item.item.id == i.id and any(map(eq,toppings_and_extras,order_item.toppings_and_extras.all())):
+		elif order_item.item.id == i.id and all(map(eq,toppings_and_extras,order_item.toppings_and_extras.all())):
 			order_item.augment_quantity(quantity)
 			item_in_order = True
 	
