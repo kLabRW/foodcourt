@@ -10,7 +10,10 @@
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/style.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impress.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impression.css">
+   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/jPages.css">
+  
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+  
 
 
   {%endblock %}
@@ -66,7 +69,16 @@
   <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>
   <link type="text/javascript" href="{{ STATIC_URL }}js/semantic.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jPages.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.js"></script>
+  <script>
+  jQuery(function(){
+  	jQuery("div.hover").jPages({
+  		containerID: "resto-content",
+  		perPage: 4
+  	});
+  });
+  </script>
  </body>
 </html>
 
