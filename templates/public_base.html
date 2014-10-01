@@ -10,9 +10,10 @@
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/style.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impress.css">
   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/impression.css">
-   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/jPages.css">
+   <link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}maincss/">
   
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+  
   
 
 
@@ -22,7 +23,7 @@
 {% block content %}
 {% endblock %}
 
- {% load smartmin %}
+ 
  <nav class="navbar navbar-default" style="margin-bottom: 0p; background:#f36c00;">
  <div id="logo" style="padding-left: 25px;padding-top: 10px;">
      <a href="/">
@@ -40,20 +41,7 @@
    </div>
 
    <div class="collapse navbar-collapse navbar-responsive-ex1-collapse">
-    <ul class="nav navbar-nav pull-right" style="margin-right: 53px;">
-
-     <li><a id="lettering" style="float: Left;" href="{% url 'restaurant_list'%}">Home</a></li>
-     <li><a id="lettering" style="float: Left;" href="{% url 'how_it_works' %}">How It Works</a></li>
-     <li><a id="lettering" style="float: Left;" href="{% url 'contact_us' %}">Contact Us</a></li>
-     {% if perms.orders.recievedorder_list %}
-     <li><a id="lettering" href="{% url 'orders.recievedorder_list' %}">Admin</a></li>
-     {% endif %}
-     {% if request.user.is_authenticated %}
-      <li><a id="lettering" href="{% url 'users.user_logout' %}">Logout</a></li>
-     {% else %}
-     <li><a id="lettering" href="{% url 'users.user_login' %}">Login</a></li>
-     {% endif %}
-    </ul>
+   
    </div><!--end .nav-->
  </div><!--end #header-->
 </nav>

@@ -11,20 +11,16 @@ admin.autodiscover()
 urlpatterns = patterns('',
 #	url(r'^$', direct_to_template, {'template': 'index.html'}),
 	url(r'^$',include('live.urls')),
-	url(r'^users/', include('smartmin.users.urls')),
-	url(r'^incoming_orders/',include('orders.urls')),
-	url(r'^restaurant_detail/', include('restaurant_detail.urls')),
+#	url(r'^users/', include('smartmin.users.urls')),
+#	url(r'^incoming_orders/',include('orders.urls')),
+#	url(r'^restaurant_detail/', include('restaurant_detail.urls')),
 #	url(r'^messaging/', include('messaging.urls')),
-	url(r'^content/', include('django_quickblocks.urls')),
-	url(r'rate-restaurant/(?P<object_id>\d+)/(?P<score>\d+)/', AddRatingFromModel(),{
-'app_label':'restaurant_detail',
-'model':'restaurant',
-'field_name':'rating',
-}),
-	url(r'^ratings/', include("agon_ratings.urls")),
+#	url(r'^content/', include('django_quickblocks.urls')),
+
+	
 #	url(r'^console/', include('nsms.console.urls')),
 #	url(r'^',include('rapidsms_httprouter.urls')),
-	url(r'^orders/', include('live.urls')),
+#	url(r'^orders/', include('live.urls')),
 #	url(r'^', include('messaging.urls')),
 #	url(r'^search_results/$','f4l.views.search',),
 
