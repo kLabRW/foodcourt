@@ -259,6 +259,7 @@ def contact(request):
 	if request.method == 'POST':
 		form = formz.ContactForm(request.POST)
 		if form.is_valid():
+			human = True
 			name = form.cleaned_data['name']
 			email = form.cleaned_data['email']
 			message = form.cleaned_data['message']
